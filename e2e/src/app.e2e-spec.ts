@@ -8,7 +8,7 @@ describe('workspace-project App', () => {
     page = new AppPage();
   });
 
-  it('should display maintainance message', () => {
+  it('should display maintenance message', () => {
     page.navigateTo();
     expect(page.getTitleText()).toEqual('workflow-management app is running!');
   });

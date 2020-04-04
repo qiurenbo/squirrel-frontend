@@ -1,0 +1,18 @@
+.content-container {
+  .filter-container {
+    width: 100%;
+    margin-bottom: 24px;
+
+    nz-select {
+      width: 150px;
+      margin: 10px;
+    }
+
+    nz-date-picker {
+      margin: 10px;
+    }
+  }
+  nz-table {
+    width: 100%;
+  }
+}

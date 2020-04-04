@@ -2,12 +2,12 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: '/maintainance/list' },
+  { path: '', pathMatch: 'full', redirectTo: '/maintenance/list' },
   {
-    path: 'maintainance',
+    path: 'maintenance',
     loadChildren: () =>
-      import('./pages/maintainance/maintainance.module').then(
-        m => m.MaintainanceModule
+      import('./pages/maintenance/maintenance.module').then(
+        m => m.MaintenanceModule
       )
   }
 ];

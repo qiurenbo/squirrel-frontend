@@ -1,0 +1,12 @@
+{
+  "/api/*": "/$1",
+  "/maintenances/names/": "/maintenanceNames",
+  "/maintenances/actions/": "/maintenanceActions",
+  "/maintenances/devices/": "/maintenanceDevices",
+  "/maintenances/addrs/": "/maintenanceAddrs",
+  "/maintenances/types/": "/maintenanceTypes",
+  "/maintenances/:uuid": "/maintenances?uuid=:uuid",
+  "/:resource/:id/show": "/:resource/:id",
+  "/posts/:category": "/posts?category=:category",
+  "/articles\\?id=:id": "/posts/:id"
+}

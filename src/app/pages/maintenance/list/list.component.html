@@ -1,0 +1,114 @@
+<div
+  class="content-container"
+  fxLayout="column"
+  fxLayoutAlign="space-between center"
+>
+  <div class="filter-container" fxLayout="row" fxLayoutAlign="start center">
+    <nz-range-picker [(ngModel)]="dateRange"></nz-range-picker>
+    <nz-select
+      [(ngModel)]="selectedAddr"
+      (nzOpenChange)="onAddrsOpenChange()"
+      nzPlaceHolder="所有地点"
+      nzAllowClear
+      [nzLoading]="isAddrsLoading"
+      nzNotFoundContent=""
+    >
+      <nz-option
+        *ngFor="let a of addrs"
+        [nzValue]="a"
+        [nzLabel]="a"
+      ></nz-option>
+    </nz-select>
+
+    <nz-select
+      [(ngModel)]="selectedName"
+      (nzOpenChange)="onNamesOpenChange()"
+      nzPlaceHolder="全体人员"
+      nzAllowClear
+      [nzLoading]="isNamesLoading"
+      nzNotFoundContent=""
+    >
+      <nz-option
+        *ngFor="let n of names"
+        [nzValue]="n"
+        [nzLabel]="n"
+      ></nz-option>
+    </nz-select>
+
+    <nz-select
+      [(ngModel)]="selectedAction"
+      (nzOpenChange)="onActionsOpenChange()"
+      nzPlaceHolder="所有行为"
+      nzAllowClear
+      [nzLoading]="isActionsLoading"
+      nzNotFoundContent=""
+    >
+      <nz-option
+        *ngFor="let a of actions"
+        [nzValue]="a"
+        [nzLabel]="a"
+      ></nz-option>
+    </nz-select>
+
+    <nz-select
+      [(ngModel)]="selectedDevice"
+      (nzOpenChange)="onDevicesOpenChange()"
+      nzPlaceHolder="所有设备"
+      nzAllowClear
+      [nzLoading]="isDevicesLoading"
+      nzNotFoundContent=""
+    >
+      <nz-option
+        *ngFor="let d of devices"
+        [nzValue]="d"
+        [nzLabel]="d"
+      ></nz-option>
+    </nz-select>
+
+    <nz-select
+      [(ngModel)]="selectedType"
+      (nzOpenChange)="onTypesOpenChange()"
+      nzPlaceHolder="所有类别"
+      nzAllowClear
+      [nzLoading]="isTypesLoading"
+      nzNotFoundContent=""
+    >
+      <nz-option
+        *ngFor="let t of types"
+        [nzValue]="t"
+        [nzLabel]="t"
+      ></nz-option>
+    </nz-select>
+
+    <button nz-button nzType="default" (click)="onFilterClick()">过滤</button>
+  </div>
+  <nz-table
+    #filterTable
+    [nzData]="listOfData"
+    [nzLoading]="isLoading"
+    [nzPageSize]="pageSize"
+    [(nzPageIndex)]="pageIndex"
+    [nzTotal]="total"
+  >
+    <thead>
+      <tr>
+        <th>时间</th>
+        <th>地点</th>
+        <th>人员</th>
+        <th>行为</th>
+        <th>设备</th>
+        <th>类别</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of filterTable.data">
+        <td>{{ data.date }}</td>
+        <td>{{ data.addr }}</td>
+        <td>{{ data.name }}</td>
+        <td>{{ data.action }}</td>
+        <td>{{ data.device }}</td>
+        <td>{{ data.type }}</td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>

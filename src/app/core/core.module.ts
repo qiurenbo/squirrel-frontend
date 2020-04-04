@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
-import { MaintainceService } from './maintainances.service';
+import { MaintainceService } from './maintenance.service';
 
 @NgModule({
   declarations: [MaintainceService],
