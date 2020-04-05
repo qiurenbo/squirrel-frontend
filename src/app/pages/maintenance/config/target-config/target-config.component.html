@@ -1,0 +1,66 @@
+<div class="container" fxLayout="column" fxLayoutAlign="space-between center">
+  <div class="filter-container" fxLayout="row" fxLayoutAlign="start center">
+    <input nz-input placeholder="对象名称" [(ngModel)]="name" />
+
+    <nz-select [(ngModel)]="selectedType" nzAllowClear nzPlaceHolder="对象类型">
+      <nz-option nzValue="软件" nzLabel="软件"></nz-option>
+      <nz-option nzValue="硬件" nzLabel="硬件"></nz-option>
+    </nz-select>
+
+    <input nz-input placeholder="品牌名称" [(ngModel)]="brand" />
+    <button nz-button nzType="default" (click)="add()">新增</button>
+  </div>
+  <nz-table
+    #basicTable
+    [nzData]="targets"
+    [nzPageSize]="6"
+    [nzLoading]="isLoading"
+  >
+    <thead>
+      <tr>
+        <th>品牌</th>
+        <th>对象</th>
+        <th>软/硬件</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td>
+          <ng-container *ngIf="currentId != data.id; else brandInputTpl">
+            {{ data.brand }}
+          </ng-container>
+          <ng-template #brandInputTpl>
+            <input type="text" nz-input [ngModel]="data.brand" />
+          </ng-template>
+        </td>
+        <td>
+          <ng-container *ngIf="currentId != data.id; else nameInputTpl">
+            {{ data.name }}
+          </ng-container>
+          <ng-template #nameInputTpl>
+            <input type="text" nz-input [(ngModel)]="data.name" />
+          </ng-template>
+        </td>
+
+        <td>
+          <ng-container *ngIf="currentId != data.id; else typeInputTpl">
+            {{ data.type }}
+          </ng-container>
+          <ng-template #typeInputTpl>
+            <input type="text" nz-input [(ngModel)]="data.type" />
+          </ng-template>
+        </td>
+
+        <td>
+          <a *ngIf="currentId !== data.id" (click)="makeEditable(data.id)"
+            >编辑</a
+          >
+          <a *ngIf="currentId === data.id" (click)="saveData(data)">保存</a>
+          <nz-divider nzType="vertical"></nz-divider>
+          <a (click)="delete(data)">删除</a>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>

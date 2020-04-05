@@ -1,0 +1,71 @@
+<div class="container" fxLayout="column" fxLayoutAlign="space-between center">
+  <div class="filter-container" fxLayout="row" fxLayoutAlign="start center">
+    <input nz-input placeholder="地点名称" [(ngModel)]="name" />
+    <input nz-input placeholder="地点类型" [(ngModel)]="type" />
+    <input nz-input placeholder="具体地址" [(ngModel)]="addr" />
+    <input nz-input placeholder="联系电话" [(ngModel)]="tel" />
+    <button nz-button nzType="default" (click)="add()">新增</button>
+  </div>
+  <nz-table
+    #basicTable
+    [nzData]="addrs"
+    [nzPageSize]="6"
+    [nzLoading]="isLoading"
+  >
+    <thead>
+      <tr>
+        <th>地点</th>
+        <th>类型</th>
+        <th>地址</th>
+        <th>电话</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td>
+          <ng-container *ngIf="currentId != data.id; else nameInputTpl">
+            {{ data.name }}
+          </ng-container>
+          <ng-template #nameInputTpl>
+            <input type="text" nz-input [(ngModel)]="data.name" />
+          </ng-template>
+        </td>
+        <td>
+          <ng-container *ngIf="currentId != data.id; else typeInputTpl">
+            {{ data.type }}
+          </ng-container>
+          <ng-template #typeInputTpl>
+            <input type="text" nz-input [ngModel]="data.type" />
+          </ng-template>
+        </td>
+        <td>
+          <ng-container *ngIf="currentId != data.id; else addrInputTpl">
+            {{ data.addr }}
+          </ng-container>
+          <ng-template #addrInputTpl>
+            <input type="text" nz-input [(ngModel)]="data.addr" />
+          </ng-template>
+        </td>
+
+        <td>
+          <ng-container *ngIf="currentId != data.id; else telInputTpl">
+            {{ data.tel }}
+          </ng-container>
+          <ng-template #telInputTpl>
+            <input type="text" nz-input [ngModel]="data.tel" />
+          </ng-template>
+        </td>
+
+        <td>
+          <a *ngIf="currentId !== data.id" (click)="makeEditable(data.id)"
+            >编辑</a
+          >
+          <a *ngIf="currentId === data.id" (click)="saveData(data)">保存</a>
+          <nz-divider nzType="vertical"></nz-divider>
+          <a (click)="delete(data)">删除</a>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>

@@ -3,25 +3,31 @@ import { Routes, RouterModule } from '@angular/router';
 import { ListComponent } from './list/list.component';
 import { DetailComponent } from './detail/detail.component';
 import { StatsComponent } from './stats/stats.component';
+import { ConfigComponent } from './config/config.component';
 const routes: Routes = [
   { path: 'list', component: ListComponent },
   {
     path: 'detail',
-    component: DetailComponent
+    component: DetailComponent,
   },
   {
     path: 'stats',
-    component: StatsComponent
+    component: StatsComponent,
+  },
+
+  {
+    path: 'config',
+    component: ConfigComponent,
   },
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'list'
-  }
+    redirectTo: 'list',
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class MaintenanceRoutingModule {}

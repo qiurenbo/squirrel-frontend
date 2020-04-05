@@ -15,8 +15,8 @@
     >
       <nz-option
         *ngFor="let a of addrs"
-        [nzValue]="a"
-        [nzLabel]="a"
+        [nzValue]="a.name"
+        [nzLabel]="a.name"
       ></nz-option>
     </nz-select>
 
@@ -36,39 +36,25 @@
     </nz-select>
 
     <nz-select
-      [(ngModel)]="selectedAction"
-      (nzOpenChange)="onActionsOpenChange()"
-      nzPlaceHolder="所有行为"
+      [(ngModel)]="selectedTarget"
+      (nzOpenChange)="onTargetsOpenChange()"
+      nzPlaceHolder="所有对象"
       nzAllowClear
-      [nzLoading]="isActionsLoading"
+      [nzLoading]="isTargetsLoading"
       nzNotFoundContent=""
+      class="target"
     >
       <nz-option
-        *ngFor="let a of actions"
-        [nzValue]="a"
-        [nzLabel]="a"
-      ></nz-option>
-    </nz-select>
-
-    <nz-select
-      [(ngModel)]="selectedDevice"
-      (nzOpenChange)="onDevicesOpenChange()"
-      nzPlaceHolder="所有设备"
-      nzAllowClear
-      [nzLoading]="isDevicesLoading"
-      nzNotFoundContent=""
-    >
-      <nz-option
-        *ngFor="let d of devices"
-        [nzValue]="d"
-        [nzLabel]="d"
+        *ngFor="let t of targets"
+        [nzValue]="t.id"
+        [nzLabel]="t.brand + '-' + t.name"
       ></nz-option>
     </nz-select>
 
     <nz-select
       [(ngModel)]="selectedType"
       (nzOpenChange)="onTypesOpenChange()"
-      nzPlaceHolder="所有类别"
+      nzPlaceHolder="所有故障"
       nzAllowClear
       [nzLoading]="isTypesLoading"
       nzNotFoundContent=""
@@ -80,6 +66,20 @@
       ></nz-option>
     </nz-select>
 
+    <nz-select
+      [(ngModel)]="selectedAction"
+      (nzOpenChange)="onActionsOpenChange()"
+      nzPlaceHolder="所有方法"
+      nzAllowClear
+      [nzLoading]="isActionsLoading"
+      nzNotFoundContent=""
+    >
+      <nz-option
+        *ngFor="let a of actions"
+        [nzValue]="a"
+        [nzLabel]="a"
+      ></nz-option>
+    </nz-select>
     <button nz-button nzType="default" (click)="onFilterClick()">过滤</button>
   </div>
   <nz-table
@@ -95,19 +95,19 @@
         <th>时间</th>
         <th>地点</th>
         <th>人员</th>
-        <th>行为</th>
-        <th>设备</th>
-        <th>类别</th>
+        <th>对象</th>
+        <th>故障</th>
+        <th>方法</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let data of filterTable.data">
         <td>{{ data.date }}</td>
-        <td>{{ data.addr }}</td>
+        <td>{{ data.addr.name }}</td>
         <td>{{ data.name }}</td>
-        <td>{{ data.action }}</td>
-        <td>{{ data.device }}</td>
+        <td>{{ data.target.brand }}——{{ data.target.name }}</td>
         <td>{{ data.type }}</td>
+        <td>{{ data.action }}</td>
       </tr>
     </tbody>
   </nz-table>
