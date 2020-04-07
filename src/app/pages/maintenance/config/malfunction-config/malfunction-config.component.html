@@ -1,20 +1,27 @@
 <div class="container" fxLayout="column" fxLayoutAlign="space-between center">
   <div class="filter-container" fxLayout="row" fxLayoutAlign="start center">
-    <input nz-input placeholder="品牌" [(ngModel)]="brand" />
-    <input nz-input placeholder="名称" [(ngModel)]="name" />
+    <nz-select [(ngModel)]="selectedTargetId" nzAllowClear nzPlaceHolder="品名">
+      <nz-option
+        *ngFor="let t of targets"
+        [nzValue]="t.id"
+        [nzLabel]="t.brand + '——' + t.name"
+      >
+      </nz-option>
+    </nz-select>
 
-    <button nz-button nzType="default" (click)="add()">新增</button>
+    <input nz-input placeholder="故障" [(ngModel)]="malfunctionName" />
+    <button nz-button (click)="add()">新增</button>
   </div>
   <nz-table
     #basicTable
-    [nzData]="targets"
+    [nzData]="malfunctions"
     [nzPageSize]="6"
     [nzLoading]="isLoading"
   >
     <thead>
       <tr>
-        <th>品牌</th>
-        <th>名称</th>
+        <th>品名</th>
+        <th>故障</th>
         <th></th>
       </tr>
     </thead>
@@ -22,17 +29,22 @@
       <tr *ngFor="let data of basicTable.data">
         <td>
           <ng-container *ngIf="currentId != data.id; else brandInputTpl">
-            {{ data.brand }}
+            {{ data.target.brand }}—— {{ data.target.name }}
           </ng-container>
           <ng-template #brandInputTpl>
-            <input type="text" nz-input [ngModel]="data.brand" />
+            <input
+              type="text"
+              nz-input
+              [ngModel]="data.target.brand + '——' + data.target.name"
+            />
           </ng-template>
         </td>
+
         <td>
-          <ng-container *ngIf="currentId != data.id; else nameInputTpl">
+          <ng-container *ngIf="currentId != data.id; else typeInputTpl">
             {{ data.name }}
           </ng-container>
-          <ng-template #nameInputTpl>
+          <ng-template #typeInputTpl>
             <input type="text" nz-input [(ngModel)]="data.name" />
           </ng-template>
         </td>

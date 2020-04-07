@@ -1,8 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
-import { Maintenances, Addr, Target } from '../models/maintenance.model';
+import { environment } from 'src/environments/environment.mock';
+import {
+  Addr,
+  Target,
+  MaintenanceDetail,
+  Operator,
+  Malfunction,
+  Action,
+} from '../models/maintenance.model';
 import { assembleRequestUrl } from './utils';
 @Injectable({
   providedIn: 'root',
@@ -10,73 +17,115 @@ import { assembleRequestUrl } from './utils';
 export class MaintainceService {
   constructor(private http: HttpClient) {}
 
-  getMaintaincesByFilter(
-    filter: {
-      target: string;
-      type: string;
-      name: string;
-      addr: string;
-      date: string;
-      _page: number;
-      _limit: number;
-    } = null
-  ): Observable<Maintenances> {
-    return this.http.get<Maintenances>(
-      assembleRequestUrl(filter, environment.apiurl + 'maintenances')
-    );
+  getMaintainces(filter: any = null): Observable<MaintenanceDetail[]> {
+    if (environment.mock) {
+      // convert pagination to slice because json-server didn't support pagination to get total
+      // https://github.com/typicode/json-server/pull/1080
+      if (filter?._page && filter?._limit) {
+        filter.start = (filter._page - 1) * filter._limit;
+        filter.end = (filter._page - 1) * filter._limit;
+        delete filter._limit;
+        delete filter._page;
+      }
+
+      return this.http.get<MaintenanceDetail[]>(
+        assembleRequestUrl(
+          filter,
+          environment.apiurl + 'maintenances',
+          '_expand=addr&_expand=operator&_expand=action&_expand=malfunction&_expand=target'
+        )
+      );
+    }
   }
 
-  getMaintainceNames(): Observable<string[]> {
-    return this.http.get<string[]>(environment.apiurl + 'maintenances/names');
+  getMaintainceNames(): Observable<Operator[]> {
+    return this.http.get<Operator[]>(environment.apiurl + 'operators');
   }
 
   getMaintainceAddrs(): Observable<Addr[]> {
-    return this.http.get<Addr[]>(environment.apiurl + 'maintenances/addrs');
+    return this.http.get<Addr[]>(environment.apiurl + 'addrs');
   }
 
   getMaintainceTargets(): Observable<Target[]> {
-    return this.http.get<Target[]>(environment.apiurl + 'maintenances/targets');
+    return this.http.get<Target[]>(environment.apiurl + 'targets');
   }
 
-  getMaintainceActions(): Observable<string[]> {
-    return this.http.get<string[]>(environment.apiurl + 'maintenances/actions');
+  getMaintainceActions(filter: any = null): Observable<Action[]> {
+    if (environment.mock) {
+      if (filter?._page && filter?._limit) {
+        filter.start = (filter._page - 1) * filter._limit;
+        filter.end = (filter._page - 1) * filter._limit;
+        delete filter._limit;
+        delete filter._page;
+      }
+
+      return this.http.get<Action[]>(
+        assembleRequestUrl(
+          filter,
+          environment.apiurl + 'actions',
+          '_expand=malfunction'
+        )
+      );
+    }
   }
 
-  getMaintainceTypes(): Observable<string[]> {
-    return this.http.get<string[]>(environment.apiurl + 'maintenances/types');
+  getMaintainceMalfunctions(filter: any = null): Observable<Malfunction[]> {
+    if (environment.mock) {
+      if (filter?._page && filter?._limit) {
+        filter.start = (filter._page - 1) * filter._limit;
+        filter.end = (filter._page - 1) * filter._limit;
+        delete filter._limit;
+        delete filter._page;
+      }
+
+      return this.http.get<Malfunction[]>(
+        assembleRequestUrl(
+          filter,
+          environment.apiurl + 'malfunctions',
+          '_expand=target'
+        )
+      );
+    }
   }
 
   postMaintainceAddr(addr: Addr): Observable<any> {
-    return this.http.post(environment.apiurl + 'maintenances/addrs', addr);
+    return this.http.post(environment.apiurl + 'addrs', addr);
   }
 
   deleteMaintainceAddr(addr: Addr): Observable<any> {
-    return this.http.delete(
-      environment.apiurl + 'maintenances/addrs/' + addr.id
-    );
+    return this.http.delete(environment.apiurl + 'addrs/' + addr.id);
   }
 
   putMaintainceAddr(addr: Addr): Observable<any> {
-    return this.http.put(
-      environment.apiurl + 'maintenances/addrs/' + addr.id,
-      addr
-    );
+    return this.http.put(environment.apiurl + 'addrs/' + addr.id, addr);
   }
 
   postMaintainceTarget(target: Target): Observable<any> {
-    return this.http.post(environment.apiurl + 'maintenances/targets', target);
+    return this.http.post(environment.apiurl + 'targets', target);
   }
 
   deleteMaintainceTarget(target: Target): Observable<any> {
+    return this.http.delete(environment.apiurl + 'targets/' + target.id);
+  }
+
+  putMaintainceMalfunction(malfunction: Malfunction): Observable<any> {
+    return this.http.put(
+      environment.apiurl + 'malfunctions/' + malfunction.id,
+      malfunction
+    );
+  }
+
+  postMaintainceMalfunction(malfunction: Malfunction): Observable<any> {
+    return this.http.post(environment.apiurl + 'malfunctions', malfunction);
+  }
+
+  deleteMaintainceMalfunction(malfunction: Malfunction): Observable<any> {
     return this.http.delete(
-      environment.apiurl + 'maintenances/targets/' + target.id
+      environment.apiurl + 'malfunctions/' + malfunction.id
     );
   }
 
   putMaintainceTarget(target: Target): Observable<any> {
-    return this.http.put(
-      environment.apiurl + 'maintenances/targets/' + target.id,
-      target
-    );
+    return this.http.put(environment.apiurl + 'targets/' + target.id, target);
   }
 }

@@ -7,13 +7,18 @@ const routes: Routes = [
     path: 'maintenance',
     loadChildren: () =>
       import('./pages/maintenance/maintenance.module').then(
-        m => m.MaintenanceModule
-      )
-  }
+        (m) => m.MaintenanceModule
+      ),
+  },
+  {
+    path: 'others',
+    loadChildren: () =>
+      import('./pages/others/others.module').then((m) => m.OthersModule),
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}

@@ -1,16 +1,40 @@
-export class Maintenance {
-  date: string;
+export class Action {
+  id: string;
   name: string;
-  addr: Addr;
-  action: string;
-  target: string;
-  type: string;
+  malfunctionId: string;
 }
 
-export class Maintenances {
-  total: number;
-  list: Maintenance[];
+export class Target {
+  id: string;
+  name: string;
+  brand: string;
 }
+
+export class Malfunction {
+  id: string;
+  name: string;
+  targetId: string;
+}
+
+export class Operator {
+  id: string;
+  name: string;
+  addrId: string;
+}
+
+export class MaintenanceDetail {
+  date: string;
+  operator: Operator;
+  addr: Addr;
+  action: Action;
+  target: Target;
+  malfunction: Malfunction;
+}
+
+// export class Maintenances {
+//   total: number;
+//   list: Maintenance[];
+// }
 
 export class Addr {
   id: string;
@@ -18,11 +42,4 @@ export class Addr {
   addr: string;
   tel: string;
   type: string;
-}
-
-export class Target {
-  id: string;
-  name: string;
-  type: string;
-  brand: string;
 }

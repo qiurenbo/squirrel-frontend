@@ -1,21 +1,20 @@
-export const assembleRequestUrl = (filter, baseUrl) => {
-  if (!filter) {
+export const assembleRequestUrl = (filter, baseUrl, rel = '') => {
+  if (!filter && !rel) {
     return baseUrl;
+  } else if (rel) {
+    baseUrl += '?' + rel;
   }
 
   // https://stackoverflow.com/questions/1876485/how-to-iterate-through-property-names-of-javascript-object
-  let query = '';
   for (var key in filter) {
     if (filter[key]) {
-      if (!query) {
-        query = '?' + key + '=' + filter[key];
+      if (baseUrl.indexOf('?') === -1) {
+        baseUrl = baseUrl + '?' + key + '=' + filter[key];
       } else {
-        query += '&' + key + '=' + filter[key];
+        baseUrl = baseUrl + '&' + key + '=' + filter[key];
       }
     }
   }
-
-  baseUrl += query;
 
   return baseUrl;
 };

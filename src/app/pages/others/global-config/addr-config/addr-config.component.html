@@ -1,9 +1,9 @@
 <div class="container" fxLayout="column" fxLayoutAlign="space-between center">
   <div class="filter-container" fxLayout="row" fxLayoutAlign="start center">
-    <input nz-input placeholder="地点名称" [(ngModel)]="name" />
-    <input nz-input placeholder="地点类型" [(ngModel)]="type" />
-    <input nz-input placeholder="具体地址" [(ngModel)]="addr" />
-    <input nz-input placeholder="联系电话" [(ngModel)]="tel" />
+    <input nz-input placeholder="地点" [(ngModel)]="name" />
+    <input nz-input placeholder="类型" [(ngModel)]="type" />
+    <input nz-input placeholder="地址" [(ngModel)]="addr" />
+    <input nz-input placeholder="电话" [(ngModel)]="tel" />
     <button nz-button nzType="default" (click)="add()">新增</button>
   </div>
   <nz-table
@@ -36,7 +36,7 @@
             {{ data.type }}
           </ng-container>
           <ng-template #typeInputTpl>
-            <input type="text" nz-input [ngModel]="data.type" />
+            <input type="text" nz-input [(ngModel)]="data.type" />
           </ng-template>
         </td>
         <td>
@@ -53,7 +53,7 @@
             {{ data.tel }}
           </ng-container>
           <ng-template #telInputTpl>
-            <input type="text" nz-input [ngModel]="data.tel" />
+            <input type="text" nz-input [(ngModel)]="data.tel" />
           </ng-template>
         </td>
 

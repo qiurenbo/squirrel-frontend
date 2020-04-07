@@ -14,7 +14,6 @@ export class AddrConfigComponent implements OnInit {
   tel: string;
   type: string;
   addrs: Addr[] = null;
-  selectedAddr: string = null;
   isLoading = false;
   currentId: string = null;
   constructor(private mservice: MaintainceService) {}

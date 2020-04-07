@@ -15,7 +15,7 @@
     >
       <nz-option
         *ngFor="let a of addrs"
-        [nzValue]="a.name"
+        [nzValue]="a.id"
         [nzLabel]="a.name"
       ></nz-option>
     </nz-select>
@@ -29,15 +29,16 @@
       nzNotFoundContent=""
     >
       <nz-option
-        *ngFor="let n of names"
-        [nzValue]="n"
-        [nzLabel]="n"
+        *ngFor="let o of operators"
+        [nzValue]="o.id"
+        [nzLabel]="o.name"
       ></nz-option>
     </nz-select>
 
     <nz-select
       [(ngModel)]="selectedTarget"
       (nzOpenChange)="onTargetsOpenChange()"
+      (ngModelChange)="onTargetsOptionChange()"
       nzPlaceHolder="所有对象"
       nzAllowClear
       [nzLoading]="isTargetsLoading"
@@ -52,17 +53,19 @@
     </nz-select>
 
     <nz-select
-      [(ngModel)]="selectedType"
-      (nzOpenChange)="onTypesOpenChange()"
+      [(ngModel)]="selectedMalfunction"
+      (nzOpenChange)="onMalfunctionsOpenChange()"
+      (ngModelChange)="onMalfunctionsOptionChange()"
       nzPlaceHolder="所有故障"
       nzAllowClear
-      [nzLoading]="isTypesLoading"
+      [nzLoading]="isMalfunctionsLoading"
       nzNotFoundContent=""
+      [disabled]="isMalfunctionsDisabled"
     >
       <nz-option
-        *ngFor="let t of types"
-        [nzValue]="t"
-        [nzLabel]="t"
+        *ngFor="let m of malfunctions"
+        [nzValue]="m.id"
+        [nzLabel]="m.name"
       ></nz-option>
     </nz-select>
 
@@ -73,14 +76,17 @@
       nzAllowClear
       [nzLoading]="isActionsLoading"
       nzNotFoundContent=""
+      [disabled]="isActionsDisabled"
     >
       <nz-option
         *ngFor="let a of actions"
-        [nzValue]="a"
-        [nzLabel]="a"
+        [nzValue]="a.id"
+        [nzLabel]="a.name"
       ></nz-option>
     </nz-select>
-    <button nz-button nzType="default" (click)="onFilterClick()">过滤</button>
+    <button nz-button nzMalfunction="default" (click)="onFilterClick()">
+      过滤
+    </button>
   </div>
   <nz-table
     #filterTable
@@ -97,17 +103,17 @@
         <th>人员</th>
         <th>对象</th>
         <th>故障</th>
-        <th>方法</th>
+        <th>处理</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let data of filterTable.data">
         <td>{{ data.date }}</td>
         <td>{{ data.addr.name }}</td>
-        <td>{{ data.name }}</td>
+        <td>{{ data.operator.name }}</td>
         <td>{{ data.target.brand }}——{{ data.target.name }}</td>
-        <td>{{ data.type }}</td>
-        <td>{{ data.action }}</td>
+        <td>{{ data.malfunction.name }}</td>
+        <td>{{ data.action.name }}</td>
       </tr>
     </tbody>
   </nz-table>

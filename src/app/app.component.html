@@ -19,7 +19,14 @@
       nzMode="inline"
       [nzInlineCollapsed]="isCollapsed"
     >
-      <li nz-submenu nzOpen nzTitle="日常维护" nzIcon="tool">
+      <li
+        nz-submenu
+        nzOpen
+        nzTitle="日常维护"
+        nzIcon="tool"
+        [(nzOpen)]="openMap.maintenance"
+        (nzOpenChange)="openHandler('maintenance')"
+      >
         <ul>
           <li nz-menu-item nzMatchRouter>
             <a routerLink="/maintenance/list">维护日志</a>
@@ -33,7 +40,14 @@
         </ul>
       </li>
 
-      <li nz-submenu nzOpen nzTitle="日常摄像" nzIcon="video-camera">
+      <li
+        nz-submenu
+        nzOpen
+        nzTitle="日常摄像"
+        nzIcon="video-camera"
+        [(nzOpen)]="openMap.carmera"
+        (nzOpenChange)="openHandler('carmera')"
+      >
         <ul>
           <li nz-menu-item nzMatchRouter>
             <a routerLink="/record">摄像日志</a>
@@ -44,7 +58,14 @@
         </ul>
       </li>
 
-      <li nz-submenu nzOpen nzTitle="日常派发" nzIcon="shop">
+      <li
+        nz-submenu
+        nzOpen
+        nzTitle="日常派发"
+        nzIcon="shop"
+        [(nzOpen)]="openMap.allocations"
+        (nzOpenChange)="openHandler('allocations')"
+      >
         <ul>
           <li nz-menu-item nzMatchRouter>
             <a routerLink="/record">派发日志</a>
@@ -55,16 +76,37 @@
         </ul>
       </li>
 
-      <li nz-submenu nzOpen nzTitle="账号管理" nzIcon="video-camera">
+      <li
+        nz-submenu
+        nzOpen
+        nzTitle="其他配置"
+        nzIcon="video-camera"
+        [(nzOpen)]="openMap.others"
+        (nzOpenChange)="openHandler('others')"
+      >
         <ul>
           <li nz-menu-item nzMatchRouter>
-            <a routerLink="/users">账户管理</a>
+            <a routerLink="/others/global-config">全局配置</a>
           </li>
           <li nz-menu-item nzMatchRouter>
-            <a routerLink="/permissions">权限管理</a>
+            <a routerLink="/others/users">账户管理</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/others/permissions">权限管理</a>
           </li>
         </ul>
       </li>
+
+      <!-- <li nz-submenu nzOpen nzTitle="元数据配置" nzIcon="video-camera">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/users">通用配置</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/permissions">维护配置</a>
+          </li>
+        </ul>
+      </li> -->
     </ul>
   </nz-sider>
   <nz-layout>

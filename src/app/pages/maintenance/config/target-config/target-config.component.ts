@@ -12,7 +12,6 @@ export class TargetConfigComponent implements OnInit {
   name: string;
   target: string;
   brand: string;
-  type: string;
   targets: Target[] = null;
   selectedTarget: string = null;
   selectedType: string = null;
@@ -22,8 +21,8 @@ export class TargetConfigComponent implements OnInit {
 
   loadingData() {
     this.isLoading = true;
-    this.mservice.getMaintainceTargets().subscribe((a) => {
-      this.targets = a;
+    this.mservice.getMaintainceTargets().subscribe((t) => {
+      this.targets = t;
       this.isLoading = false;
     });
   }
@@ -36,7 +35,6 @@ export class TargetConfigComponent implements OnInit {
       .postMaintainceTarget({
         id: uuidv4(),
         name: this.name,
-        type: this.type,
         brand: this.brand,
       })
       .subscribe(() => {
