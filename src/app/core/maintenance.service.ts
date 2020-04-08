@@ -63,7 +63,7 @@ export class MaintainceService {
         assembleRequestUrl(
           filter,
           environment.apiurl + 'actions',
-          '_expand=malfunction'
+          '_expand=malfunction&_expand=target'
         )
       );
     }
@@ -127,5 +127,17 @@ export class MaintainceService {
 
   putMaintainceTarget(target: Target): Observable<any> {
     return this.http.put(environment.apiurl + 'targets/' + target.id, target);
+  }
+
+  postMaintainceAction(action: Action): Observable<any> {
+    return this.http.post(environment.apiurl + 'actions', action);
+  }
+
+  deleteMaintainceAction(action: Action): Observable<any> {
+    return this.http.delete(environment.apiurl + 'actions/' + action.id);
+  }
+
+  putMaintainceAction(action: Action): Observable<any> {
+    return this.http.put(environment.apiurl + 'actions/' + action.id, action);
   }
 }

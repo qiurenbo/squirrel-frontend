@@ -20,6 +20,7 @@ const createActions = () => {
       action = {
         id: uuidv4(),
         name: names[k],
+        targetId: malfunctions[i].targetId,
         malfunctionId: malfunctions[i].id,
       };
       actions.push(action);

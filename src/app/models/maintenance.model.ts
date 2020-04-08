@@ -2,12 +2,12 @@ export class Action {
   id: string;
   name: string;
   malfunctionId: string;
+  targetId: string;
 }
 
 export class Target {
   id: string;
   name: string;
-  brand: string;
 }
 
 export class Malfunction {

@@ -25,6 +25,7 @@ export class MalfunctionConfigComponent implements OnInit {
       this.isLoading = false;
     });
   }
+
   ngOnInit(): void {
     this.loadingData();
     this.mservice.getMaintainceTargets().subscribe((t) => {

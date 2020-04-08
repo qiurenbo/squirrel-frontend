@@ -1,27 +1,42 @@
 <div class="container" fxLayout="column" fxLayoutAlign="space-between center">
   <div class="filter-container" fxLayout="row" fxLayoutAlign="start center">
-    <input nz-input placeholder="品名" [(ngModel)]="name" />
-    <button nz-button nzType="default" (click)="add()">新增</button>
+    <nz-cascader
+      (nzSelectionChange)="onSelectionChange($event)"
+      [nzLoadData]="loadCascaderData"
+      nzPlaceHolder="选择故障类型"
+    ></nz-cascader>
+
+    <input nz-input placeholder="处理" [(ngModel)]="actionName" />
+    <button nz-button (click)="add()">新增</button>
   </div>
   <nz-table
     #basicTable
-    [nzData]="targets"
+    [nzData]="actions"
     [nzPageSize]="6"
     [nzLoading]="isLoading"
   >
     <thead>
       <tr>
         <th>品名</th>
+        <th>故障</th>
+        <th>处理</th>
         <th></th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let data of basicTable.data">
         <td>
-          <ng-container *ngIf="currentId != data.id; else nameInputTpl">
+          {{ data.target.name }}
+        </td>
+        <td>
+          {{ data.malfunction.name }}
+        </td>
+
+        <td>
+          <ng-container *ngIf="currentId != data.id; else typeInputTpl">
             {{ data.name }}
           </ng-container>
-          <ng-template #nameInputTpl>
+          <ng-template #typeInputTpl>
             <input type="text" nz-input [(ngModel)]="data.name" />
           </ng-template>
         </td>

@@ -48,7 +48,7 @@
       <nz-option
         *ngFor="let t of targets"
         [nzValue]="t.id"
-        [nzLabel]="t.brand + '-' + t.name"
+        [nzLabel]="t.name"
       ></nz-option>
     </nz-select>
 
@@ -111,7 +111,7 @@
         <td>{{ data.date }}</td>
         <td>{{ data.addr.name }}</td>
         <td>{{ data.operator.name }}</td>
-        <td>{{ data.target.brand }}——{{ data.target.name }}</td>
+        <td>{{ data.target.name }}</td>
         <td>{{ data.malfunction.name }}</td>
         <td>{{ data.action.name }}</td>
       </tr>

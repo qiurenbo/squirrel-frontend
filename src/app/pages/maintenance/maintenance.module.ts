@@ -9,6 +9,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { ConfigComponent } from './config/config.component';
 import { TargetConfigComponent } from './config/target-config/target-config.component';
 import { MalfunctionConfigComponent } from './config/malfunction-config/malfunction-config.component';
+import { ActionConfigComponent } from './config/action-config/action-config.component';
 
 @NgModule({
   imports: [MaintenanceRoutingModule, SharedModule],
@@ -19,6 +20,7 @@ import { MalfunctionConfigComponent } from './config/malfunction-config/malfunct
     ConfigComponent,
     TargetConfigComponent,
     MalfunctionConfigComponent,
+    ActionConfigComponent,
   ],
   exports: [],
 })

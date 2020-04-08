@@ -1,11 +1,13 @@
-<nz-tabset>
-  <nz-tab nzTitle="对象">
-    <app-target-config></app-target-config>
-  </nz-tab>
-  <nz-tab nzTitle="故障">
-    <app-malfunction-config></app-malfunction-config>
-  </nz-tab>
-  <nz-tab nzTitle="处理">
-    Content of Tab Pane 3
-  </nz-tab>
-</nz-tabset>
+<div>
+  <nz-tabset>
+    <nz-tab nzTitle="对象" [nzForceRender]="true">
+      <app-target-config></app-target-config>
+    </nz-tab>
+    <nz-tab nzTitle="故障" [nzForceRender]="true">
+      <app-malfunction-config></app-malfunction-config>
+    </nz-tab>
+    <nz-tab nzTitle="处理" [nzForceRender]="true">
+      <app-action-config></app-action-config>
+    </nz-tab>
+  </nz-tabset>
+</div>

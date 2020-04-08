@@ -1,11 +1,7 @@
 <div class="container" fxLayout="column" fxLayoutAlign="space-between center">
   <div class="filter-container" fxLayout="row" fxLayoutAlign="start center">
     <nz-select [(ngModel)]="selectedTargetId" nzAllowClear nzPlaceHolder="品名">
-      <nz-option
-        *ngFor="let t of targets"
-        [nzValue]="t.id"
-        [nzLabel]="t.brand + '——' + t.name"
-      >
+      <nz-option *ngFor="let t of targets" [nzValue]="t.id" [nzLabel]="t.name">
       </nz-option>
     </nz-select>
 
@@ -28,16 +24,7 @@
     <tbody>
       <tr *ngFor="let data of basicTable.data">
         <td>
-          <ng-container *ngIf="currentId != data.id; else brandInputTpl">
-            {{ data.target.brand }}—— {{ data.target.name }}
-          </ng-container>
-          <ng-template #brandInputTpl>
-            <input
-              type="text"
-              nz-input
-              [ngModel]="data.target.brand + '——' + data.target.name"
-            />
-          </ng-template>
+          {{ data.target.name }}
         </td>
 
         <td>

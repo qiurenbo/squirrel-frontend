@@ -2,18 +2,15 @@ const uuidv4 = require("uuid").v4;
 const targets = [
   {
     id: uuidv4(),
-    name: "自助借还机",
-    brand: "阿尔法迪",
+    name: "阿尔法迪——自助借还机",
   },
   {
     id: uuidv4(),
-    name: "路由器",
-    brand: "TPLink",
+    name: "TPLink——路由器",
   },
   {
     id: uuidv4(),
-    name: "自助借还机",
-    brand: "海恒",
+    name: "海恒——自助借还机",
   },
 ];
 
