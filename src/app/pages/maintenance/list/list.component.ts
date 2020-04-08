@@ -58,11 +58,11 @@ export class ListComponent implements OnInit {
   get filter(): any {
     return {
       date: this.selectedDate,
-      addr: this.selectedAddr,
-      target: this.selectedTarget,
-      action: this.selectedAction,
-      name: this.selectedName,
-      malfunction: this.selectedMalfunction,
+      addrId: this.selectedAddr,
+      targetId: this.selectedTarget,
+      actionId: this.selectedAction,
+      operatorId: this.selectedName,
+      malfunctionId: this.selectedMalfunction,
       _page: this.pageIndex,
       _limit: this.pageSize,
     };
