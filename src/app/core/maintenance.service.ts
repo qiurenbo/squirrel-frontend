@@ -18,6 +18,8 @@ export class MaintainceService {
   constructor(private http: HttpClient) {}
 
   getMaintainces(filter: any = null): Observable<MaintenanceDetail[]> {
+    let relations =
+      '_expand=addr&_expand=operator&_expand=action&_expand=malfunction&_expand=target&_sort=date&_order=desc';
     if (environment.mock) {
       // convert pagination to slice because json-server didn't support pagination to get total
       // https://github.com/typicode/json-server/pull/1080
@@ -28,11 +30,18 @@ export class MaintainceService {
         delete filter._page;
       }
 
+      if (filter?.startDate && filter?.endDate) {
+        relations +=
+          '&date_gte=' + filter.startDate + '&date_lte=' + filter.endDate;
+        delete filter.startDate;
+        delete filter.endDate;
+      }
+
       return this.http.get<MaintenanceDetail[]>(
         assembleRequestUrl(
           filter,
           environment.apiurl + 'maintenances',
-          '_expand=addr&_expand=operator&_expand=action&_expand=malfunction&_expand=target'
+          relations
         )
       );
     }

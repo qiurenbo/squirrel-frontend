@@ -1,14 +1,3 @@
 {
-  "/api/*": "/$1",
-  "/maintenances/names/": "/maintenanceNames",
-  "/maintenances/actions/:id": "/maintenanceActions/:id",
-  "/maintenances/actions/": "/maintenanceActions",
-  "/maintenances/targets/:id": "/maintenanceTargets/:id",
-  "/maintenances/targets/": "/maintenanceTargets",
-  "/maintenances/addrs/:id": "/maintenanceAddrs/:id",
-  "/maintenances/addrs/": "/maintenanceAddrs",
-  "/maintenances/types/": "/maintenanceTypes",
-  "/:resource/:id/show": "/:resource/:id",
-  "/posts/:category": "/posts?category=:category",
-  "/articles\\?id=:id": "/posts/:id"
+  "/api/*": "/$1"
 }

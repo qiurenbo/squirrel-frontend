@@ -17,7 +17,6 @@ import * as moment from 'moment';
 })
 export class ListComponent implements OnInit {
   dateRange: any;
-  date: string = null;
   listOfData: MaintenanceDetail[] = null;
   isLoading = true;
   pageSize: number;
@@ -57,7 +56,8 @@ export class ListComponent implements OnInit {
 
   get filter(): any {
     return {
-      date: this.selectedDate,
+      startDate: this.selectedStartDate,
+      endDate: this.selectedEndDate,
       addrId: this.selectedAddr,
       targetId: this.selectedTarget,
       actionId: this.selectedAction,
@@ -67,8 +67,12 @@ export class ListComponent implements OnInit {
       _limit: this.pageSize,
     };
   }
-  get selectedDate(): string {
-    return this.date ? moment(this.date).format('YYYYMMDD') : null;
+  get selectedStartDate(): string {
+    return this.dateRange ? moment(this.dateRange[0]).format('YYYYMMDD') : null;
+  }
+
+  get selectedEndDate(): string {
+    return this.dateRange ? moment(this.dateRange[1]).format('YYYYMMDD') : null;
   }
 
   onNamesOpenChange() {
