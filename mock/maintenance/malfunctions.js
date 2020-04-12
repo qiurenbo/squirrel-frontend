@@ -1,32 +1,32 @@
-const targets = require("./targets");
+// const targets = require("./targets");
 const uuidv4 = require("uuid").v4;
-const { random } = require("../utils");
-const createMalfunctions = () => {
-  const arrs = [
-    ["无法开机", "无法启动", "软件闪退"],
-    ["无法开机", "无法上网"],
-    ["界面卡住"],
-  ];
+// const { random } = require("../utils");
+// const createMalfunctions = () => {
+//   const arrs = [
+//     ["无法开机", "无法启动", "软件闪退"],
+//     ["无法开机", "无法上网"],
+//     ["界面卡住"],
+//   ];
 
-  let malfunctions = [];
+//   let malfunctions = [];
 
-  for (let i = 0; i < targets.length; i++) {
-    const names = arrs[random(targets.length)];
+//   for (let i = 0; i < targets.length; i++) {
+//     const names = arrs[random(targets.length)];
 
-    for (let k = 0; k < names.length; k++) {
-      let malfunction = {
-        id: uuidv4(),
-        name: names[k],
-        targetId: targets[i].id,
-      };
+//     for (let k = 0; k < names.length; k++) {
+//       let malfunction = {
+//         id: uuidv4(),
+//         name: names[k],
+//         targetId: targets[i].id,
+//       };
 
-      malfunctions.push(malfunction);
-    }
-  }
+//       malfunctions.push(malfunction);
+//     }
+//   }
 
-  return malfunctions;
-};
+//   return malfunctions;
+// };
 
-const malfunctions = createMalfunctions();
+const malfunctions = [{id:uuidv4(),name:"无法开机"}, {id:uuidv4(),name:"无法启动"}, {id:uuidv4(),name:"软件闪退"}];
 
 module.exports = malfunctions;

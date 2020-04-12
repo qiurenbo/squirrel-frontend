@@ -1,8 +1,6 @@
 export class Action {
   id: string;
   name: string;
-  malfunctionId: string;
-  targetId: string;
 }
 
 export class Target {
@@ -13,13 +11,11 @@ export class Target {
 export class Malfunction {
   id: string;
   name: string;
-  targetId: string;
 }
 
 export class Operator {
   id: string;
   name: string;
-  addrId: string;
 }
 
 export class MaintenanceDetail {

@@ -9,10 +9,8 @@ import { NzCascaderOption, arraysEqual } from 'ng-zorro-antd';
   styleUrls: ['./action-config.component.scss'],
 })
 export class ActionConfigComponent implements OnInit {
-  isMalfunctionsLoading = false;
   actionName: string;
   actions: Action[] = null;
-  targets: Target[] = null;
   isLoading = false;
   currentId: string = null;
   option: NzCascaderOption = null;
@@ -55,10 +53,6 @@ export class ActionConfigComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadingTableData();
-    this.mservice.getMaintainceTargets().subscribe((t) => {
-      this.targets = t;
-      this.isLoading = false;
-    });
   }
 
   onSelectionChange(option: NzCascaderOption) {
@@ -78,8 +72,6 @@ export class ActionConfigComponent implements OnInit {
       .postMaintainceAction({
         id: uuidv4(),
         name: this.actionName,
-        targetId: this.selectedTargetId,
-        malfunctionId: this.selectedMalfunctionId,
       })
       .subscribe(() => {
         this.loadingTableData();

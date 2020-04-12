@@ -1,7 +1,9 @@
 <div class="container" fxLayout="column" fxLayoutAlign="space-between center">
   <div class="filter-container" fxLayout="row" fxLayoutAlign="start center">
     <input nz-input placeholder="品名" [(ngModel)]="name" />
-    <button nz-button nzType="default" (click)="add()">新增</button>
+    <a>
+      <i nz-icon nzType="plus-square" nzTheme="outline" (click)="add()"></i>
+    </a>
   </div>
   <nz-table
     #basicTable
@@ -27,12 +29,16 @@
         </td>
 
         <td>
-          <a *ngIf="currentId !== data.id" (click)="makeEditable(data.id)"
-            >编辑</a
-          >
-          <a *ngIf="currentId === data.id" (click)="saveData(data)">保存</a>
+          <a *ngIf="currentId !== data.id" (click)="makeEditable(data.id)">
+            <i nz-icon nzType="edit" nzTheme="outline"></i
+          ></a>
+          <a *ngIf="currentId === data.id" (click)="saveData(data)">
+            <i nz-icon nzType="save" nzTheme="outline"></i
+          ></a>
           <nz-divider nzType="vertical"></nz-divider>
-          <a (click)="delete(data)">删除</a>
+          <a (click)="delete(data)">
+            <i nz-icon nzType="delete" nzTheme="outline"></i
+          ></a>
         </td>
       </tr>
     </tbody>

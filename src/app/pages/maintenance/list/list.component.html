@@ -4,8 +4,17 @@
   fxLayoutAlign="space-between center"
 >
   <div class="filter-container" fxLayout="row" fxLayoutAlign="start center">
+    <a>
+      <i
+        nz-icon
+        nzType="plus-square"
+        nzTheme="outline"
+        [routerLink]="['/maintenance/detail']"
+        routerLinkActive="router-link-active"
+      ></i>
+    </a>
     <nz-range-picker [(ngModel)]="dateRange"></nz-range-picker>
-    <nz-select
+    <!-- <nz-select
       [(ngModel)]="selectedAddr"
       (nzOpenChange)="onAddrsOpenChange()"
       nzPlaceHolder="所有地点"
@@ -18,8 +27,8 @@
         [nzValue]="a.id"
         [nzLabel]="a.name"
       ></nz-option>
-    </nz-select>
-
+    </nz-select> -->
+    <app-addr-select></app-addr-select>
     <nz-select
       [(ngModel)]="selectedName"
       (nzOpenChange)="onNamesOpenChange()"
@@ -38,7 +47,6 @@
     <nz-select
       [(ngModel)]="selectedTarget"
       (nzOpenChange)="onTargetsOpenChange()"
-      (ngModelChange)="onTargetsOptionChange()"
       nzPlaceHolder="所有对象"
       nzAllowClear
       [nzLoading]="isTargetsLoading"
@@ -55,12 +63,10 @@
     <nz-select
       [(ngModel)]="selectedMalfunction"
       (nzOpenChange)="onMalfunctionsOpenChange()"
-      (ngModelChange)="onMalfunctionsOptionChange()"
       nzPlaceHolder="所有故障"
       nzAllowClear
       [nzLoading]="isMalfunctionsLoading"
       nzNotFoundContent=""
-      [disabled]="isMalfunctionsDisabled"
     >
       <nz-option
         *ngFor="let m of malfunctions"
@@ -76,7 +82,6 @@
       nzAllowClear
       [nzLoading]="isActionsLoading"
       nzNotFoundContent=""
-      [disabled]="isActionsDisabled"
     >
       <nz-option
         *ngFor="let a of actions"
@@ -104,6 +109,7 @@
         <th>对象</th>
         <th>故障</th>
         <th>处理</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -114,6 +120,11 @@
         <td>{{ data.target.name }}</td>
         <td>{{ data.malfunction.name }}</td>
         <td>{{ data.action.name }}</td>
+        <td>
+          <a><i nz-icon nzType="edit" nzTheme="outline"></i></a>
+          <nz-divider nzType="vertical"></nz-divider>
+          <a> <i nz-icon nzType="delete" nzTheme="outline"></i></a>
+        </td>
       </tr>
     </tbody>
   </nz-table>

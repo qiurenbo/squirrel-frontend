@@ -11,7 +11,6 @@ export class MalfunctionConfigComponent implements OnInit {
   isMalfunctionsLoading = false;
   malfunctionName: string;
   malfunctions: Malfunction[] = null;
-  targets: Target[] = null;
   selectedTargetId: string = null;
 
   isLoading = false;
@@ -28,10 +27,6 @@ export class MalfunctionConfigComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadingData();
-    this.mservice.getMaintainceTargets().subscribe((t) => {
-      this.targets = t;
-      this.isLoading = false;
-    });
   }
 
   add() {
@@ -39,7 +34,6 @@ export class MalfunctionConfigComponent implements OnInit {
       .postMaintainceMalfunction({
         id: uuidv4(),
         name: this.malfunctionName,
-        targetId: this.selectedTargetId,
       })
       .subscribe(() => {
         this.loadingData();

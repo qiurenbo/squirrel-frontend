@@ -10,6 +10,7 @@ import { ConfigComponent } from './config/config.component';
 import { TargetConfigComponent } from './config/target-config/target-config.component';
 import { MalfunctionConfigComponent } from './config/malfunction-config/malfunction-config.component';
 import { ActionConfigComponent } from './config/action-config/action-config.component';
+import { AddrSelectComponent } from './list/addr-select/addr-select.component';
 
 @NgModule({
   imports: [MaintenanceRoutingModule, SharedModule],
@@ -21,6 +22,7 @@ import { ActionConfigComponent } from './config/action-config/action-config.comp
     TargetConfigComponent,
     MalfunctionConfigComponent,
     ActionConfigComponent,
+    AddrSelectComponent,
   ],
   exports: [],
 })

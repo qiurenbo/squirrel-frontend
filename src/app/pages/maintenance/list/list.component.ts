@@ -40,13 +40,10 @@ export class ListComponent implements OnInit {
   isTargetsLoading = false;
   isMalfunctionsLoading = false;
 
-  isMalfunctionsDisabled = true;
-  isActionsDisabled = true;
-
   constructor(private mservice: MaintainceService) {}
 
   ngOnInit(): void {
-    this.pageSize = 6;
+    this.pageSize = 7;
     this.pageIndex = 1;
     this.mservice.getMaintainces(this.filter).subscribe((m) => {
       this.isLoading = false;
@@ -109,18 +106,6 @@ export class ListComponent implements OnInit {
     });
   }
 
-  onTargetsOptionChange() {
-    this.isMalfunctionsDisabled = this.selectedTarget ? false : true;
-    this.isMalfunctionsLoading = true;
-    this.selectedMalfunction = null;
-    this.mservice
-      .getMaintainceMalfunctions({ targetId: this.selectedTarget })
-      .subscribe((m) => {
-        this.malfunctions = m;
-        this.isMalfunctionsLoading = false;
-      });
-  }
-
   onMalfunctionsOpenChange() {
     if (!this.malfunctions) {
       this.isMalfunctionsLoading = true;
@@ -129,18 +114,6 @@ export class ListComponent implements OnInit {
         this.isMalfunctionsLoading = false;
       });
     }
-  }
-
-  onMalfunctionsOptionChange() {
-    this.isActionsDisabled = this.selectedMalfunction ? false : true;
-    this.selectedAction = null;
-    this.isActionsLoading = true;
-    this.mservice
-      .getMaintainceActions({ malfunctionId: this.selectedMalfunction })
-      .subscribe((a) => {
-        this.actions = a;
-        this.isActionsLoading = false;
-      });
   }
 
   onFilterClick() {

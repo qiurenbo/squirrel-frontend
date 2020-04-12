@@ -1,0 +1,14 @@
+<nz-select
+  [(ngModel)]="addrIdValue"
+  (nzOpenChange)="onAddrsOpenChange()"
+  nzPlaceHolder="所有地点"
+  nzAllowClear
+  [nzLoading]="isAddrsLoading"
+  nzNotFoundContent=""
+>
+  <nz-option
+    *ngFor="let a of addrs"
+    [nzValue]="a.id"
+    [nzLabel]="a.name"
+  ></nz-option>
+</nz-select>

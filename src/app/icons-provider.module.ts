@@ -8,7 +8,11 @@ import {
   DashboardOutline,
   ToolOutline,
   VideoCameraOutline,
-  ShopOutline
+  ShopOutline,
+  PlusSquareOutline,
+  EditOutline,
+  DeleteOutline,
+  SaveOutline,
 } from '@ant-design/icons-angular/icons';
 
 const icons = [
@@ -18,10 +22,14 @@ const icons = [
   FormOutline,
   ToolOutline,
   VideoCameraOutline,
-  ShopOutline
+  ShopOutline,
+  PlusSquareOutline,
+  EditOutline,
+  DeleteOutline,
+  SaveOutline,
 ];
 
 @NgModule({
-  providers: [{ provide: NZ_ICONS, useValue: icons }]
+  providers: [{ provide: NZ_ICONS, useValue: icons }],
 })
 export class IconsProviderModule {}

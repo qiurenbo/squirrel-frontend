@@ -7,6 +7,10 @@
   .filter-container {
     width: 100%;
     margin-bottom: 24px;
+
+    i {
+      font-size: 24px;
+    }
     input {
       width: 150px;
       margin-right: 10px;
@@ -20,6 +24,11 @@
 
   nz-table {
     width: 100%;
+
+    i {
+      font-size: 16px;
+    }
+
     input {
       width: 150px;
     }

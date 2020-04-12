@@ -69,11 +69,7 @@ export class MaintainceService {
       }
 
       return this.http.get<Action[]>(
-        assembleRequestUrl(
-          filter,
-          environment.apiurl + 'actions',
-          '_expand=malfunction&_expand=target'
-        )
+        assembleRequestUrl(filter, environment.apiurl + 'actions')
       );
     }
   }
@@ -88,11 +84,7 @@ export class MaintainceService {
       }
 
       return this.http.get<Malfunction[]>(
-        assembleRequestUrl(
-          filter,
-          environment.apiurl + 'malfunctions',
-          '_expand=target'
-        )
+        assembleRequestUrl(filter, environment.apiurl + 'malfunctions')
       );
     }
   }

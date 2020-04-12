@@ -1,13 +1,9 @@
 <div class="container" fxLayout="column" fxLayoutAlign="space-between center">
   <div class="filter-container" fxLayout="row" fxLayoutAlign="start center">
-    <nz-cascader
-      (nzSelectionChange)="onSelectionChange($event)"
-      [nzLoadData]="loadCascaderData"
-      nzPlaceHolder="选择故障类型"
-    ></nz-cascader>
-
     <input nz-input placeholder="处理" [(ngModel)]="actionName" />
-    <button nz-button (click)="add()">新增</button>
+    <a
+      ><i nz-icon nzType="plus-square" (click)="add()" nzTheme="outline"></i
+    ></a>
   </div>
   <nz-table
     #basicTable
@@ -17,21 +13,12 @@
   >
     <thead>
       <tr>
-        <th>品名</th>
-        <th>故障</th>
         <th>处理</th>
         <th></th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let data of basicTable.data">
-        <td>
-          {{ data.target.name }}
-        </td>
-        <td>
-          {{ data.malfunction.name }}
-        </td>
-
         <td>
           <ng-container *ngIf="currentId != data.id; else typeInputTpl">
             {{ data.name }}
@@ -42,12 +29,16 @@
         </td>
 
         <td>
-          <a *ngIf="currentId !== data.id" (click)="makeEditable(data.id)"
-            >编辑</a
-          >
-          <a *ngIf="currentId === data.id" (click)="saveData(data)">保存</a>
+          <a *ngIf="currentId !== data.id" (click)="makeEditable(data.id)">
+            <i nz-icon nzType="edit" nzTheme="outline"></i>
+          </a>
+          <a *ngIf="currentId === data.id" (click)="saveData(data)"
+            ><i nz-icon nzType="save" nzTheme="outline"></i
+          ></a>
           <nz-divider nzType="vertical"></nz-divider>
-          <a (click)="delete(data)">删除</a>
+          <a (click)="delete(data)">
+            <i nz-icon nzType="delete" nzTheme="outline"></i
+          ></a>
         </td>
       </tr>
     </tbody>
