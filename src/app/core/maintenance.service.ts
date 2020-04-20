@@ -14,10 +14,14 @@ import { assembleRequestUrl } from './utils';
 @Injectable({
   providedIn: 'root',
 })
-export class MaintainceService {
+export class MaintenanceService {
   constructor(private http: HttpClient) {}
 
-  getMaintainces(filter: any = null): Observable<MaintenanceDetail[]> {
+  getMaintenanceStats(): Observable<any> {
+    return this.http.get<any>(environment.apiurl + 'maintenanceStats');
+  }
+
+  getMaintenances(filter: any = null): Observable<MaintenanceDetail[]> {
     let relations =
       '_expand=addr&_expand=operator&_expand=action&_expand=malfunction&_expand=target&_sort=date&_order=desc';
     if (environment.mock) {
@@ -47,19 +51,28 @@ export class MaintainceService {
     }
   }
 
-  getMaintainceNames(): Observable<Operator[]> {
-    return this.http.get<Operator[]>(environment.apiurl + 'operators');
+  postMaintenance(maintenance: MaintenanceDetail): Observable<any> {
+    return this.http.post(environment.apiurl + 'maintenances', maintenance);
   }
 
-  getMaintainceAddrs(): Observable<Addr[]> {
-    return this.http.get<Addr[]>(environment.apiurl + 'addrs');
+  putMaintenance(maintenance: MaintenanceDetail): Observable<any> {
+    return this.http.put(
+      environment.apiurl + 'maintenances/' + maintenance.id,
+      maintenance
+    );
   }
 
-  getMaintainceTargets(): Observable<Target[]> {
+  deleteMaintenance(maintenance: MaintenanceDetail): Observable<any> {
+    return this.http.delete(
+      environment.apiurl + 'maintenances/' + maintenance.id
+    );
+  }
+
+  getMaintenanceTargets(): Observable<Target[]> {
     return this.http.get<Target[]>(environment.apiurl + 'targets');
   }
 
-  getMaintainceActions(filter: any = null): Observable<Action[]> {
+  getMaintenanceActions(filter: any = null): Observable<Action[]> {
     if (environment.mock) {
       if (filter?._page && filter?._limit) {
         filter.start = (filter._page - 1) * filter._limit;
@@ -74,7 +87,7 @@ export class MaintainceService {
     }
   }
 
-  getMaintainceMalfunctions(filter: any = null): Observable<Malfunction[]> {
+  getMaintenanceMalfunctions(filter: any = null): Observable<Malfunction[]> {
     if (environment.mock) {
       if (filter?._page && filter?._limit) {
         filter.start = (filter._page - 1) * filter._limit;
@@ -89,56 +102,44 @@ export class MaintainceService {
     }
   }
 
-  postMaintainceAddr(addr: Addr): Observable<any> {
-    return this.http.post(environment.apiurl + 'addrs', addr);
-  }
-
-  deleteMaintainceAddr(addr: Addr): Observable<any> {
-    return this.http.delete(environment.apiurl + 'addrs/' + addr.id);
-  }
-
-  putMaintainceAddr(addr: Addr): Observable<any> {
-    return this.http.put(environment.apiurl + 'addrs/' + addr.id, addr);
-  }
-
-  postMaintainceTarget(target: Target): Observable<any> {
+  postMaintenanceTarget(target: Target): Observable<any> {
     return this.http.post(environment.apiurl + 'targets', target);
   }
 
-  deleteMaintainceTarget(target: Target): Observable<any> {
+  deleteMaintenanceTarget(target: Target): Observable<any> {
     return this.http.delete(environment.apiurl + 'targets/' + target.id);
   }
 
-  putMaintainceMalfunction(malfunction: Malfunction): Observable<any> {
+  putMaintenanceMalfunction(malfunction: Malfunction): Observable<any> {
     return this.http.put(
       environment.apiurl + 'malfunctions/' + malfunction.id,
       malfunction
     );
   }
 
-  postMaintainceMalfunction(malfunction: Malfunction): Observable<any> {
+  postMaintenanceMalfunction(malfunction: Malfunction): Observable<any> {
     return this.http.post(environment.apiurl + 'malfunctions', malfunction);
   }
 
-  deleteMaintainceMalfunction(malfunction: Malfunction): Observable<any> {
+  deleteMaintenanceMalfunction(malfunction: Malfunction): Observable<any> {
     return this.http.delete(
       environment.apiurl + 'malfunctions/' + malfunction.id
     );
   }
 
-  putMaintainceTarget(target: Target): Observable<any> {
+  putMaintenanceTarget(target: Target): Observable<any> {
     return this.http.put(environment.apiurl + 'targets/' + target.id, target);
   }
 
-  postMaintainceAction(action: Action): Observable<any> {
+  postMaintenanceAction(action: Action): Observable<any> {
     return this.http.post(environment.apiurl + 'actions', action);
   }
 
-  deleteMaintainceAction(action: Action): Observable<any> {
+  deleteMaintenanceAction(action: Action): Observable<any> {
     return this.http.delete(environment.apiurl + 'actions/' + action.id);
   }
 
-  putMaintainceAction(action: Action): Observable<any> {
+  putMaintenanceAction(action: Action): Observable<any> {
     return this.http.put(environment.apiurl + 'actions/' + action.id, action);
   }
 }

@@ -1,0 +1,13 @@
+<nz-select
+  [(ngModel)]="actionId"
+  nzPlaceHolder="所有方法"
+  nzAllowClear
+  [nzLoading]="isActionsLoading"
+  nzNotFoundContent=""
+>
+  <nz-option
+    *ngFor="let a of actions"
+    [nzValue]="a.id"
+    [nzLabel]="a.name"
+  ></nz-option>
+</nz-select>

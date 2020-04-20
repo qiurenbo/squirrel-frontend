@@ -1,5 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { MaintainceService } from 'src/app/core/maintenance.service';
+import {
+  Component,
+  OnInit,
+  ComponentFactoryResolver,
+  ViewContainerRef,
+} from '@angular/core';
+import { MaintenanceService } from 'src/app/core/maintenance.service';
 import {
   MaintenanceDetail,
   Addr,
@@ -9,6 +14,7 @@ import {
   Action,
 } from 'src/app/models/maintenance.model';
 import * as moment from 'moment';
+import { DetailComponent } from './detail/detail.component';
 
 @Component({
   selector: 'app-list',
@@ -16,7 +22,6 @@ import * as moment from 'moment';
   styleUrls: ['./list.component.scss'],
 })
 export class ListComponent implements OnInit {
-  dateRange: any;
   listOfData: MaintenanceDetail[] = null;
   isLoading = true;
   pageSize: number;
@@ -28,99 +33,91 @@ export class ListComponent implements OnInit {
   malfunctions: Malfunction[] = null;
   total: number;
 
-  selectedName: string = null;
-  selectedAddr: string = null;
-  selectedAction: string = null;
-  selectedTarget: string = null;
-  selectedMalfunction: string = null;
+  selectedStartDate: string;
+  selectedEndDate: string;
+  selectedOperatorId: string = null;
+  selectedAddrId: string = null;
+  selectedActionId: string = null;
+  selectedTargetId: string = null;
+  selectedMalfunctionId: string = null;
 
-  isNamesLoading = false;
-  isAddrsLoading = false;
-  isActionsLoading = false;
-  isTargetsLoading = false;
-  isMalfunctionsLoading = false;
+  constructor(
+    private mservice: MaintenanceService,
+    private resolver: ComponentFactoryResolver,
+    private viewContainer: ViewContainerRef
+  ) {}
 
-  constructor(private mservice: MaintainceService) {}
+  loadData() {
+    this.isLoading = true;
+    this.mservice.getMaintenances(this.filter).subscribe((m) => {
+      this.isLoading = false;
+      this.listOfData = m;
+    });
+  }
 
   ngOnInit(): void {
     this.pageSize = 7;
     this.pageIndex = 1;
-    this.mservice.getMaintainces(this.filter).subscribe((m) => {
-      this.isLoading = false;
-      this.listOfData = m;
-    });
+    this.loadData();
   }
 
   get filter(): any {
     return {
       startDate: this.selectedStartDate,
       endDate: this.selectedEndDate,
-      addrId: this.selectedAddr,
-      targetId: this.selectedTarget,
-      actionId: this.selectedAction,
-      operatorId: this.selectedName,
-      malfunctionId: this.selectedMalfunction,
+      addrId: this.selectedAddrId,
+      targetId: this.selectedTargetId,
+      actionId: this.selectedActionId,
+      operatorId: this.selectedOperatorId,
+      malfunctionId: this.selectedMalfunctionId,
       _page: this.pageIndex,
       _limit: this.pageSize,
     };
   }
-  get selectedStartDate(): string {
-    return this.dateRange ? moment(this.dateRange[0]).format('YYYYMMDD') : null;
+
+  // get selectedStartDate(): string {
+  //   return this.dateRange ? moment(this.dateRange[0]).format('YYYYMMDD') : null;
+  // }
+
+  // get selectedEndDate(): string {
+  //   return this.dateRange ? moment(this.dateRange[1]).format('YYYYMMDD') : null;
+  // }
+
+  set dateRange(range) {
+    this.selectedStartDate =
+      range.length > 0 ? moment(range[0]).format('YYYYMMDD') : null;
+    this.selectedEndDate =
+      range.length > 0 ? moment(range[1]).format('YYYYMMDD') : null;
   }
 
-  get selectedEndDate(): string {
-    return this.dateRange ? moment(this.dateRange[1]).format('YYYYMMDD') : null;
+  makeDlg() {
+    const factory = this.resolver.resolveComponentFactory(DetailComponent);
+    const detailComponentRef = this.viewContainer.createComponent(factory);
+    detailComponentRef.instance.dateUpdate.subscribe(() => this.loadData());
+    return detailComponentRef;
+  }
+  showAddDlg() {
+    const detailComponentRef = this.makeDlg();
+    detailComponentRef.instance.title = '新增维护';
+    detailComponentRef.instance.detail = null;
+    detailComponentRef.instance.method = 'POST';
   }
 
-  onNamesOpenChange() {
-    this.isNamesLoading = true;
-    this.mservice.getMaintainceNames().subscribe((o) => {
-      this.operators = o;
-      this.isNamesLoading = false;
-    });
-  }
-
-  onAddrsOpenChange() {
-    this.isAddrsLoading = true;
-    this.mservice.getMaintainceAddrs().subscribe((a) => {
-      this.addrs = a;
-      this.isAddrsLoading = false;
-    });
-  }
-
-  onActionsOpenChange() {
-    if (!this.actions) {
-      this.isActionsLoading = true;
-      this.mservice.getMaintainceActions().subscribe((a) => {
-        this.actions = a;
-        this.isActionsLoading = false;
-      });
-    }
-  }
-
-  onTargetsOpenChange() {
-    this.isTargetsLoading = true;
-    this.mservice.getMaintainceTargets().subscribe((d) => {
-      this.targets = d;
-      this.isTargetsLoading = false;
-    });
-  }
-
-  onMalfunctionsOpenChange() {
-    if (!this.malfunctions) {
-      this.isMalfunctionsLoading = true;
-      this.mservice.getMaintainceMalfunctions().subscribe((m) => {
-        this.malfunctions = m;
-        this.isMalfunctionsLoading = false;
-      });
-    }
+  showEditDlg(maintenance: MaintenanceDetail) {
+    const detailComponentRef = this.makeDlg();
+    detailComponentRef.instance.title = '修改当前';
+    detailComponentRef.instance.method = 'PUT';
+    detailComponentRef.instance.detail = maintenance;
+    detailComponentRef.instance.dateUpdate.subscribe(() => this.loadData());
   }
 
   onFilterClick() {
-    this.isLoading = true;
-    this.mservice.getMaintainces(this.filter).subscribe((m) => {
-      this.isLoading = false;
-      this.listOfData = m;
+    this.loadData();
+  }
+
+  deleteRecord(maintenance: MaintenanceDetail) {
+    this.mservice.deleteMaintenance(maintenance).subscribe(() => {
+      this.loadData();
     });
   }
 }

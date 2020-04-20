@@ -1,7 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { MaintainceService } from 'src/app/core/maintenance.service';
+import {
+  Component,
+  OnInit,
+  ComponentFactoryResolver,
+  ViewContainerRef,
+} from '@angular/core';
 import { Addr } from 'src/app/models/maintenance.model';
 import { v4 as uuidv4 } from 'uuid';
+import { AddrEditDlgComponent } from './addr-edit-dlg/addr-edit-dlg.component';
+import { AddrService } from 'src/app/core/addr.service';
 @Component({
   selector: 'app-addr-config',
   templateUrl: './addr-config.component.html',
@@ -16,11 +22,15 @@ export class AddrConfigComponent implements OnInit {
   addrs: Addr[] = null;
   isLoading = false;
   currentId: string = null;
-  constructor(private mservice: MaintainceService) {}
+  constructor(
+    private addrService: AddrService,
+    private resolver: ComponentFactoryResolver,
+    private viewContainer: ViewContainerRef
+  ) {}
 
   loadingData() {
     this.isLoading = true;
-    this.mservice.getMaintainceAddrs().subscribe((a) => {
+    this.addrService.getAddrs().subscribe((a) => {
       this.addrs = a;
       this.isLoading = false;
     });
@@ -29,9 +39,17 @@ export class AddrConfigComponent implements OnInit {
     this.loadingData();
   }
 
+  checkInput() {
+    if (this.name && this.addr && this.tel && this.type) {
+      return true;
+    }
+    return false;
+  }
+
   add() {
-    this.mservice
-      .postMaintainceAddr({
+    if (!this.checkInput()) return;
+    this.addrService
+      .postAddr({
         id: uuidv4(),
         name: this.name,
         addr: this.addr,
@@ -44,17 +62,21 @@ export class AddrConfigComponent implements OnInit {
   }
 
   delete(addr: Addr) {
-    this.mservice.deleteMaintainceAddr(addr).subscribe(() => {
+    this.addrService.deleteAddr(addr).subscribe(() => {
       this.loadingData();
     });
   }
 
-  makeEditable(id: string) {
-    this.currentId = id;
+  openEditDlg(addr: Addr) {
+    const factory = this.resolver.resolveComponentFactory(AddrEditDlgComponent);
+    const dlg = this.viewContainer.createComponent(factory);
+    dlg.instance.passValue = addr;
+    dlg.instance.onOk = this.OnOk;
   }
 
-  saveData(addr: Addr) {
-    this.currentId = null;
-    this.mservice.putMaintainceAddr(addr).subscribe(() => {});
-  }
+  OnOk = (addr: Addr) => {
+    this.addrService.putAddr(addr).subscribe(() => {
+      this.loadingData();
+    });
+  };
 }

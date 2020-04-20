@@ -1,8 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { MaintainceService } from 'src/app/core/maintenance.service';
+import {
+  Component,
+  OnInit,
+  ComponentFactoryResolver,
+  ViewContainerRef,
+} from '@angular/core';
+import { MaintenanceService } from 'src/app/core/maintenance.service';
 import { v4 as uuidv4 } from 'uuid';
-import { Target, Malfunction, Action } from 'src/app/models/maintenance.model';
-import { NzCascaderOption, arraysEqual } from 'ng-zorro-antd';
+import { Action, Malfunction } from 'src/app/models/maintenance.model';
+import { NzCascaderOption } from 'ng-zorro-antd';
+import * as _ from 'lodash';
+import { EditDlgComponent } from '../edit-dlg/edit-dlg.component';
+
 @Component({
   selector: 'app-action-config',
   templateUrl: './action-config.component.html',
@@ -14,45 +22,22 @@ export class ActionConfigComponent implements OnInit {
   isLoading = false;
   currentId: string = null;
   option: NzCascaderOption = null;
-  constructor(private mservice: MaintainceService) {}
+  constructor(
+    private mservice: MaintenanceService,
+    private resolver: ComponentFactoryResolver,
+    private viewContainer: ViewContainerRef
+  ) {}
 
-  loadingTableData() {
+  loadingData() {
     this.isLoading = true;
-    this.mservice.getMaintainceActions().subscribe((a) => {
+    this.mservice.getMaintenanceActions().subscribe((a) => {
       this.actions = a;
       this.isLoading = false;
     });
   }
 
-  createArr(arr: { id: string; name: string }[], isLeaf) {
-    let newArr = [];
-    for (let i = 0; i < arr.length; i++) {
-      newArr.push({ value: arr[i].id, label: arr[i].name, isLeaf: isLeaf });
-    }
-    return newArr;
-  }
-
-  loadCascaderData = (node: NzCascaderOption, index: number) => {
-    return new Promise((resolve) => {
-      if (index < 0) {
-        // if index less than 0 it is root node
-        this.mservice.getMaintainceTargets().subscribe((t) => {
-          node.children = this.createArr(t, false);
-          resolve();
-        });
-      } else if (index === 0) {
-        this.mservice
-          .getMaintainceMalfunctions({ targetId: node.value })
-          .subscribe((m) => {
-            node.children = this.createArr(m, true);
-            resolve();
-          });
-      }
-    });
-  };
-
   ngOnInit(): void {
-    this.loadingTableData();
+    this.loadingData();
   }
 
   onSelectionChange(option: NzCascaderOption) {
@@ -67,29 +52,39 @@ export class ActionConfigComponent implements OnInit {
     return this.option[1].value;
   }
 
+  checkInput() {
+    if (!this.actionName) return false;
+    return true;
+  }
+
   add() {
+    if (!this.checkInput()) return;
     this.mservice
-      .postMaintainceAction({
+      .postMaintenanceAction({
         id: uuidv4(),
         name: this.actionName,
       })
       .subscribe(() => {
-        this.loadingTableData();
+        this.loadingData();
       });
   }
 
   delete(action: Action) {
-    this.mservice.deleteMaintainceAction(action).subscribe(() => {
-      this.loadingTableData();
+    this.mservice.deleteMaintenanceAction(action).subscribe(() => {
+      this.loadingData();
     });
   }
 
-  makeEditable(id: string) {
-    this.currentId = id;
+  openEditDlg(malfunction: Malfunction) {
+    const factory = this.resolver.resolveComponentFactory(EditDlgComponent);
+    const dlg = this.viewContainer.createComponent(factory);
+    dlg.instance.passValue = malfunction;
+    dlg.instance.onOk = this.OnOk;
   }
 
-  saveData(action: Action) {
-    this.currentId = null;
-    this.mservice.putMaintainceAction(action).subscribe(() => {});
-  }
+  OnOk = (action: Action) => {
+    this.mservice.putMaintenanceAction(action).subscribe(() => {
+      this.loadingData();
+    });
+  };
 }

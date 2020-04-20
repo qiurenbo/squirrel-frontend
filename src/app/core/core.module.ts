@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
-import { MaintainceService } from './maintenance.service';
+import { MaintenanceService } from './maintenance.service';
 
 @NgModule({
-  declarations: [MaintainceService],
+  declarations: [MaintenanceService],
   imports: [SharedModule],
-  exports: [MaintainceService]
+  exports: [MaintenanceService],
 })
 export class CoreModule {}

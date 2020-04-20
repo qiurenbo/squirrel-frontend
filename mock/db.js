@@ -1,11 +1,12 @@
 const {
-  operators,
   targets,
   actions,
-  addrs,
   malfunctions,
   maintenances,
+  maintenanceStats,
 } = require("./maintenance");
+
+const { addrs, operators, accounts } = require("./global");
 
 module.exports = () => {
   const data = {
@@ -15,6 +16,8 @@ module.exports = () => {
     operators: operators,
     actions: actions,
     malfunctions: malfunctions,
+    maintenanceStats: maintenanceStats,
+    accounts: accounts,
   };
 
   return data;

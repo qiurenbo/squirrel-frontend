@@ -4,95 +4,26 @@
   fxLayoutAlign="space-between center"
 >
   <div class="filter-container" fxLayout="row" fxLayoutAlign="start center">
-    <a>
-      <i
-        nz-icon
-        nzType="plus-square"
-        nzTheme="outline"
-        [routerLink]="['/maintenance/detail']"
-        routerLinkActive="router-link-active"
-      ></i>
+    <a (click)="showAddDlg()">
+      <i nz-icon nzType="plus-square" nzTheme="outline"></i>
     </a>
+
     <nz-range-picker [(ngModel)]="dateRange"></nz-range-picker>
-    <!-- <nz-select
-      [(ngModel)]="selectedAddr"
-      (nzOpenChange)="onAddrsOpenChange()"
-      nzPlaceHolder="所有地点"
-      nzAllowClear
-      [nzLoading]="isAddrsLoading"
-      nzNotFoundContent=""
-    >
-      <nz-option
-        *ngFor="let a of addrs"
-        [nzValue]="a.id"
-        [nzLabel]="a.name"
-      ></nz-option>
-    </nz-select> -->
-    <app-addr-select></app-addr-select>
-    <nz-select
-      [(ngModel)]="selectedName"
-      (nzOpenChange)="onNamesOpenChange()"
-      nzPlaceHolder="全体人员"
-      nzAllowClear
-      [nzLoading]="isNamesLoading"
-      nzNotFoundContent=""
-    >
-      <nz-option
-        *ngFor="let o of operators"
-        [nzValue]="o.id"
-        [nzLabel]="o.name"
-      ></nz-option>
-    </nz-select>
+    <app-addr-select [(addrId)]="selectedAddrId"></app-addr-select>
+    <app-operator-select
+      [(operatorId)]="selectedOperatorId"
+    ></app-operator-select>
+    <app-target-select [(targetId)]="selectedTargetId"></app-target-select>
+    <app-malfunction-select
+      [(malfunctionId)]="selectedMalfunctionId"
+    ></app-malfunction-select>
+    <app-action-select [(actionId)]="selectedActionId"></app-action-select>
 
-    <nz-select
-      [(ngModel)]="selectedTarget"
-      (nzOpenChange)="onTargetsOpenChange()"
-      nzPlaceHolder="所有对象"
-      nzAllowClear
-      [nzLoading]="isTargetsLoading"
-      nzNotFoundContent=""
-      class="target"
-    >
-      <nz-option
-        *ngFor="let t of targets"
-        [nzValue]="t.id"
-        [nzLabel]="t.name"
-      ></nz-option>
-    </nz-select>
-
-    <nz-select
-      [(ngModel)]="selectedMalfunction"
-      (nzOpenChange)="onMalfunctionsOpenChange()"
-      nzPlaceHolder="所有故障"
-      nzAllowClear
-      [nzLoading]="isMalfunctionsLoading"
-      nzNotFoundContent=""
-    >
-      <nz-option
-        *ngFor="let m of malfunctions"
-        [nzValue]="m.id"
-        [nzLabel]="m.name"
-      ></nz-option>
-    </nz-select>
-
-    <nz-select
-      [(ngModel)]="selectedAction"
-      (nzOpenChange)="onActionsOpenChange()"
-      nzPlaceHolder="所有方法"
-      nzAllowClear
-      [nzLoading]="isActionsLoading"
-      nzNotFoundContent=""
-    >
-      <nz-option
-        *ngFor="let a of actions"
-        [nzValue]="a.id"
-        [nzLabel]="a.name"
-      ></nz-option>
-    </nz-select>
     <button nz-button nzMalfunction="default" (click)="onFilterClick()">
       过滤
     </button>
   </div>
+
   <nz-table
     #filterTable
     [nzData]="listOfData"
@@ -121,9 +52,13 @@
         <td>{{ data.malfunction.name }}</td>
         <td>{{ data.action.name }}</td>
         <td>
-          <a><i nz-icon nzType="edit" nzTheme="outline"></i></a>
+          <a (click)="showEditDlg(data)"
+            ><i nz-icon nzType="edit" nzTheme="outline"></i
+          ></a>
           <nz-divider nzType="vertical"></nz-divider>
-          <a> <i nz-icon nzType="delete" nzTheme="outline"></i></a>
+          <a (click)="deleteRecord(data)">
+            <i nz-icon nzType="delete" nzTheme="outline"></i
+          ></a>
         </td>
       </tr>
     </tbody>

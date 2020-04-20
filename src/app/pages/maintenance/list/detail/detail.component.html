@@ -1,0 +1,18 @@
+<nz-modal
+  [nzWidth]="1000"
+  [nzVisible]="isVisible"
+  [nzTitle]="title"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk()"
+>
+  <nz-date-picker [(ngModel)]="date"></nz-date-picker>
+  <app-addr-select [(addrId)]="selectedAddrId"></app-addr-select>
+  <app-operator-select
+    [(operatorId)]="selectedOperatorId"
+  ></app-operator-select>
+  <app-target-select [(targetId)]="selectedTargetId"></app-target-select>
+  <app-malfunction-select
+    [(malfunctionId)]="selectedMalfunctionId"
+  ></app-malfunction-select>
+  <app-action-select [(actionId)]="selectedActionId"></app-action-select>
+</nz-modal>

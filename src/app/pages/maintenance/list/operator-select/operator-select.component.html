@@ -1,0 +1,13 @@
+<nz-select
+  [(ngModel)]="operatorId"
+  nzPlaceHolder="全体人员"
+  nzAllowClear
+  [nzLoading]="isNamesLoading"
+  nzNotFoundContent=""
+>
+  <nz-option
+    *ngFor="let o of operators"
+    [nzValue]="o.id"
+    [nzLabel]="o.name"
+  ></nz-option>
+</nz-select>

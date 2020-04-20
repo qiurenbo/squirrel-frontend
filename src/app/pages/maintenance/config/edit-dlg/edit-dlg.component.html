@@ -1,0 +1,9 @@
+<nz-modal
+  [nzWidth]="600"
+  [nzVisible]="isVisible"
+  [nzTitle]="'修改当前'"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk()"
+>
+  <input nz-input [(ngModel)]="clone.name" />
+</nz-modal>

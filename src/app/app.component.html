@@ -29,18 +29,19 @@
       >
         <ul>
           <li nz-menu-item nzMatchRouter>
-            <a routerLink="/maintenance/list">维护日志</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
             <a routerLink="/maintenance/stats">维护统计</a>
           </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/maintenance/list">维护日志</a>
+          </li>
+
           <li nz-menu-item nzMatchRouter>
             <a routerLink="/maintenance/config">维护配置</a>
           </li>
         </ul>
       </li>
 
-      <li
+      <!-- <li
         nz-submenu
         nzOpen
         nzTitle="日常摄像"
@@ -56,7 +57,7 @@
             <a>摄像统计</a>
           </li>
         </ul>
-      </li>
+      </li> -->
 
       <li
         nz-submenu
@@ -89,7 +90,7 @@
             <a routerLink="/others/global-config">全局配置</a>
           </li>
           <li nz-menu-item nzMatchRouter>
-            <a routerLink="/others/users">账户管理</a>
+            <a routerLink="/others/accounts">账户管理</a>
           </li>
           <li nz-menu-item nzMatchRouter>
             <a routerLink="/others/permissions">权限管理</a>

@@ -1,0 +1,14 @@
+<nz-select
+  [(ngModel)]="targetId"
+  nzPlaceHolder="所有对象"
+  nzAllowClear
+  [nzLoading]="isTargetsLoading"
+  nzNotFoundContent=""
+  class="target"
+>
+  <nz-option
+    *ngFor="let t of targets"
+    [nzValue]="t.id"
+    [nzLabel]="t.name"
+  ></nz-option>
+</nz-select>

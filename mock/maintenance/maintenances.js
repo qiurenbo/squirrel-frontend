@@ -1,10 +1,10 @@
 const uuidv4 = require("uuid").v4;
-const operators = require("./operators");
 const actions = require("./actions");
 const targets = require("./targets");
-const addrs = require("./addrs");
 const malfunctions = require("./malfunctions");
 const { random, randomYMD } = require("../utils");
+const addrs = require("../global/addrs");
+const operators = require("../global/operators");
 
 const createMaintenanceList = (number) => {
   let maintenances = [];

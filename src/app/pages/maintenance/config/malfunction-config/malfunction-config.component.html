@@ -20,33 +20,14 @@
     <tbody>
       <tr *ngFor="let data of basicTable.data">
         <td>
-          <ng-container *ngIf="currentId != data.id; else typeInputTpl">
-            {{ data.name }}
-          </ng-container>
-          <ng-template #typeInputTpl>
-            <input type="text" nz-input [(ngModel)]="data.name" />
-          </ng-template>
+          {{ data.name }}
         </td>
 
         <td>
-          <a>
-            <i
-              *ngIf="currentId !== data.id"
-              (click)="makeEditable(data.id)"
-              nz-icon
-              nzType="edit"
-              nzTheme="outline"
-            ></i
+          <a (click)="openEditDlg(data)">
+            <i nz-icon nzType="edit" nzTheme="outline"></i
           ></a>
-          <a>
-            <i
-              *ngIf="currentId === data.id"
-              (click)="saveData(data)"
-              nz-icon
-              nzType="save"
-              nzTheme="outline"
-            ></i
-          ></a>
+
           <nz-divider nzType="vertical"></nz-divider>
           <a>
             <i

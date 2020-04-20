@@ -4,15 +4,26 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
+import { PieComponent } from './components/graph/pie/pie.component';
+import { NgxEchartsModule } from 'ngx-echarts';
+
 @NgModule({
-  declarations: [],
-  imports: [CommonModule, HttpClientModule, FormsModule, NgZorroAntdModule],
+  declarations: [PieComponent],
+  imports: [
+    CommonModule,
+    HttpClientModule,
+    FormsModule,
+    NgZorroAntdModule,
+    NgxEchartsModule,
+  ],
   exports: [
     CommonModule,
     FlexLayoutModule,
     HttpClientModule,
+    NgxEchartsModule,
     FormsModule,
-    NgZorroAntdModule
-  ]
+    NgZorroAntdModule,
+    PieComponent,
+  ],
 })
 export class SharedModule {}

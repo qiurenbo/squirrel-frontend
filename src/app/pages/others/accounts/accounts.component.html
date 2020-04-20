@@ -1,0 +1,40 @@
+<div class="container" fxLayout="column" fxLayoutAlign="space-between center">
+  <div class="filter-container" fxLayout="row" fxLayoutAlign="start center">
+    <input nz-input placeholder="账号" [(ngModel)]="username" />
+    <input nz-input placeholder="密码" [(ngModel)]="passwd" />
+    <a>
+      <i nz-icon nzType="plus-square" nzTheme="outline" (click)="add()"></i
+    ></a>
+  </div>
+  <nz-table
+    #basicTable
+    [nzData]="accounts"
+    [nzPageSize]="6"
+    [nzLoading]="isLoading"
+  >
+    <thead>
+      <tr>
+        <th>账号</th>
+        <th>密码</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td>
+          {{ data.username }}
+        </td>
+        <td>
+          ********
+        </td>
+
+        <td>
+          <a (click)="openEditDlg(data)">编辑</a>
+
+          <nz-divider nzType="vertical"></nz-divider>
+          <a (click)="delete(data)">删除</a>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>

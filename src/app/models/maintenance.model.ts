@@ -16,15 +16,18 @@ export class Malfunction {
 export class Operator {
   id: string;
   name: string;
+  department: string;
+  tel: string;
 }
 
 export class MaintenanceDetail {
+  id: string;
   date: string;
-  operator: Operator;
-  addr: Addr;
-  action: Action;
-  target: Target;
-  malfunction: Malfunction;
+  operatorId: string;
+  addrId: string;
+  actionId: string;
+  targetId: string;
+  malfunctionId: string;
 }
 
 // export class Maintenances {
@@ -38,4 +41,21 @@ export class Addr {
   addr: string;
   tel: string;
   type: string;
+}
+
+export class Stats {
+  orderOfToday: string;
+  orderOfCurMonth: string;
+  orderOfCurYear: string;
+  orderOfHistory: string;
+
+  pieOfMalfunctions: {
+    lengend: [];
+    series: [];
+  };
+
+  pieOfTargets: {
+    lengend: [];
+    series: [];
+  };
 }

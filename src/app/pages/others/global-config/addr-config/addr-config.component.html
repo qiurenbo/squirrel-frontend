@@ -4,7 +4,9 @@
     <input nz-input placeholder="类型" [(ngModel)]="type" />
     <input nz-input placeholder="地址" [(ngModel)]="addr" />
     <input nz-input placeholder="电话" [(ngModel)]="tel" />
-    <button nz-button nzType="default" (click)="add()">新增</button>
+    <a>
+      <i nz-icon nzType="plus-square" nzTheme="outline" (click)="add()"></i
+    ></a>
   </div>
   <nz-table
     #basicTable
@@ -24,44 +26,22 @@
     <tbody>
       <tr *ngFor="let data of basicTable.data">
         <td>
-          <ng-container *ngIf="currentId != data.id; else nameInputTpl">
-            {{ data.name }}
-          </ng-container>
-          <ng-template #nameInputTpl>
-            <input type="text" nz-input [(ngModel)]="data.name" />
-          </ng-template>
+          {{ data.name }}
         </td>
         <td>
-          <ng-container *ngIf="currentId != data.id; else typeInputTpl">
-            {{ data.type }}
-          </ng-container>
-          <ng-template #typeInputTpl>
-            <input type="text" nz-input [(ngModel)]="data.type" />
-          </ng-template>
+          {{ data.type }}
         </td>
         <td>
-          <ng-container *ngIf="currentId != data.id; else addrInputTpl">
-            {{ data.addr }}
-          </ng-container>
-          <ng-template #addrInputTpl>
-            <input type="text" nz-input [(ngModel)]="data.addr" />
-          </ng-template>
+          {{ data.addr }}
         </td>
 
         <td>
-          <ng-container *ngIf="currentId != data.id; else telInputTpl">
-            {{ data.tel }}
-          </ng-container>
-          <ng-template #telInputTpl>
-            <input type="text" nz-input [(ngModel)]="data.tel" />
-          </ng-template>
+          {{ data.tel }}
         </td>
 
         <td>
-          <a *ngIf="currentId !== data.id" (click)="makeEditable(data.id)"
-            >编辑</a
-          >
-          <a *ngIf="currentId === data.id" (click)="saveData(data)">保存</a>
+          <a (click)="openEditDlg(data)">编辑</a>
+
           <nz-divider nzType="vertical"></nz-divider>
           <a (click)="delete(data)">删除</a>
         </td>

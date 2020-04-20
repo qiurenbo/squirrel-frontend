@@ -1,0 +1,13 @@
+<nz-select
+  [(ngModel)]="malfunctionId"
+  nzPlaceHolder="所有故障"
+  nzAllowClear
+  [nzLoading]="isMalfunctionsLoading"
+  nzNotFoundContent=""
+>
+  <nz-option
+    *ngFor="let m of malfunctions"
+    [nzValue]="m.id"
+    [nzLabel]="m.name"
+  ></nz-option>
+</nz-select>

@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
-import { MaintainceService } from 'src/app/core/maintenance.service';
 import { Addr } from 'src/app/models/maintenance.model';
+import { AddrService } from 'src/app/core/addr.service';
 
 @Component({
   selector: 'app-addr-select',
@@ -8,7 +8,7 @@ import { Addr } from 'src/app/models/maintenance.model';
   styleUrls: ['./addr-select.component.scss'],
 })
 export class AddrSelectComponent implements OnInit {
-  constructor(private mservice: MaintainceService) {}
+  constructor(private addrService: AddrService) {}
   isAddrsLoading = false;
 
   addrs: Addr[];
@@ -28,11 +28,9 @@ export class AddrSelectComponent implements OnInit {
     this.addrIdChange.emit(this.addrIdValue);
   }
 
-  ngOnInit(): void {}
-
-  onAddrsOpenChange() {
+  ngOnInit(): void {
     this.isAddrsLoading = true;
-    this.mservice.getMaintainceAddrs().subscribe((a) => {
+    this.addrService.getAddrs().subscribe((a) => {
       this.addrs = a;
       this.isAddrsLoading = false;
     });
