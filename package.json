@@ -10,7 +10,7 @@
     "e2e": "ng e2e",
     "ng-mock": "ng serve -c mock",
     "mock": "concurrently 'npm:ng-mock' 'npm:mock-server'",
-    "mock-server": "json-server --watch mock/db.js --routes mock/routes.json"
+    "mock-server": "json-server --watch mock/db.js --routes mock/routes.json -m ./node_modules/json-server-auth"
   },
   "private": true,
   "dependencies": {
@@ -46,6 +46,7 @@
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~4.2.1",
     "json-server": "^0.16.1",
+    "json-server-auth": "^1.2.1",
     "karma": "~4.4.1",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage-istanbul-reporter": "~2.1.0",

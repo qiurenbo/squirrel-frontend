@@ -1,0 +1,11 @@
+<nz-modal
+  [nzWidth]="900"
+  [nzVisible]="isVisible"
+  [nzTitle]="'修改当前'"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk()"
+>
+  <input nz-input [(ngModel)]="operator.name" />
+  <input nz-input [(ngModel)]="operator.department" />
+  <input nz-input [(ngModel)]="operator.tel" />
+</nz-modal>

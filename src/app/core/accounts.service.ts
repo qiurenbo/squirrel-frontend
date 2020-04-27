@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
 import { Account } from '../models/account.model';
 import { environment } from 'src/environments/environment';
 
@@ -14,6 +14,13 @@ export class AccountService {
     return this.http.get<Account[]>(environment.apiurl + 'accounts');
   }
   postAccount(account: Account): Observable<any> {
+    if (environment.mock) {
+      return forkJoin(
+        this.http.post(environment.apiurl + 'register', account),
+        this.http.post(environment.apiurl + 'accounts', account)
+      );
+    }
+
     return this.http.post(environment.apiurl + 'accounts', account);
   }
 

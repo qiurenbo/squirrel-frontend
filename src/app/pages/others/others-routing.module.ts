@@ -1,15 +1,12 @@
-import { Routes, RouterModule } from '@angular/router';
-import { GlobalConfigComponent } from './global-config/global-config.component';
 import { NgModule } from '@angular/core';
-import { AccountsComponent } from './accounts/accounts.component';
-const routes: Routes = [
-  { path: 'global-config', component: GlobalConfigComponent },
-  { path: 'accounts', component: AccountsComponent },
-];
+import { CommonModule } from '@angular/common';
+import { Route, RouterModule } from '@angular/router';
+import { LoginComponent } from './login/login.component';
+
+const routes: Route[] = [{ path: 'login', component: LoginComponent }];
 
 @NgModule({
   declarations: [],
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+  imports: [CommonModule, RouterModule.forChild(routes)],
 })
 export class OthersRoutingModule {}

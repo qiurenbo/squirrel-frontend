@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
 import { SharedModule } from './shared/shared.module';
+import { CoreModule } from './core/core.module';
 
 registerLocaleData(zh);
 
@@ -19,9 +20,10 @@ registerLocaleData(zh);
     AppRoutingModule,
     IconsProviderModule,
     SharedModule,
-    BrowserAnimationsModule
+    CoreModule.forRoot(),
+    BrowserAnimationsModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: zh_CN }],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -18,6 +18,7 @@ module.exports = () => {
     malfunctions: malfunctions,
     maintenanceStats: maintenanceStats,
     accounts: accounts,
+    users: [],
   };
 
   return data;

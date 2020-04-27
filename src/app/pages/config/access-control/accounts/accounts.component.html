@@ -1,7 +1,7 @@
 <div class="container" fxLayout="column" fxLayoutAlign="space-between center">
   <div class="filter-container" fxLayout="row" fxLayoutAlign="start center">
-    <input nz-input placeholder="账号" [(ngModel)]="username" />
-    <input nz-input placeholder="密码" [(ngModel)]="passwd" />
+    <input nz-input placeholder="账号/邮箱" [(ngModel)]="username" />
+    <input nz-input placeholder="密码" [(ngModel)]="password" />
     <a>
       <i nz-icon nzType="plus-square" nzTheme="outline" (click)="add()"></i
     ></a>
@@ -14,7 +14,7 @@
   >
     <thead>
       <tr>
-        <th>账号</th>
+        <th>账号/邮箱</th>
         <th>密码</th>
         <th></th>
       </tr>

@@ -1,0 +1,10 @@
+<nz-modal
+  [nzWidth]="900"
+  [nzVisible]="isVisible"
+  [nzTitle]="'修改当前'"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk()"
+>
+  <input nz-input [(ngModel)]="account.username" />
+  <input nz-input [(ngModel)]="account.password" />
+</nz-modal>

@@ -6,11 +6,12 @@ import * as _ from 'lodash';
   styleUrls: ['./account-edit-dlg.component.scss'],
 })
 export class AccountEditDlgComponent implements OnInit {
-  accounts: Account[];
+  isVisible = true;
+  account: any;
 
   @Input()
   set passValue(value) {
-    this.accounts = _.clone(value);
+    this.account = _.clone(value);
   }
 
   @Input()
@@ -19,4 +20,24 @@ export class AccountEditDlgComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  checkInput() {
+    if (!this.account.username) return false;
+
+    return true;
+  }
+
+  handleOk(): void {
+    if (!this.checkInput()) {
+      return;
+    }
+
+    this.isVisible = false;
+
+    this.onOk(this.account);
+  }
+
+  handleCancel(): void {
+    this.isVisible = false;
+  }
 }

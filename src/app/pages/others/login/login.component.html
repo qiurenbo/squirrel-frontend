@@ -1,0 +1,55 @@
+<div class="container" fxLayout="row" fxLayoutAlign="center center">
+  <div class="form-container" fxLayout="row" fxLayoutAlign="center center">
+    <img src="assets/computer-and-man.svg" />
+
+    <form
+      nz-form
+      [formGroup]="validateForm"
+      class="login-form"
+      (ngSubmit)="submitForm()"
+      fxLayout="column"
+      fxLayoutAlign="center center"
+    >
+      <nz-form-item class="login-element">
+        <nz-form-control nzErrorTip="请输入用户名">
+          <nz-input-group nzPrefixIcon="user">
+            <input
+              type="text"
+              nz-input
+              formControlName="username"
+              placeholder="用户名"
+            />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item class="login-element">
+        <nz-form-control nzErrorTip="请输入密码">
+          <nz-input-group nzPrefixIcon="lock">
+            <input
+              type="password"
+              nz-input
+              formControlName="password"
+              placeholder="密码"
+            />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+      <!-- <div nz-row class="login-form-margin">
+      <div nz-col [nzSpan]="12">
+        <label nz-checkbox formControlName="remember">
+          <span>Remember me</span>
+        </label>
+      </div>
+    </div> -->
+      <button
+        nz-button
+        class="login-form-button"
+        [nzType]="'primary'"
+        class="login-element"
+      >
+        登录
+      </button>
+    </form>
+  </div>
+</div>

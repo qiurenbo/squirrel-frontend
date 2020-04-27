@@ -7,6 +7,7 @@ import {
 import { Operator } from 'src/app/models/maintenance.model';
 import { v4 as uuidv4 } from 'uuid';
 import { OperatorService } from 'src/app/core/operator.service';
+import { OperatorEditDlgComponent } from './operator-edit-dlg/operator-edit-dlg.component';
 
 @Component({
   selector: 'app-operator-config',
@@ -30,8 +31,8 @@ export class OperatorConfigComponent implements OnInit {
 
   loadingData() {
     this.isLoading = true;
-    this.opService.getOperators().subscribe((a) => {
-      this.operators = a;
+    this.opService.getOperators().subscribe((o) => {
+      this.operators = o;
       this.isLoading = false;
     });
   }
@@ -67,10 +68,12 @@ export class OperatorConfigComponent implements OnInit {
   }
 
   openEditDlg(operator: Operator) {
-    // const factory = this.resolver.resolveComponentFactory(OperatorEditDlgComponent);
-    // const dlg = this.viewContainer.createComponent(factory);
-    // dlg.instance.passValue = operator;
-    // dlg.instance.onOk = this.OnOk;
+    const factory = this.resolver.resolveComponentFactory(
+      OperatorEditDlgComponent
+    );
+    const dlg = this.viewContainer.createComponent(factory);
+    dlg.instance.passValue = operator;
+    dlg.instance.onOk = this.OnOk;
   }
 
   OnOk = (operator: Operator) => {

@@ -15,10 +15,7 @@ import { AccountEditDlgComponent } from './account-edit-dlg/account-edit-dlg.com
 })
 export class AccountsComponent implements OnInit {
   username: string;
-  department: string;
-  type: string;
-  tel: string;
-  passwd: string;
+  password: string;
   accounts: Account[] = null;
   selectedAccountId: string = null;
 
@@ -51,10 +48,9 @@ export class AccountsComponent implements OnInit {
     this.accountService
       .postAccount({
         id: uuidv4(),
+        email: this.username,
         username: this.username,
-        type: '',
-        department: this.department,
-        tel: this.tel,
+        password: this.password,
       })
       .subscribe(() => {
         this.loadingData();
@@ -76,6 +72,7 @@ export class AccountsComponent implements OnInit {
       AccountEditDlgComponent
     );
     const dlg = this.viewContainer.createComponent(factory);
+    account.password = '******';
     dlg.instance.passValue = account;
     dlg.instance.onOk = this.OnOk;
   }
