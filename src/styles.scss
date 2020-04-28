@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+
+@font-face {
+  font-family: "Alibaba-PuHuiTi-Regular";
+  src: url("assets/Alibaba-PuHuiTi-Regular.ttf");
+}
+
+* {
+  font-family: "Alibaba-PuHuiTi-Regular";
+}

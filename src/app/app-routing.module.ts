@@ -5,7 +5,7 @@ import { DefaultLayoutComponent } from './shared/layouts/default-layout/default-
 import { AuthGuardService } from './core/auth-guard.service';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: '/maintenance/stats' },
+  { path: '', pathMatch: 'full', redirectTo: '/maintenance/login' },
   {
     path: '',
     component: SideLayoutComponent,
