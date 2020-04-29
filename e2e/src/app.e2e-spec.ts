@@ -10,7 +10,7 @@ describe('workspace-project App', () => {
 
   it('should display order message', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('workflow-management app is running!');
+    expect(page.getTitleText()).toEqual('squirrel-frontend app is running!');
   });
 
   afterEach(async () => {
