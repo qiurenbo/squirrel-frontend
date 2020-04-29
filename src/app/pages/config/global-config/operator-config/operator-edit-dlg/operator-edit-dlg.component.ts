@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import * as _ from 'lodash';
-import { Operator } from 'src/app/models/maintenance.model';
+import { Operator } from 'src/app/models/order.model';
 @Component({
   selector: 'app-operator-edit-dlg',
   templateUrl: './operator-edit-dlg.component.html',

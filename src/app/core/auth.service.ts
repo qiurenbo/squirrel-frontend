@@ -21,7 +21,7 @@ export class AuthService {
         map((accessToken) => {
           if (accessToken.accessToken) {
             localStorage.setItem('accessToken', accessToken.accessToken);
-            this.router.navigate(['/maintenance/stats']);
+            this.router.navigate(['/order/stats']);
           }
         })
       );

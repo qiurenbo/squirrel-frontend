@@ -24,19 +24,19 @@
         nzOpen
         nzTitle="日常维护"
         nzIcon="tool"
-        [(nzOpen)]="openMap.maintenance"
-        (nzOpenChange)="openHandler('maintenance')"
+        [(nzOpen)]="openMap.order"
+        (nzOpenChange)="openHandler('order')"
       >
         <ul>
           <li nz-menu-item nzMatchRouter>
-            <a routerLink="/maintenance/stats">维护统计</a>
+            <a routerLink="/order/stats">维护统计</a>
           </li>
           <li nz-menu-item nzMatchRouter>
-            <a routerLink="/maintenance/list">维护日志</a>
+            <a routerLink="/order/list">维护日志</a>
           </li>
 
           <li nz-menu-item nzMatchRouter>
-            <a routerLink="/maintenance/config">维护配置</a>
+            <a routerLink="/order/config">维护配置</a>
           </li>
         </ul>
       </li>

@@ -4,7 +4,7 @@ import {
   ComponentFactoryResolver,
   ViewContainerRef,
 } from '@angular/core';
-import { Addr } from 'src/app/models/maintenance.model';
+import { Addr } from 'src/app/models/order.model';
 import { v4 as uuidv4 } from 'uuid';
 import { AddrEditDlgComponent } from './addr-edit-dlg/addr-edit-dlg.component';
 import { AddrService } from 'src/app/core/addr.service';

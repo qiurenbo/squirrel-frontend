@@ -2,21 +2,21 @@ const {
   targets,
   actions,
   malfunctions,
-  maintenances,
-  maintenanceStats,
-} = require("./maintenance");
+  orders,
+  orderStats,
+} = require("./order");
 
 const { addrs, operators, accounts } = require("./global");
 
 module.exports = () => {
   const data = {
-    maintenances: maintenances,
+    orders: orders,
     addrs: addrs,
     targets: targets,
     operators: operators,
     actions: actions,
     malfunctions: malfunctions,
-    maintenanceStats: maintenanceStats,
+    orderStats: orderStats,
     accounts: accounts,
     users: [],
   };

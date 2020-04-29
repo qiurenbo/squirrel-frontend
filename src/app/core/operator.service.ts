@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Operator } from '../models/maintenance.model';
+import { Operator } from '../models/order.model';
 import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',

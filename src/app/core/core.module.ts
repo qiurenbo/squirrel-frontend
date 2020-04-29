@@ -1,6 +1,6 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
-import { MaintenanceService } from './maintenance.service';
+import { OrderService } from './order.service';
 import { AccountService } from './accounts.service';
 import { AddrService } from './addr.service';
 import { OperatorService } from './operator.service';
@@ -19,7 +19,7 @@ export class CoreModule {
     return {
       ngModule: CoreModule,
       providers: [
-        MaintenanceService,
+        OrderService,
         AccountService,
         AddrService,
         OperatorService,

@@ -5,19 +5,17 @@ import { DefaultLayoutComponent } from './shared/layouts/default-layout/default-
 import { AuthGuardService } from './core/auth-guard.service';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: '/maintenance/login' },
+  { path: '', pathMatch: 'full', redirectTo: '/order/stats' },
   {
     path: '',
     component: SideLayoutComponent,
     canActivate: [AuthGuardService],
     children: [
       {
-        path: 'maintenance',
+        path: 'order',
 
         loadChildren: () =>
-          import('./pages/maintenance/maintenance.module').then(
-            (m) => m.MaintenanceModule
-          ),
+          import('./pages/order/order.module').then((m) => m.OrderModule),
       },
       {
         path: 'config',
