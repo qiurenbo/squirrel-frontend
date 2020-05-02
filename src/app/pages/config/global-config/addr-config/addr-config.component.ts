@@ -50,7 +50,7 @@ export class AddrConfigComponent implements OnInit {
     if (!this.checkInput()) return;
     this.addrService
       .postAddr({
-        id: uuidv4(),
+        //id: uuidv4(),
         name: this.name,
         addr: this.addr,
         tel: this.tel,

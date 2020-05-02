@@ -47,7 +47,7 @@ export class MalfunctionConfigComponent implements OnInit {
 
     this.mservice
       .postOrderMalfunction({
-        id: uuidv4(),
+        //id: uuidv4(),
         name: this.malfunctionName,
       })
       .subscribe(() => {

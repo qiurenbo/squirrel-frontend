@@ -47,7 +47,7 @@ export class AccountsComponent implements OnInit {
 
     this.accountService
       .postAccount({
-        id: uuidv4(),
+        //id: uuidv4(),
         email: this.username,
         username: this.username,
         password: this.password,

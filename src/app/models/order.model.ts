@@ -1,27 +1,27 @@
 export class Action {
-  id: string;
+  id?: string;
   name: string;
 }
 
 export class Target {
-  id: string;
+  id?: string;
   name: string;
 }
 
 export class Malfunction {
-  id: string;
+  id?: string;
   name: string;
 }
 
 export class Operator {
-  id: string;
+  id?: string;
   name: string;
   department: string;
   tel: string;
 }
 
 export class OrderDetail {
-  id: string;
+  id?: string;
   date: string;
   operatorId: string;
   addrId: string;
@@ -36,7 +36,7 @@ export class OrderDetail {
 // }
 
 export class Addr {
-  id: string;
+  id?: string;
   name: string;
   addr: string;
   tel: string;

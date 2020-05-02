@@ -51,7 +51,7 @@ export class OperatorConfigComponent implements OnInit {
     if (!this.checkInput()) return;
     this.opService
       .postOperator({
-        id: uuidv4(),
+        //id: uuidv4(),
         name: this.name,
         department: this.department,
         tel: this.tel,

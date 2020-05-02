@@ -44,7 +44,7 @@ export class TargetConfigComponent implements OnInit {
 
     this.mservice
       .postOrderTarget({
-        id: uuidv4(),
+        //id: uuidv4(),
         name: this.name,
       })
       .subscribe(() => {

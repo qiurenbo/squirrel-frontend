@@ -61,7 +61,7 @@ export class ActionConfigComponent implements OnInit {
     if (!this.checkInput()) return;
     this.mservice
       .postOrderAction({
-        id: uuidv4(),
+        //id: uuidv4(),
         name: this.actionName,
       })
       .subscribe(() => {
