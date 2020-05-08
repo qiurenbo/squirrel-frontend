@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 import { AccountService } from 'src/app/core/accounts.service';
 import { Account } from 'src/app/models/account.model';
-import { v4 as uuidv4 } from 'uuid';
+
 import { AccountEditDlgComponent } from './account-edit-dlg/account-edit-dlg.component';
 @Component({
   selector: 'app-accounts',
@@ -14,7 +14,7 @@ import { AccountEditDlgComponent } from './account-edit-dlg/account-edit-dlg.com
   styleUrls: ['./accounts.component.scss'],
 })
 export class AccountsComponent implements OnInit {
-  username: string;
+  email: string;
   password: string;
   accounts: Account[] = null;
   selectedAccountId: string = null;
@@ -41,15 +41,14 @@ export class AccountsComponent implements OnInit {
   }
 
   add() {
-    if (!this.username) {
+    if (!this.email) {
       return;
     }
 
     this.accountService
       .postAccount({
-        //id: uuidv4(),
-        email: this.username,
-        username: this.username,
+        email: this.email,
+        username: this.email,
         password: this.password,
       })
       .subscribe(() => {

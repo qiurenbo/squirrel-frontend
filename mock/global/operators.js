@@ -7,14 +7,12 @@ const operators = [
     name: "郭云峰",
     tel: "17838431923",
     department: "技术部",
-    addrId: addrs[random(addrs.length)].id,
   },
   {
     id: uuidv4(),
     name: "陆志强",
     tel: "13838421923",
     department: "技术部",
-    addrId: addrs[random(addrs.length)].id,
   },
 ];
 

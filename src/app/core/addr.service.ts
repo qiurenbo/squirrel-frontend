@@ -10,8 +10,9 @@ import { environment } from 'src/environments/environment';
 export class AddrService {
   constructor(private http: HttpClient) {}
 
-  getAddrs(): Observable<Addr[]> {
-    return this.http.get<Addr[]>(environment.apiurl + 'addrs');
+  getAddrs(query: string = null): Observable<Addr[]> {
+    query = query ? '?' + query : '';
+    return this.http.get<Addr[]>(environment.apiurl + 'addrs' + query);
   }
   postAddr(addr: Addr): Observable<any> {
     return this.http.post(environment.apiurl + 'addrs', addr);

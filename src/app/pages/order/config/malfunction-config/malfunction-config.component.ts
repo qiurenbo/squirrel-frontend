@@ -5,7 +5,7 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import { OrderService } from 'src/app/core/order.service';
-import { v4 as uuidv4 } from 'uuid';
+
 import { Malfunction } from 'src/app/models/order.model';
 import * as _ from 'lodash';
 import { EditDlgComponent } from 'src/app/pages/order/config/edit-dlg/edit-dlg.component';

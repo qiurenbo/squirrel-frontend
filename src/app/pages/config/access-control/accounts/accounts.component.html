@@ -1,6 +1,6 @@
 <div class="container" fxLayout="column" fxLayoutAlign="space-between center">
   <div class="filter-container" fxLayout="row" fxLayoutAlign="start center">
-    <input nz-input placeholder="账号/邮箱" [(ngModel)]="username" />
+    <input nz-input placeholder="邮箱" [(ngModel)]="email" />
     <input nz-input placeholder="密码" [(ngModel)]="password" />
     <a>
       <i nz-icon nzType="plus-square" nzTheme="outline" (click)="add()"></i
@@ -14,7 +14,7 @@
   >
     <thead>
       <tr>
-        <th>账号/邮箱</th>
+        <th>邮箱</th>
         <th>密码</th>
         <th></th>
       </tr>
@@ -22,7 +22,7 @@
     <tbody>
       <tr *ngFor="let data of basicTable.data">
         <td>
-          {{ data.username }}
+          {{ data.email }}
         </td>
         <td>
           ********

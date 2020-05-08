@@ -19,6 +19,8 @@ export class AccountService {
         this.http.post(environment.apiurl + 'register', account),
         this.http.post(environment.apiurl + 'accounts', account)
       );
+    } else {
+      this.http.post(environment.apiurl + 'accounts', account);
     }
 
     return this.http.post(environment.apiurl + 'accounts', account);

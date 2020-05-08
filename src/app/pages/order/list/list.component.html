@@ -46,11 +46,11 @@
     <tbody>
       <tr *ngFor="let data of filterTable.data">
         <td>{{ data.date }}</td>
-        <td>{{ data.addr.name }}</td>
-        <td>{{ data.operator.name }}</td>
-        <td>{{ data.target.name }}</td>
-        <td>{{ data.malfunction.name }}</td>
-        <td>{{ data.action.name }}</td>
+        <td>{{ data.Addr.name }}</td>
+        <td>{{ data.Operator.name }}</td>
+        <td>{{ data.Target.name }}</td>
+        <td>{{ data.Malfunction.name }}</td>
+        <td>{{ data.Action.name }}</td>
         <td>
           <a (click)="showEditDlg(data)"
             ><i nz-icon nzType="edit" nzTheme="outline"></i

@@ -12,7 +12,7 @@ export class StatsComponent implements OnInit {
   stats: Stats = null;
 
   ngOnInit(): void {
-    this.mservice.getOrderStats().subscribe((stats) => {
+    this.mservice.getstats().subscribe((stats) => {
       this.stats = stats;
     });
   }

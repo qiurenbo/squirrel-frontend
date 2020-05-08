@@ -8,8 +8,9 @@ import { Observable } from 'rxjs';
 })
 export class OperatorService {
   constructor(private http: HttpClient) {} // Operator
-  getOperators(): Observable<Operator[]> {
-    return this.http.get<Operator[]>(environment.apiurl + 'operators');
+  getOperators(query: string = null): Observable<Operator[]> {
+    query = query ? '?' + query : '';
+    return this.http.get<Operator[]>(environment.apiurl + 'operators' + query);
   }
 
   postOperator(operator: Operator): Observable<any> {
