@@ -16,9 +16,12 @@ import { AccountEditDlgComponent } from './account-edit-dlg/account-edit-dlg.com
 export class AccountsComponent implements OnInit {
   email: string;
   password: string;
+  total: number;
   accounts: Account[] = null;
   selectedAccountId: string = null;
 
+  pageSize = 6;
+  pageIndex = 1;
   isLoading = false;
   editAccount: Account;
 
@@ -28,16 +31,26 @@ export class AccountsComponent implements OnInit {
     private viewContainer: ViewContainerRef
   ) {}
 
-  loadingData() {
+  loadData() {
     this.isLoading = true;
-    this.accountService.getAccounts().subscribe((a) => {
-      this.accounts = a;
-      this.isLoading = false;
-    });
+    this.accountService
+      .getAccounts({
+        limit: this.pageSize,
+        offset: (this.pageIndex - 1) * this.pageSize,
+      })
+      .subscribe((a) => {
+        this.total = parseInt(a.headers.get('X-Total-Count'));
+        this.accounts = a.body;
+        this.isLoading = false;
+      });
   }
 
   ngOnInit(): void {
-    this.loadingData();
+    this.loadData();
+  }
+
+  onPageIndexChange(index: number) {
+    this.loadData();
   }
 
   add() {
@@ -52,13 +65,13 @@ export class AccountsComponent implements OnInit {
         password: this.password,
       })
       .subscribe(() => {
-        this.loadingData();
+        this.loadData();
       });
   }
 
   delete(account: Account) {
     this.accountService.deleteAccount(account).subscribe(() => {
-      this.loadingData();
+      this.loadData();
     });
   }
 
@@ -78,7 +91,7 @@ export class AccountsComponent implements OnInit {
 
   OnOk = (account) => {
     this.accountService.putAccount(account).subscribe(() => {
-      this.loadingData();
+      this.loadData();
     });
   };
 }

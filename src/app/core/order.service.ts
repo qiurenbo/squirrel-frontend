@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import {
@@ -8,6 +8,7 @@ import {
   Malfunction,
   Action,
 } from '../models/order.model';
+import { assembleRequestUrl } from './utils';
 @Injectable({
   providedIn: 'root',
 })
@@ -20,9 +21,15 @@ export class OrderService {
   }
 
   /*orders*/
-  getOrders(query: string = null): Observable<OrderDetail[]> {
-    query = query ? '?' + query : '';
-    return this.http.get<OrderDetail[]>(environment.apiurl + 'orders' + query);
+  getOrders(
+    query: { limit: number; offset: number } = null
+  ): Observable<HttpResponse<OrderDetail[]>> {
+    return this.http.get<OrderDetail[]>(
+      assembleRequestUrl(query, environment.apiurl + 'orders'),
+      {
+        observe: 'response',
+      }
+    );
   }
 
   postOrder(order: OrderDetail): Observable<any> {
@@ -38,10 +45,10 @@ export class OrderService {
   }
 
   /*actions*/
-  getOrderActions(query: string = null): Observable<Action[]> {
-    query = query ? '?' + query : '';
+  getOrderActions(query: any = null): Observable<HttpResponse<Action[]>> {
     return this.http.get<Action[]>(
-      environment.apiurl + 'orders/actions?' + query
+      assembleRequestUrl(query, environment.apiurl + 'orders/actions'),
+      { observe: 'response' }
     );
   }
 
@@ -61,10 +68,12 @@ export class OrderService {
   }
 
   /*targets*/
-  getOrderTargets(query: string = null): Observable<Target[]> {
-    query = query ? '?' + query : '';
+  getOrderTargets(query: any = null): Observable<HttpResponse<Target[]>> {
     return this.http.get<Target[]>(
-      environment.apiurl + 'orders/targets' + query
+      assembleRequestUrl(query, environment.apiurl + 'orders/targets'),
+      {
+        observe: 'response',
+      }
     );
   }
 
@@ -84,10 +93,14 @@ export class OrderService {
   }
 
   /*malfunctions*/
-  getOrderMalfunctions(query: string = null): Observable<Malfunction[]> {
-    query = query ? '?' + query : '';
+  getOrderMalfunctions(
+    query: any = null
+  ): Observable<HttpResponse<Malfunction[]>> {
     return this.http.get<Malfunction[]>(
-      environment.apiurl + 'orders/malfunctions' + query
+      assembleRequestUrl(query, environment.apiurl + 'orders/malfunctions'),
+      {
+        observe: 'response',
+      }
     );
   }
 

@@ -17,27 +17,35 @@ import { OperatorEditDlgComponent } from './operator-edit-dlg/operator-edit-dlg.
 export class OperatorConfigComponent implements OnInit {
   isOperatorsLoading = false;
   name: string;
-
+  total: number;
   tel: string;
   department: string;
   operators: Operator[] = null;
   isLoading = false;
   currentId: string = null;
+  pageSize = 6;
+  pageIndex = 1;
   constructor(
     private opService: OperatorService,
     private resolver: ComponentFactoryResolver,
     private viewContainer: ViewContainerRef
   ) {}
 
-  loadingData() {
+  loadData() {
     this.isLoading = true;
-    this.opService.getOperators().subscribe((o) => {
-      this.operators = o;
-      this.isLoading = false;
-    });
+    this.opService
+      .getOperators({
+        limit: this.pageSize,
+        offset: (this.pageIndex - 1) * this.pageSize,
+      })
+      .subscribe((o) => {
+        this.total = parseInt(o.headers.get('X-Total-Count'));
+        this.operators = o.body;
+        this.isLoading = false;
+      });
   }
   ngOnInit(): void {
-    this.loadingData();
+    this.loadData();
   }
 
   checkInput() {
@@ -45,6 +53,9 @@ export class OperatorConfigComponent implements OnInit {
       return true;
     }
     return false;
+  }
+  onPageIndexChange(index: number) {
+    this.loadData();
   }
 
   add() {
@@ -57,13 +68,13 @@ export class OperatorConfigComponent implements OnInit {
         tel: this.tel,
       })
       .subscribe(() => {
-        this.loadingData();
+        this.loadData();
       });
   }
 
   delete(operator: Operator) {
     this.opService.deleteOperator(operator).subscribe(() => {
-      this.loadingData();
+      this.loadData();
     });
   }
 
@@ -78,7 +89,7 @@ export class OperatorConfigComponent implements OnInit {
 
   OnOk = (operator: Operator) => {
     this.opService.putOperator(operator).subscribe(() => {
-      this.loadingData();
+      this.loadData();
     });
   };
 }

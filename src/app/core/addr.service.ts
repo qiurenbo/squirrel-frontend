@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Addr } from '../models/order.model';
 import { environment } from 'src/environments/environment';
+import { assembleRequestUrl } from './utils';
 
 @Injectable({
   providedIn: 'root',
@@ -10,9 +11,15 @@ import { environment } from 'src/environments/environment';
 export class AddrService {
   constructor(private http: HttpClient) {}
 
-  getAddrs(query: string = null): Observable<Addr[]> {
-    query = query ? '?' + query : '';
-    return this.http.get<Addr[]>(environment.apiurl + 'addrs' + query);
+  getAddrs(
+    query: { limit: number; offset: number } = null
+  ): Observable<HttpResponse<Addr[]>> {
+    return this.http.get<Addr[]>(
+      assembleRequestUrl(query, environment.apiurl + 'addrs'),
+      {
+        observe: 'response',
+      }
+    );
   }
   postAddr(addr: Addr): Observable<any> {
     return this.http.post(environment.apiurl + 'addrs', addr);

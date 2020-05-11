@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, forkJoin } from 'rxjs';
 import { Account } from '../models/account.model';
 import { environment } from 'src/environments/environment';
+import { assembleRequestUrl } from './utils';
 
 @Injectable({
   providedIn: 'root',
@@ -10,9 +11,17 @@ import { environment } from 'src/environments/environment';
 export class AccountService {
   constructor(private http: HttpClient) {}
 
-  getAccounts(): Observable<Account[]> {
-    return this.http.get<Account[]>(environment.apiurl + 'accounts');
+  getAccounts(
+    query: { limit: number; offset: number } = null
+  ): Observable<HttpResponse<Account[]>> {
+    return this.http.get<Account[]>(
+      assembleRequestUrl(query, environment.apiurl + 'accounts'),
+      {
+        observe: 'response',
+      }
+    );
   }
+
   postAccount(account: Account): Observable<any> {
     if (environment.mock) {
       return forkJoin(

@@ -10,7 +10,6 @@ import { Action } from 'src/app/models/order.model';
 export class ActionSelectComponent implements OnInit {
   isActionsLoading = false;
   actions: Action[];
-
   actionIdValue: string;
 
   @Output()
@@ -31,7 +30,7 @@ export class ActionSelectComponent implements OnInit {
   ngOnInit(): void {
     this.isActionsLoading = true;
     this.mservice.getOrderActions().subscribe((a) => {
-      this.actions = a;
+      this.actions = a.body;
       this.isActionsLoading = false;
     });
   }

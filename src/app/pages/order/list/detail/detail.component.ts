@@ -96,11 +96,13 @@ export class DetailComponent implements OnInit {
         this.mservice.postOrder(this.order).subscribe(() => {
           this.dateUpdate.emit();
         });
+        break;
 
       case 'PUT':
         this.mservice.putOrder(this.order).subscribe(() => {
           this.dateUpdate.emit();
         });
+        break;
     }
   }
 

@@ -18,26 +18,33 @@ export class MalfunctionConfigComponent implements OnInit {
   malfunctionName: string;
   malfunctions: Malfunction[] = null;
   selectedMalfunctionId: string = null;
-
+  total: number;
   isLoading = false;
   editMalfunction: Malfunction;
-
+  pageSize = 6;
+  pageIndex = 1;
   constructor(
     private mservice: OrderService,
     private resolver: ComponentFactoryResolver,
     private viewContainer: ViewContainerRef
   ) {}
 
-  loadingData() {
+  loadData() {
     this.isLoading = true;
-    this.mservice.getOrderMalfunctions().subscribe((m) => {
-      this.malfunctions = m;
-      this.isLoading = false;
-    });
+    this.mservice
+      .getOrderMalfunctions({
+        limit: this.pageSize,
+        offset: (this.pageIndex - 1) * this.pageSize,
+      })
+      .subscribe((m) => {
+        this.total = parseInt(m.headers.get('X-Total-Count'));
+        this.malfunctions = m.body;
+        this.isLoading = false;
+      });
   }
 
   ngOnInit(): void {
-    this.loadingData();
+    this.loadData();
   }
 
   add() {
@@ -51,13 +58,13 @@ export class MalfunctionConfigComponent implements OnInit {
         name: this.malfunctionName,
       })
       .subscribe(() => {
-        this.loadingData();
+        this.loadData();
       });
   }
 
   delete(malfunction: Malfunction) {
     this.mservice.deleteOrderMalfunction(malfunction).subscribe(() => {
-      this.loadingData();
+      this.loadData();
     });
   }
 
@@ -72,9 +79,12 @@ export class MalfunctionConfigComponent implements OnInit {
     dlg.instance.onOk = this.OnOk;
   }
 
+  onPageIndexChange(index: number) {
+    this.loadData();
+  }
   OnOk = (malfunction) => {
     this.mservice.putOrderMalfunction(malfunction).subscribe(() => {
-      this.loadingData();
+      this.loadData();
     });
   };
 }

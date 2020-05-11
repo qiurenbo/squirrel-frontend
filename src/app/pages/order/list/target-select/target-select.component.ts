@@ -31,7 +31,7 @@ export class TargetSelectComponent implements OnInit {
   ngOnInit(): void {
     this.isTargetsLoading = true;
     this.mservice.getOrderTargets().subscribe((d) => {
-      this.targets = d;
+      this.targets = d.body;
       this.isTargetsLoading = false;
     });
   }

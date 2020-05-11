@@ -19,24 +19,34 @@ export class AddrConfigComponent implements OnInit {
   addr: string;
   tel: string;
   type: string;
+  total: number;
   addrs: Addr[] = null;
   isLoading = false;
   currentId: string = null;
+
+  pageSize = 6;
+  pageIndex = 1;
   constructor(
     private addrService: AddrService,
     private resolver: ComponentFactoryResolver,
     private viewContainer: ViewContainerRef
   ) {}
 
-  loadingData() {
+  loadData() {
     this.isLoading = true;
-    this.addrService.getAddrs().subscribe((a) => {
-      this.addrs = a;
-      this.isLoading = false;
-    });
+    this.addrService
+      .getAddrs({
+        limit: this.pageSize,
+        offset: (this.pageIndex - 1) * this.pageSize,
+      })
+      .subscribe((a) => {
+        this.total = parseInt(a.headers.get('X-Total-Count'));
+        this.addrs = a.body;
+        this.isLoading = false;
+      });
   }
   ngOnInit(): void {
-    this.loadingData();
+    this.loadData();
   }
 
   checkInput() {
@@ -57,13 +67,13 @@ export class AddrConfigComponent implements OnInit {
         type: this.type,
       })
       .subscribe(() => {
-        this.loadingData();
+        this.loadData();
       });
   }
 
   delete(addr: Addr) {
     this.addrService.deleteAddr(addr).subscribe(() => {
-      this.loadingData();
+      this.loadData();
     });
   }
 
@@ -76,7 +86,11 @@ export class AddrConfigComponent implements OnInit {
 
   OnOk = (addr: Addr) => {
     this.addrService.putAddr(addr).subscribe(() => {
-      this.loadingData();
+      this.loadData();
     });
   };
+
+  onPageIndexChange(index: number) {
+    this.loadData();
+  }
 }

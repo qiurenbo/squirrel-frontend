@@ -31,7 +31,7 @@ export class MalfunctionSelectComponent implements OnInit {
   ngOnInit(): void {
     this.isMalfunctionsLoading = true;
     this.mservice.getOrderMalfunctions().subscribe((m) => {
-      this.malfunctions = m;
+      this.malfunctions = m.body;
       this.isMalfunctionsLoading = false;
     });
   }

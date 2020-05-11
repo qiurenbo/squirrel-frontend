@@ -32,7 +32,7 @@ export class OperatorSelectComponent implements OnInit {
   ngOnInit(): void {
     this.isNamesLoading = true;
     this.opService.getOperators().subscribe((o) => {
-      this.operators = o;
+      this.operators = o.body;
       this.isNamesLoading = false;
     });
   }

@@ -8,8 +8,12 @@
   <nz-table
     #basicTable
     [nzData]="actions"
-    [nzPageSize]="6"
+    [nzPageSize]="pageSize"
+    [(nzPageIndex)]="pageIndex"
     [nzLoading]="isLoading"
+    [nzTotal]="total"
+    [nzFrontPagination]="false"
+    (nzPageIndexChange)="onPageIndexChange($event)"
   >
     <thead>
       <tr>

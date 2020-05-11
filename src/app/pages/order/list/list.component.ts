@@ -49,10 +49,16 @@ export class ListComponent implements OnInit {
 
   loadData() {
     this.isLoading = true;
-    this.mservice.getOrders(this.filter).subscribe((m) => {
-      this.isLoading = false;
-      this.listOfData = m;
-    });
+    this.mservice
+      .getOrders({
+        limit: this.pageSize,
+        offset: (this.pageIndex - 1) * this.pageSize,
+      })
+      .subscribe((m: any) => {
+        this.total = m.headers.get('X-Total-Count');
+        this.isLoading = false;
+        this.listOfData = m.body;
+      });
   }
 
   ngOnInit(): void {
@@ -70,8 +76,8 @@ export class ListComponent implements OnInit {
       actionId: this.selectedActionId,
       operatorId: this.selectedOperatorId,
       malfunctionId: this.selectedMalfunctionId,
-      _page: this.pageIndex,
-      _limit: this.pageSize,
+      offset: this.pageIndex,
+      limit: this.pageSize,
     };
   }
 
@@ -115,6 +121,9 @@ export class ListComponent implements OnInit {
     this.loadData();
   }
 
+  onPageIndexChange(index: number) {
+    this.loadData();
+  }
   deleteRecord(order: OrderDetail) {
     this.mservice.deleteOrder(order).subscribe(() => {
       this.loadData();

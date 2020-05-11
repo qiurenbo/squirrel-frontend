@@ -6,7 +6,6 @@ import {
 } from '@angular/core';
 import { OrderService } from 'src/app/core/order.service';
 import { Target } from 'src/app/models/order.model';
-import { v4 as uuidv4 } from 'uuid';
 
 import { EditDlgComponent } from 'src/app/pages/order/config/edit-dlg/edit-dlg.component';
 @Component({
@@ -19,22 +18,32 @@ export class TargetConfigComponent implements OnInit {
   targets: Target[] = null;
   selectedTarget: string = null;
   isLoading = false;
+  total: number;
+  pageSize = 6;
+  pageIndex = 1;
   constructor(
     private mservice: OrderService,
     private resolver: ComponentFactoryResolver,
     private viewContainer: ViewContainerRef
   ) {}
 
-  loadingData() {
+  loadData() {
     this.isLoading = true;
-    this.mservice.getOrderTargets().subscribe((t) => {
-      this.targets = t;
-      this.isLoading = false;
-    });
+
+    this.mservice
+      .getOrderTargets({
+        limit: this.pageSize,
+        offset: (this.pageIndex - 1) * this.pageSize,
+      })
+      .subscribe((t) => {
+        this.total = parseInt(t.headers.get('X-Total-Count'));
+        this.targets = t.body;
+        this.isLoading = false;
+      });
   }
 
   ngOnInit(): void {
-    this.loadingData();
+    this.loadData();
   }
 
   add() {
@@ -48,13 +57,13 @@ export class TargetConfigComponent implements OnInit {
         name: this.name,
       })
       .subscribe(() => {
-        this.loadingData();
+        this.loadData();
       });
   }
 
   delete(target: Target) {
     this.mservice.deleteOrderTarget(target).subscribe(() => {
-      this.loadingData();
+      this.loadData();
     });
   }
 
@@ -65,9 +74,12 @@ export class TargetConfigComponent implements OnInit {
     dlg.instance.onOk = this.OnOk;
   }
 
+  onPageIndexChange(index: number) {
+    this.loadData();
+  }
   OnOk = (target) => {
     this.mservice.putOrderTarget(target).subscribe(() => {
-      this.loadingData();
+      this.loadData();
     });
   };
 }

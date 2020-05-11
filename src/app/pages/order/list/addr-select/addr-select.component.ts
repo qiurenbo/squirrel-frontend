@@ -31,7 +31,7 @@ export class AddrSelectComponent implements OnInit {
   ngOnInit(): void {
     this.isAddrsLoading = true;
     this.addrService.getAddrs().subscribe((a) => {
-      this.addrs = a;
+      this.addrs = a.body;
       this.isAddrsLoading = false;
     });
   }

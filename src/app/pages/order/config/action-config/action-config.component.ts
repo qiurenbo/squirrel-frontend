@@ -22,6 +22,9 @@ export class ActionConfigComponent implements OnInit {
   isLoading = false;
   currentId: string = null;
   option: NzCascaderOption = null;
+  total: number;
+  pageSize: number = 6;
+  pageIndex: number = 1;
   constructor(
     private mservice: OrderService,
     private resolver: ComponentFactoryResolver,
@@ -30,10 +33,16 @@ export class ActionConfigComponent implements OnInit {
 
   loadingData() {
     this.isLoading = true;
-    this.mservice.getOrderActions().subscribe((a) => {
-      this.actions = a;
-      this.isLoading = false;
-    });
+    this.mservice
+      .getOrderActions({
+        limit: this.pageSize,
+        offset: (this.pageIndex - 1) * this.pageSize,
+      })
+      .subscribe((a) => {
+        this.total = parseInt(a.headers.get('X-Total-Count'));
+        this.actions = a.body;
+        this.isLoading = false;
+      });
   }
 
   ngOnInit(): void {
@@ -82,6 +91,9 @@ export class ActionConfigComponent implements OnInit {
     dlg.instance.onOk = this.OnOk;
   }
 
+  onPageIndexChange($event) {
+    this.loadingData();
+  }
   OnOk = (action: Action) => {
     this.mservice.putOrderAction(action).subscribe(() => {
       this.loadingData();

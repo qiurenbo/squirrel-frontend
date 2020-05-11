@@ -8,6 +8,7 @@ import { AuthGuardService } from './auth-guard.service';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JsonRequestInterceptor } from './interceptors/json-request.interceptor';
+import { AuthErrorInterceptor } from './interceptors/auth-error.interceptor';
 @NgModule({
   declarations: [],
   imports: [SharedModule],
@@ -28,6 +29,11 @@ export class CoreModule {
         {
           provide: HTTP_INTERCEPTORS,
           useClass: JsonRequestInterceptor,
+          multi: true,
+        },
+        {
+          provide: HTTP_INTERCEPTORS,
+          useClass: AuthErrorInterceptor,
           multi: true,
         },
       ],

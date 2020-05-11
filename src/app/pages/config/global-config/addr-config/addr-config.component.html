@@ -11,8 +11,12 @@
   <nz-table
     #basicTable
     [nzData]="addrs"
-    [nzPageSize]="6"
     [nzLoading]="isLoading"
+    [nzPageSize]="pageSize"
+    [(nzPageIndex)]="pageIndex"
+    [nzTotal]="total"
+    [nzFrontPagination]="false"
+    (nzPageIndexChange)="onPageIndexChange($event)"
   >
     <thead>
       <tr>

@@ -31,6 +31,8 @@
     [nzPageSize]="pageSize"
     [(nzPageIndex)]="pageIndex"
     [nzTotal]="total"
+    [nzFrontPagination]="false"
+    (nzPageIndexChange)="onPageIndexChange($event)"
   >
     <thead>
       <tr>
