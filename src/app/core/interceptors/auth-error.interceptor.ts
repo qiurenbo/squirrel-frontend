@@ -4,7 +4,6 @@ import {
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
-  HttpResponse,
   HttpErrorResponse,
 } from '@angular/common/http';
 import { Observable, EMPTY } from 'rxjs';
@@ -19,13 +18,14 @@ export class AuthErrorInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
+    //https://stackoverflow.com/questions/46019771/catching-errors-in-angular-httpclient
     // add authorization header with jwt token if available
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.error instanceof Error) {
           // A client-side or network error occurred. Handle it accordingly.
           //   console.error('An error occurred:', error.error.message);
-        } else {
+        } else if (error.error.error.includes('Token')) {
           // The backend returned an unsuccessful response code.
           // The response body may contain clues as to what went wrong,
           //   console.error(
