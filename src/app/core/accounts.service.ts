@@ -23,14 +23,7 @@ export class AccountService {
   }
 
   postAccount(account: Account): Observable<any> {
-    if (environment.mock) {
-      return forkJoin(
-        this.http.post(environment.apiurl + 'register', account),
-        this.http.post(environment.apiurl + 'accounts', account)
-      );
-    } else {
-      this.http.post(environment.apiurl + 'accounts', account);
-    }
+    this.http.post(environment.apiurl + 'accounts', account);
 
     return this.http.post(environment.apiurl + 'accounts', account);
   }
