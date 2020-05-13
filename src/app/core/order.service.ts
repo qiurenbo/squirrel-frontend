@@ -21,9 +21,7 @@ export class OrderService {
   }
 
   /*orders*/
-  getOrders(
-    query: { limit: number; offset: number } = null
-  ): Observable<HttpResponse<OrderDetail[]>> {
+  getOrders(query: any = null): Observable<HttpResponse<OrderDetail[]>> {
     return this.http.get<OrderDetail[]>(
       assembleRequestUrl(query, environment.apiurl + 'orders'),
       {

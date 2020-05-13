@@ -49,16 +49,11 @@ export class ListComponent implements OnInit {
 
   loadData() {
     this.isLoading = true;
-    this.mservice
-      .getOrders({
-        limit: this.pageSize,
-        offset: (this.pageIndex - 1) * this.pageSize,
-      })
-      .subscribe((m: any) => {
-        this.total = m.headers.get('X-Total-Count');
-        this.isLoading = false;
-        this.listOfData = m.body;
-      });
+    this.mservice.getOrders(this.filter).subscribe((m: any) => {
+      this.total = m.headers.get('X-Total-Count');
+      this.isLoading = false;
+      this.listOfData = m.body;
+    });
   }
 
   ngOnInit(): void {
@@ -68,17 +63,42 @@ export class ListComponent implements OnInit {
   }
 
   get filter(): any {
-    return {
-      startDate: this.selectedStartDate,
-      endDate: this.selectedEndDate,
-      addrId: this.selectedAddrId,
-      targetId: this.selectedTargetId,
-      actionId: this.selectedActionId,
-      operatorId: this.selectedOperatorId,
-      malfunctionId: this.selectedMalfunctionId,
-      offset: this.pageIndex,
-      limit: this.pageSize,
-    };
+    let fiter: any = {};
+
+    if (this.selectedStartDate) {
+      fiter.startDate = this.selectedStartDate;
+    }
+
+    if (this.selectedEndDate) {
+      fiter.endDate = this.selectedEndDate;
+    }
+
+    if (this.selectedAddrId) {
+      fiter.addrId = this.selectedAddrId;
+    }
+
+    if (this.selectedTargetId) {
+      fiter.targetId = this.selectedTargetId;
+    }
+
+    if (this.selectedActionId) {
+      fiter.actionId = this.selectedActionId;
+    }
+
+    if (this.selectedOperatorId) {
+      fiter.operatorId = this.selectedOperatorId;
+    }
+    if (this.selectedMalfunctionId) {
+      fiter.malfunctionId = this.selectedMalfunctionId;
+    }
+    if (this.pageIndex) {
+      fiter.offset = (this.pageIndex - 1) * this.pageSize;
+    }
+    if (this.pageSize) {
+      fiter.limit = this.pageSize;
+    }
+
+    return fiter;
   }
 
   // get selectedStartDate(): string {
