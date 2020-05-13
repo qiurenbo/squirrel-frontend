@@ -3,20 +3,53 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgZorroAntdModule } from 'ng-zorro-antd';
+import {
+  NzInputModule,
+  NzModalModule,
+  NzTableModule,
+  NzButtonModule,
+  NzFormModule,
+  NzTabsModule,
+  NzDividerModule,
+  NzSelectModule,
+  NzStatisticModule,
+  NzLayoutModule,
+  NzMenuModule,
+  NzIconModule,
+  NzCardModule,
+  NzCalendarModule,
+  NzDatePickerModule,
+} from 'ng-zorro-antd';
 import { PieComponent } from './components/graph/pie/pie.component';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { SideLayoutComponent } from './layouts/side-layout/side-layout.component';
 import { DefaultLayoutComponent } from './layouts/default-layout/default-layout.component';
 import { RouterModule } from '@angular/router';
 
+const NzModules = [
+  NzInputModule,
+  NzModalModule,
+  NzTableModule,
+  NzButtonModule,
+  NzFormModule,
+  NzDividerModule,
+  NzTabsModule,
+  NzSelectModule,
+  NzStatisticModule,
+  NzLayoutModule,
+  NzMenuModule,
+  NzIconModule,
+  NzCardModule,
+  NzDatePickerModule,
+  NzCardModule,
+];
 @NgModule({
   declarations: [PieComponent, SideLayoutComponent, DefaultLayoutComponent],
   imports: [
     CommonModule,
     HttpClientModule,
     FormsModule,
-    NgZorroAntdModule,
+    ...NzModules,
     NgxEchartsModule,
     RouterModule,
     ReactiveFormsModule,
@@ -27,7 +60,7 @@ import { RouterModule } from '@angular/router';
     HttpClientModule,
     NgxEchartsModule,
     FormsModule,
-    NgZorroAntdModule,
+    ...NzModules,
     PieComponent,
     RouterModule,
     ReactiveFormsModule,
