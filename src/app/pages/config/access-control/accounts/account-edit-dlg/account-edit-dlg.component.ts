@@ -22,8 +22,7 @@ export class AccountEditDlgComponent implements OnInit {
   ngOnInit(): void {}
 
   checkInput() {
-    if (!this.account.username) return false;
-
+    if (!this.account.email) return false;
     return true;
   }
 
@@ -34,6 +33,10 @@ export class AccountEditDlgComponent implements OnInit {
 
     this.isVisible = false;
 
+    // if password is * then password is not changed
+    if (this.account.password === '******') {
+      this.account.password = '';
+    }
     this.onOk(this.account);
   }
 
