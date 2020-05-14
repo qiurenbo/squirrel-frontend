@@ -7,5 +7,9 @@
 >
   <input nz-input [(ngModel)]="account.email" />
 
-  <input nz-input [(ngModel)]="account.password" />
+  <input
+    nz-input
+    [ngModel]="'******'"
+    (change)="onPasswordInputChange($event)"
+  />
 </nz-modal>

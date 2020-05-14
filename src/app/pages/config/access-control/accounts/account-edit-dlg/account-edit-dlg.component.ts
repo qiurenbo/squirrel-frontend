@@ -33,14 +33,14 @@ export class AccountEditDlgComponent implements OnInit {
 
     this.isVisible = false;
 
-    // if password is * then password is not changed
-    if (this.account.password === '******') {
-      this.account.password = '';
-    }
     this.onOk(this.account);
   }
 
   handleCancel(): void {
     this.isVisible = false;
+  }
+
+  onPasswordInputChange(e) {
+    this.account.password = e.target.value;
   }
 }

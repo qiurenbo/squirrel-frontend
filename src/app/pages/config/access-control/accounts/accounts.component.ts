@@ -84,7 +84,6 @@ export class AccountsComponent implements OnInit {
       AccountEditDlgComponent
     );
     const dlg = this.viewContainer.createComponent(factory);
-    account.password = '******';
     dlg.instance.passValue = account;
     dlg.instance.onOk = this.OnOk;
   }
