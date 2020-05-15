@@ -18,6 +18,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
+                docker.build()
                 sh "docker build -t squirrel-frontend ."
             }
         }
