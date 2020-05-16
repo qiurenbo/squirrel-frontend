@@ -37,9 +37,9 @@ pipeline {
                     remote.password = 'vagrant'
                     remote.allowAnyHosts = true
 
-                    sshCommand remote: remote, command: "if [ $(docker ps | grep -c \"squirrel-frontend\") == 1 ]; then docker stop  squirrel-frontend; fi"
-                    sshCommand remote: remote, command: "if [ $(docker ps -a | grep -c \"squirrel-frontend\") == 1 ]; then docker rm squirrel-frontend; fi"
-                    sshCommand remote: remote, command: "if [ $(docker images | grep -c \"192.168.33.12/library/squirrel-frontend\") == 1 ]; then docker rmi --force 192.168.33.12/library/squirrel-frontend; fi"
+                    sshCommand remote: remote, command: "if [ \$(docker ps | grep -c \"squirrel-frontend\") == 1 ]; then docker stop  squirrel-frontend; fi"
+                    sshCommand remote: remote, command: "if [ \$(docker ps -a | grep -c \"squirrel-frontend\") == 1 ]; then docker rm squirrel-frontend; fi"
+                    sshCommand remote: remote, command: "if [ \$(docker images | grep -c \"192.168.33.12/library/squirrel-frontend\") == 1 ]; then docker rmi --force 192.168.33.12/library/squirrel-frontend; fi"
 
                     sshCommand remote: remote, command: "docker login 192.168.33.12 -u admin -p Harbor12345"
                 
