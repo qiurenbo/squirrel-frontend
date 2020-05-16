@@ -31,6 +31,6 @@ FROM nginx:1.13.12-alpine
 # #copy dist content to html nginx folder, config nginx to point in index.html
 # COPY --from=node /usr/src/app/dist/squirrel-frontend /usr/share/nginx/html
 #copy dist content to html nginx folder, config nginx to point in index.html
-COPY ./dist/squirrel-frontend/ /usr/share/nginx/html
+COPY --from=node /usr/src/app/dist/squirrel-frontend /usr/share/nginx/html
 
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
