@@ -28,6 +28,7 @@ export class OrderDetail {
   actionId: string;
   targetId: string;
   malfunctionId: string;
+  remarks: string;
 }
 
 // export class Orders {

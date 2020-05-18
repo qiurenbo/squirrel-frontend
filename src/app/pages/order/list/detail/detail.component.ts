@@ -23,6 +23,7 @@ export class DetailComponent implements OnInit {
 
   isVisible = true;
   date: Date;
+  remarks: string = null;
   selectedOperatorId: string = null;
   selectedAddrId: string = null;
   selectedActionId: string = null;
@@ -38,6 +39,7 @@ export class DetailComponent implements OnInit {
     this.selectedActionId = this.detail?.actionId;
     this.selectedTargetId = this.detail?.targetId;
     this.selectedMalfunctionId = this.detail?.malfunctionId;
+    this.remarks = this.detail?.remarks;
   }
 
   get selectedDate() {
@@ -63,6 +65,7 @@ export class DetailComponent implements OnInit {
       actionId: this.selectedActionId,
       targetId: this.selectedTargetId,
       malfunctionId: this.selectedMalfunctionId,
+      remarks: this.remarks,
     };
   }
 

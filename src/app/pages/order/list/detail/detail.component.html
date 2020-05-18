@@ -15,4 +15,10 @@
     [(malfunctionId)]="selectedMalfunctionId"
   ></app-malfunction-select>
   <app-action-select [(actionId)]="selectedActionId"></app-action-select>
+  <textarea
+    placeholder="备注信息（选填）"
+    rows="4"
+    nz-input
+    [(ngModel)]="remarks"
+  ></textarea>
 </nz-modal>

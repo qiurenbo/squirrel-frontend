@@ -22,21 +22,21 @@
       <li
         nz-submenu
         nzOpen
-        nzTitle="日常维护"
+        nzTitle="日常工作"
         nzIcon="tool"
         [(nzOpen)]="openMap.order"
         (nzOpenChange)="openHandler('order')"
       >
         <ul>
           <li nz-menu-item nzMatchRouter>
-            <a routerLink="/order/stats">维护统计</a>
+            <a routerLink="/order/stats">工作统计</a>
           </li>
           <li nz-menu-item nzMatchRouter>
-            <a routerLink="/order/list">维护日志</a>
+            <a routerLink="/order/list">工作日志</a>
           </li>
 
           <li nz-menu-item nzMatchRouter>
-            <a routerLink="/order/config">维护配置</a>
+            <a routerLink="/order/config">工作配置</a>
           </li>
         </ul>
       </li>
