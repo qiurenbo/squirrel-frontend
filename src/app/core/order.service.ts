@@ -7,6 +7,7 @@ import {
   OrderDetail,
   Malfunction,
   Action,
+  Status,
 } from '../models/order.model';
 import { assembleRequestUrl } from './utils';
 @Injectable({
@@ -14,6 +15,13 @@ import { assembleRequestUrl } from './utils';
 })
 export class OrderService {
   constructor(private http: HttpClient) {}
+
+  /*statuses*/
+  getOrderStatuses(): Observable<HttpResponse<Status[]>> {
+    return this.http.get<any>(environment.apiurl + 'orders/statuses', {
+      observe: 'response',
+    });
+  }
 
   /*stats*/
   getstats(): Observable<any> {

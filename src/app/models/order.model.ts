@@ -3,6 +3,11 @@ export class Action {
   name: string;
 }
 
+export class Status {
+  id?: string;
+  name: string;
+}
+
 export class Target {
   id?: string;
   name: string;
@@ -28,6 +33,7 @@ export class OrderDetail {
   actionId: string;
   targetId: string;
   malfunctionId: string;
+  statusId: string;
   remarks: string;
 }
 

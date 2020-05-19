@@ -17,6 +17,7 @@ import { MalfunctionSelectComponent } from './list/malfunction-select/malfunctio
 import { ActionSelectComponent } from './list/action-select/action-select.component';
 
 import { EditDlgComponent } from './config/edit-dlg/edit-dlg.component';
+import { StatusSelectComponent } from './list/status-select/status-select.component';
 @NgModule({
   imports: [OrderRoutingModule, SharedModule],
   declarations: [
@@ -33,6 +34,7 @@ import { EditDlgComponent } from './config/edit-dlg/edit-dlg.component';
     MalfunctionSelectComponent,
     ActionSelectComponent,
     EditDlgComponent,
+    StatusSelectComponent,
   ],
   exports: [],
 })

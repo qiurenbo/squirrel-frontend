@@ -1,0 +1,13 @@
+<nz-select
+  [(ngModel)]="statusId"
+  nzPlaceHolder="所有状态"
+  nzAllowClear
+  [nzLoading]="isStatusesLoading"
+  nzNotFoundContent=""
+>
+  <nz-option
+    *ngFor="let a of statuses"
+    [nzValue]="a.id"
+    [nzLabel]="a.name"
+  ></nz-option>
+</nz-select>

@@ -40,7 +40,7 @@ export class ListComponent implements OnInit {
   selectedActionId: string = null;
   selectedTargetId: string = null;
   selectedMalfunctionId: string = null;
-
+  selectedStatusId: string = null;
   constructor(
     private mservice: OrderService,
     private resolver: ComponentFactoryResolver,
@@ -91,6 +91,10 @@ export class ListComponent implements OnInit {
     if (this.selectedMalfunctionId) {
       fiter.malfunctionId = this.selectedMalfunctionId;
     }
+    if (this.selectedStatusId) {
+      fiter.statusId = this.selectedStatusId;
+    }
+
     if (this.pageIndex) {
       fiter.offset = (this.pageIndex - 1) * this.pageSize;
     }
@@ -144,6 +148,7 @@ export class ListComponent implements OnInit {
   onPageIndexChange(index: number) {
     this.loadData();
   }
+
   deleteRecord(order: OrderDetail) {
     this.mservice.deleteOrder(order).subscribe(() => {
       this.loadData();

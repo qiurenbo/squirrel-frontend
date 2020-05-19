@@ -1,5 +1,5 @@
 <nz-modal
-  [nzWidth]="1000"
+  [nzWidth]="1200"
   [nzVisible]="isVisible"
   [nzTitle]="title"
   (nzOnCancel)="handleCancel()"
@@ -14,7 +14,8 @@
   <app-malfunction-select
     [(malfunctionId)]="selectedMalfunctionId"
   ></app-malfunction-select>
-  <app-action-select [(actionId)]="selectedActionId"></app-action-select>
+  <app-action-select [(actionId)]="selectedActionId"></app-action-select
+  ><app-status-select [(statusId)]="selectedStatusId"></app-status-select>
   <textarea
     placeholder="备注信息（选填）"
     rows="4"

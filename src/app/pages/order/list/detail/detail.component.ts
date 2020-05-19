@@ -29,7 +29,7 @@ export class DetailComponent implements OnInit {
   selectedActionId: string = null;
   selectedTargetId: string = null;
   selectedMalfunctionId: string = null;
-
+  selectedStatusId: string = null;
   constructor(private mservice: OrderService) {}
 
   ngOnInit() {
@@ -39,6 +39,7 @@ export class DetailComponent implements OnInit {
     this.selectedActionId = this.detail?.actionId;
     this.selectedTargetId = this.detail?.targetId;
     this.selectedMalfunctionId = this.detail?.malfunctionId;
+    this.selectedStatusId = this.detail?.statusId;
     this.remarks = this.detail?.remarks;
   }
 
@@ -65,6 +66,7 @@ export class DetailComponent implements OnInit {
       actionId: this.selectedActionId,
       targetId: this.selectedTargetId,
       malfunctionId: this.selectedMalfunctionId,
+      statusId: this.selectedStatusId,
       remarks: this.remarks,
     };
   }
@@ -76,7 +78,8 @@ export class DetailComponent implements OnInit {
       this.selectedAddrId &&
       this.selectedActionId &&
       this.selectedTargetId &&
-      this.selectedMalfunctionId
+      this.selectedMalfunctionId &&
+      this.selectedStatusId
     ) {
       return true;
     }

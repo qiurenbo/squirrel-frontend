@@ -18,7 +18,7 @@
       [(malfunctionId)]="selectedMalfunctionId"
     ></app-malfunction-select>
     <app-action-select [(actionId)]="selectedActionId"></app-action-select>
-
+    <app-status-select [(statusId)]="selectedStatusId"></app-status-select>
     <button nz-button nzMalfunction="default" (click)="onFilterClick()">
       过滤
     </button>
@@ -41,7 +41,8 @@
         <th>人员</th>
         <th>对象</th>
         <th>故障</th>
-        <th>处理</th>
+        <th>方法</th>
+        <th>状态</th>
         <th></th>
       </tr>
     </thead>
@@ -53,6 +54,7 @@
         <td>{{ data.Target.name }}</td>
         <td>{{ data.Malfunction.name }}</td>
         <td>{{ data.Action.name }}</td>
+        <td>{{ data.Status.name }}</td>
         <td>
           <a (click)="showEditDlg(data)"
             ><i nz-icon nzType="edit" nzTheme="outline"></i
