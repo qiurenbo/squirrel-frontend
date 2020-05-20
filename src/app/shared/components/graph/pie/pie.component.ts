@@ -24,6 +24,7 @@ export class PieComponent implements OnInit {
       formatter: '{b}: {c} ({d}%)',
     },
     legend: {
+      show: false,
       orient: 'horizontal',
       left: 10,
       data: ['无法开机', '无法联网', '软件异常'],
@@ -61,6 +62,6 @@ export class PieComponent implements OnInit {
 
   ngOnInit() {
     this.options.series[0].data = this.series;
-    this.options.legend.data = this.legend;
+    // this.options.legend.data = this.legend;
   }
 }
