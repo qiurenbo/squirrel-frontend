@@ -48,6 +48,12 @@ export class Addr {
   addr: string;
   tel: string;
   type: string;
+  streetId: string;
+  Steet?: {
+    id: string;
+    name: string;
+    Area: { id: string; name: string };
+  };
 }
 
 export class Stats {

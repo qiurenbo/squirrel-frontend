@@ -17,8 +17,8 @@ import {
   NzMenuModule,
   NzIconModule,
   NzCardModule,
-  NzCalendarModule,
   NzDatePickerModule,
+  NzCascaderModule,
 } from 'ng-zorro-antd';
 import { PieComponent } from './components/graph/pie/pie.component';
 import { NgxEchartsModule } from 'ngx-echarts';
@@ -42,6 +42,7 @@ const NzModules = [
   NzCardModule,
   NzDatePickerModule,
   NzCardModule,
+  NzCascaderModule,
 ];
 @NgModule({
   declarations: [PieComponent, SideLayoutComponent, DefaultLayoutComponent],

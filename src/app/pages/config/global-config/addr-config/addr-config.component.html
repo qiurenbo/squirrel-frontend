@@ -1,9 +1,15 @@
 <div class="container" fxLayout="column" fxLayoutAlign="space-between center">
   <div class="filter-container" fxLayout="row" fxLayoutAlign="start center">
+    <nz-cascader
+      [nzOptions]="divisions"
+      [nzPlaceHolder]="'选择街道'"
+      (nzSelectionChange)="onChanges($event)"
+    ></nz-cascader>
     <input nz-input placeholder="地点" [(ngModel)]="name" />
-    <input nz-input placeholder="类型" [(ngModel)]="type" />
+    <input nz-input placeholder="属性" [(ngModel)]="type" />
     <input nz-input placeholder="地址" [(ngModel)]="addr" />
     <input nz-input placeholder="电话" [(ngModel)]="tel" />
+
     <a>
       <i nz-icon nzType="plus-square" nzTheme="outline" (click)="add()"></i
     ></a>
@@ -20,15 +26,25 @@
   >
     <thead>
       <tr>
+        <th>区域</th>
+        <th>街道</th>
+
         <th>地点</th>
-        <th>类型</th>
+        <th>属性</th>
         <th>地址</th>
         <th>电话</th>
+
         <th></th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let data of basicTable.data">
+        <td>
+          {{ data.Street.Area.name }}
+        </td>
+        <td>
+          {{ data.Street.name }}
+        </td>
         <td>
           {{ data.name }}
         </td>

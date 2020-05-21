@@ -1,10 +1,16 @@
 <nz-modal
-  [nzWidth]="900"
+  [nzWidth]="1200"
   [nzVisible]="isVisible"
   [nzTitle]="'修改当前'"
   (nzOnCancel)="handleCancel()"
   (nzOnOk)="handleOk()"
 >
+  <nz-cascader
+    [nzPlaceHolder]="'选择街道'"
+    [ngModel]="division"
+    [nzOptions]="divisions"
+    (nzSelectionChange)="onChanges($event)"
+  ></nz-cascader>
   <input nz-input [(ngModel)]="addr.name" />
   <input nz-input [(ngModel)]="addr.type" />
   <input nz-input [(ngModel)]="addr.addr" />

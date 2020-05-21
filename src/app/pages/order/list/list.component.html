@@ -7,17 +7,16 @@
     <a (click)="showAddDlg()">
       <i nz-icon nzType="plus-square" nzTheme="outline"></i>
     </a>
-
     <nz-range-picker [(ngModel)]="dateRange"></nz-range-picker>
     <app-addr-select [(addrId)]="selectedAddrId"></app-addr-select>
     <app-operator-select
       [(operatorId)]="selectedOperatorId"
     ></app-operator-select>
     <app-target-select [(targetId)]="selectedTargetId"></app-target-select>
-    <app-malfunction-select
+    <!-- <app-malfunction-select
       [(malfunctionId)]="selectedMalfunctionId"
-    ></app-malfunction-select>
-    <app-action-select [(actionId)]="selectedActionId"></app-action-select>
+    ></app-malfunction-select> -->
+    <!-- <app-action-select [(actionId)]="selectedActionId"></app-action-select> -->
     <app-status-select [(statusId)]="selectedStatusId"></app-status-select>
     <button nz-button nzMalfunction="default" (click)="onFilterClick()">
       过滤
@@ -49,7 +48,11 @@
     <tbody>
       <tr *ngFor="let data of filterTable.data">
         <td>{{ data.date }}</td>
-        <td>{{ data.Addr.name }}</td>
+        <td>
+          {{ data.Addr.Street.Area.name }}/{{ data.Addr.Street.name }}/{{
+            data.Addr.name
+          }}
+        </td>
         <td>{{ data.Operator.name }}</td>
         <td>{{ data.Target.name }}</td>
         <td>{{ data.Malfunction.name }}</td>

@@ -1,4 +1,4 @@
-<nz-select
+<!-- <nz-select
   [(ngModel)]="addrId"
   nzPlaceHolder="所有地点"
   nzAllowClear
@@ -10,4 +10,11 @@
     [nzValue]="a.id"
     [nzLabel]="a.name"
   ></nz-option>
-</nz-select>
+</nz-select> -->
+
+<nz-cascader
+  [nzPlaceHolder]="'选择地点'"
+  [ngModel]="division"
+  [nzOptions]="divisions"
+  (nzSelectionChange)="onChanges($event)"
+></nz-cascader>
