@@ -26,7 +26,7 @@ export class DetailComponent implements OnInit {
   remarks: string = null;
   selectedOperatorId: string = null;
   selectedAddrId: string = null;
-  selectedActionId: string = null;
+  selectedActionId: string = '181d4a19-49a9-475e-bfdc-13f7e597eb4e';
   selectedTargetId: string = null;
   selectedMalfunctionId: string = null;
   selectedStatusId: string = null;
@@ -36,7 +36,8 @@ export class DetailComponent implements OnInit {
     this.selectedDate = this.detail?.date;
     this.selectedOperatorId = this.detail?.operatorId;
     this.selectedAddrId = this.detail?.addrId;
-    this.selectedActionId = this.detail?.actionId;
+    // this.selectedActionId = this.detail?.actionId;
+    this.selectedActionId = '181d4a19-49a9-475e-bfdc-13f7e597eb4e';
     this.selectedTargetId = this.detail?.targetId;
     this.selectedMalfunctionId = this.detail?.malfunctionId;
     this.selectedStatusId = this.detail?.statusId;
@@ -63,7 +64,8 @@ export class DetailComponent implements OnInit {
       date: this.selectedDate,
       operatorId: this.selectedOperatorId,
       addrId: this.selectedAddrId,
-      actionId: this.selectedActionId,
+      // actionId: this.selectedActionId,
+      actionId: '181d4a19-49a9-475e-bfdc-13f7e597eb4e', // compatible with api, deprecate this action id
       targetId: this.selectedTargetId,
       malfunctionId: this.selectedMalfunctionId,
       statusId: this.selectedStatusId,
