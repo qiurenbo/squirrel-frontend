@@ -10,7 +10,7 @@ export class SideLayoutComponent implements OnInit {
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {}
-  isCollapsed = false;
+  isCollapsed = true;
 
   openMap: { [name: string]: boolean } = {
     order: true,
