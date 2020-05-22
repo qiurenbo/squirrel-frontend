@@ -13,5 +13,13 @@
   }
   nz-table {
     width: 100%;
+    ::ng-deep table {
+      table-layout: fixed;
+      td {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
   }
 }

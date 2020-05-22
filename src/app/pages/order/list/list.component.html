@@ -35,12 +35,12 @@
   >
     <thead>
       <tr>
-        <th>时间</th>
-        <th>地点</th>
-        <th>人员</th>
-        <th>对象</th>
+        <th style="width: 100px;">时间</th>
+        <th style="width: 200px;">地点</th>
+        <th style="width: 100px;">人员</th>
+        <th style="width: 100px;">对象</th>
         <th>故障</th>
-        <th>方法</th>
+        <th style="width: 200px;">备注</th>
         <th>状态</th>
         <th></th>
       </tr>
@@ -56,7 +56,7 @@
         <td>{{ data.Operator.name }}</td>
         <td>{{ data.Target.name }}</td>
         <td>{{ data.Malfunction.name }}</td>
-        <td>{{ data.Action.name }}</td>
+        <td>{{ data.remarks }}</td>
         <td>{{ data.Status.name }}</td>
         <td>
           <a (click)="showEditDlg(data)"
