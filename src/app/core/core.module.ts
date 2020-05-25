@@ -10,6 +10,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JsonRequestInterceptor } from './interceptors/json-request.interceptor';
 import { AuthErrorInterceptor } from './interceptors/auth-error.interceptor';
 import { DivisionService } from './divisons.service';
+import { MinorTargetTypesService } from './minor-target-type.service';
 @NgModule({
   declarations: [],
   imports: [SharedModule],
@@ -27,6 +28,7 @@ export class CoreModule {
         OperatorService,
         AuthGuardService,
         DivisionService,
+        MinorTargetTypesService,
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         {
           provide: HTTP_INTERCEPTORS,

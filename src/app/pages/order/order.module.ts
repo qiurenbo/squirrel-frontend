@@ -18,6 +18,8 @@ import { ActionSelectComponent } from './list/action-select/action-select.compon
 
 import { EditDlgComponent } from './config/edit-dlg/edit-dlg.component';
 import { StatusSelectComponent } from './list/status-select/status-select.component';
+import { TargetTypeCascaderComponent } from './config/target-config/target-type-cascader/target-type-cascader.component';
+import { TargetEditDlgComponent } from './config/target-config/target-edit-dlg/target-edit-dlg.component';
 @NgModule({
   imports: [OrderRoutingModule, SharedModule],
   declarations: [
@@ -35,6 +37,8 @@ import { StatusSelectComponent } from './list/status-select/status-select.compon
     ActionSelectComponent,
     EditDlgComponent,
     StatusSelectComponent,
+    TargetTypeCascaderComponent,
+    TargetEditDlgComponent,
   ],
   exports: [],
 })

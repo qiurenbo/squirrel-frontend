@@ -5,7 +5,7 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import { OrderService } from 'src/app/core/order.service';
-import { v4 as uuidv4 } from 'uuid';
+
 import { Action, Malfunction } from 'src/app/models/order.model';
 import { NzCascaderOption } from 'ng-zorro-antd';
 import * as _ from 'lodash';

@@ -10,6 +10,7 @@ import {
   Status,
 } from '../models/order.model';
 import { assembleRequestUrl } from './utils';
+import { NzCascaderOption } from 'ng-zorro-antd';
 @Injectable({
   providedIn: 'root',
 })
@@ -81,6 +82,53 @@ export class OrderService {
         observe: 'response',
       }
     );
+  }
+  getDefaultOption(targets: Target[], targetId: string): string[] {
+    for (const target of targets) {
+      if (target.id === targetId) {
+        return [
+          target.MinorTargetType.MajorTargetType.name,
+          target.MinorTargetType.name,
+          target.name,
+        ];
+      }
+    }
+  }
+  getOrderTargetsCascader(targets: Target[]): NzCascaderOption[] {
+    let cascader: NzCascaderOption[] = [];
+    let hash = {};
+    let hash2 = {};
+    for (const target of targets) {
+      let majorTargetType = target.MinorTargetType.MajorTargetType;
+      let minorTargetType = target.MinorTargetType;
+      if (!hash[majorTargetType.id]) {
+        hash[majorTargetType.id] = {};
+        hash[majorTargetType.id].children = [];
+        hash[majorTargetType.id].label = majorTargetType.name;
+        hash[majorTargetType.id].value = majorTargetType.id;
+      }
+
+      if (!hash2[minorTargetType.id]) {
+        hash2[minorTargetType.id] = {};
+        hash2[minorTargetType.id].children = [];
+        hash2[minorTargetType.id].label = minorTargetType.name;
+        hash2[minorTargetType.id].value = minorTargetType.id;
+        hash[majorTargetType.id].children.push(hash2[minorTargetType.id]);
+      }
+
+      hash2[minorTargetType.id].children.push({
+        label: target.name,
+        value: target.id,
+        isLeaf: true,
+      });
+    }
+
+    for (const key in hash) {
+      if (hash.hasOwnProperty(key)) {
+        cascader.push(hash[key]);
+      }
+    }
+    return cascader;
   }
 
   postOrderTarget(target: Target): Observable<any> {

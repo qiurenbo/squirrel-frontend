@@ -1,31 +1,35 @@
-export class Action {
+import { MinorTargetType } from './minor-target-type.model';
+
+export interface Action {
   id?: string;
   name: string;
 }
 
-export class Status {
+export interface Status {
   id?: string;
   name: string;
 }
 
-export class Target {
+export interface Target {
+  id?: string;
+  name: string;
+  minorTargetTypeId: string;
+  MinorTargetType?: MinorTargetType;
+}
+
+export interface Malfunction {
   id?: string;
   name: string;
 }
 
-export class Malfunction {
-  id?: string;
-  name: string;
-}
-
-export class Operator {
+export interface Operator {
   id?: string;
   name: string;
   department: string;
   tel: string;
 }
 
-export class OrderDetail {
+export interface OrderDetail {
   id?: string;
   date: string;
   operatorId: string;
@@ -37,12 +41,12 @@ export class OrderDetail {
   remarks: string;
 }
 
-// export class Orders {
+// export interface Orders {
 //   total: number;
 //   list: Order[];
 // }
 
-export class Addr {
+export interface Addr {
   id?: string;
   name: string;
   addr: string;
@@ -56,7 +60,7 @@ export class Addr {
   };
 }
 
-export class Stats {
+export interface Stats {
   orderOfToday: string;
   orderOfCurMonth: string;
   orderOfCurYear: string;

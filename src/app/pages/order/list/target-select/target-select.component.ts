@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { OrderService } from 'src/app/core/order.service';
-import { Target } from 'src/app/models/order.model';
+import { NzCascaderOption } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-target-select',
@@ -8,31 +8,38 @@ import { Target } from 'src/app/models/order.model';
   styleUrls: ['./target-select.component.scss'],
 })
 export class TargetSelectComponent implements OnInit {
-  isTargetsLoading = false;
-  targets: Target[];
-
-  targetIdValue: string;
+  targets: NzCascaderOption[];
 
   @Output()
   targetIdChange = new EventEmitter<string>();
 
   @Input()
-  get targetId() {
-    return this.targetIdValue;
-  }
+  targetId: string;
 
-  set targetId(value) {
-    this.targetIdValue = value;
-    this.targetIdChange.emit(value);
-  }
-
+  defaultOption: string[];
   constructor(private mservice: OrderService) {}
 
   ngOnInit(): void {
-    this.isTargetsLoading = true;
-    this.mservice.getOrderTargets().subscribe((d) => {
-      this.targets = d.body;
-      this.isTargetsLoading = false;
+    this.mservice.getOrderTargets().subscribe((t) => {
+      let targets = t.body;
+      this.targets = this.mservice.getOrderTargetsCascader(targets);
+
+      if (this.targetId) {
+        this.defaultOption = this.mservice.getDefaultOption(
+          t.body,
+          this.targetId
+        );
+      }
     });
+  }
+
+  onChanges(selectedTarget: NzCascaderOption[]) {
+    if (selectedTarget[2]) {
+      this.targetId = selectedTarget[2].value;
+    }
+    if (selectedTarget.length === 0) {
+      this.targetId = null;
+    }
+    this.targetIdChange.emit(this.targetId);
   }
 }

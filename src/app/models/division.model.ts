@@ -1,4 +1,4 @@
-export class Division {
+export interface Division {
   id: string;
   name: string;
   Area: {

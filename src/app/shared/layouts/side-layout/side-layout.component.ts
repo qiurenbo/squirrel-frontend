@@ -13,7 +13,7 @@ export class SideLayoutComponent implements OnInit {
   isCollapsed = true;
 
   openMap: { [name: string]: boolean } = {
-    order: true,
+    order: false,
     camera: false,
     allocations: false,
     config: false,

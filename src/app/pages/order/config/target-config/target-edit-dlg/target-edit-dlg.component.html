@@ -1,0 +1,13 @@
+<nz-modal
+  [nzWidth]="800"
+  [nzVisible]="isVisible"
+  [nzTitle]="'修改当前'"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk()"
+>
+  <app-target-type-cascader
+    [(selectedMinorTypeId)]="this.target.minorTargetTypeId"
+  ></app-target-type-cascader>
+
+  <input nz-input [(ngModel)]="this.target.name" />
+</nz-modal>

@@ -1,5 +1,9 @@
 <div class="container" fxLayout="column" fxLayoutAlign="space-between center">
   <div class="filter-container" fxLayout="row" fxLayoutAlign="start center">
+    <app-target-type-cascader
+      [(selectedMinorTypeId)]="minorTargetTypeId"
+    ></app-target-type-cascader>
+
     <input nz-input placeholder="品名" [(ngModel)]="name" />
     <a>
       <i nz-icon nzType="plus-square" nzTheme="outline" (click)="add()"></i>
@@ -17,7 +21,9 @@
   >
     <thead>
       <tr>
-        <th>品名</th>
+        <th>对象</th>
+        <th>所属大类</th>
+        <th>所属小类</th>
         <th></th>
       </tr>
     </thead>
@@ -25,6 +31,12 @@
       <tr *ngFor="let data of basicTable.data">
         <td>
           {{ data.name }}
+        </td>
+        <td>
+          {{ data.MinorTargetType.MajorTargetType.name }}
+        </td>
+        <td>
+          {{ data.MinorTargetType.name }}
         </td>
 
         <td>

@@ -1,6 +1,6 @@
 <nz-cascader
-  [nzOptions]="targets"
+  [nzOptions]="types"
   [nzPlaceHolder]="'选择类别'"
+  [(ngModel)]="dafaultOption"
   (nzSelectionChange)="onChanges($event)"
-  [(ngModel)]="defaultOption"
 ></nz-cascader>

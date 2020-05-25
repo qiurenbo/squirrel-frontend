@@ -4,10 +4,12 @@ import {
   ComponentFactoryResolver,
   ViewContainerRef,
 } from '@angular/core';
+import * as _ from 'lodash';
 import { OrderService } from 'src/app/core/order.service';
 import { Target } from 'src/app/models/order.model';
 
-import { EditDlgComponent } from 'src/app/pages/order/config/edit-dlg/edit-dlg.component';
+import { NzCascaderOption } from 'ng-zorro-antd';
+import { TargetEditDlgComponent } from './target-edit-dlg/target-edit-dlg.component';
 @Component({
   selector: 'app-target-config',
   templateUrl: './target-config.component.html',
@@ -21,6 +23,8 @@ export class TargetConfigComponent implements OnInit {
   total: number;
   pageSize = 6;
   pageIndex = 1;
+  minorTargetTypeId: string = null;
+  types: NzCascaderOption[];
   constructor(
     private mservice: OrderService,
     private resolver: ComponentFactoryResolver,
@@ -47,14 +51,14 @@ export class TargetConfigComponent implements OnInit {
   }
 
   add() {
-    if (!this.name) {
+    if (!this.name || !this.minorTargetTypeId) {
       return;
     }
 
     this.mservice
       .postOrderTarget({
-        //id: uuidv4(),
         name: this.name,
+        minorTargetTypeId: this.minorTargetTypeId,
       })
       .subscribe(() => {
         this.loadData();
@@ -68,15 +72,18 @@ export class TargetConfigComponent implements OnInit {
   }
 
   openEditDlg(target: Target) {
-    const factory = this.resolver.resolveComponentFactory(EditDlgComponent);
+    const factory = this.resolver.resolveComponentFactory(
+      TargetEditDlgComponent
+    );
     const dlg = this.viewContainer.createComponent(factory);
-    dlg.instance.passValue = target;
+    dlg.instance.target = _.clone(target);
     dlg.instance.onOk = this.OnOk;
   }
 
   onPageIndexChange(index: number) {
     this.loadData();
   }
+
   OnOk = (target) => {
     this.mservice.putOrderTarget(target).subscribe(() => {
       this.loadData();
