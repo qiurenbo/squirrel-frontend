@@ -16,7 +16,7 @@ COPY package.json ./
 
 # Install dependecies
 
-RUN npm install
+RUN npm install --only=prod
 
 # Get all the code needed to run the app
 
