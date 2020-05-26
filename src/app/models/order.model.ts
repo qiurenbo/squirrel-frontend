@@ -53,7 +53,7 @@ export interface Addr {
   tel: string;
   type: string;
   streetId: string;
-  Steet?: {
+  Street?: {
     id: string;
     name: string;
     Area: { id: string; name: string };

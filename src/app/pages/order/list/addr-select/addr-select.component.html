@@ -14,7 +14,7 @@
 
 <nz-cascader
   [nzPlaceHolder]="'选择地点'"
-  [ngModel]="division"
-  [nzOptions]="divisions"
+  [ngModel]="defaultAddrOption"
+  [nzOptions]="addrs"
   (nzSelectionChange)="onChanges($event)"
 ></nz-cascader>

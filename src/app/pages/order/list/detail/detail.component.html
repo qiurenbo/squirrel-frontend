@@ -5,21 +5,23 @@
   (nzOnCancel)="handleCancel()"
   (nzOnOk)="handleOk()"
 >
-  <nz-date-picker [(ngModel)]="date"></nz-date-picker>
-  <app-addr-select [(addrId)]="selectedAddrId"></app-addr-select>
-  <app-operator-select
-    [(operatorId)]="selectedOperatorId"
-  ></app-operator-select>
-  <app-target-select [(targetId)]="selectedTargetId"></app-target-select>
-  <app-malfunction-select
-    [(malfunctionId)]="selectedMalfunctionId"
-  ></app-malfunction-select>
-  <!-- <app-action-select [(actionId)]="selectedActionId"></app-action-select > -->
-  <app-status-select [(statusId)]="selectedStatusId"></app-status-select>
-  <textarea
-    placeholder="备注信息（选填）"
-    rows="4"
-    nz-input
-    [(ngModel)]="remarks"
-  ></textarea>
+  <div>
+    <nz-date-picker [(ngModel)]="date"></nz-date-picker>
+    <app-addr-select [(addrId)]="selectedAddrId"></app-addr-select>
+    <app-operator-select
+      [(operatorId)]="selectedOperatorId"
+    ></app-operator-select>
+    <app-target-select [(targetId)]="selectedTargetId"></app-target-select>
+    <app-malfunction-select
+      [(malfunctionId)]="selectedMalfunctionId"
+    ></app-malfunction-select>
+    <!-- <app-action-select [(actionId)]="selectedActionId"></app-action-select > -->
+    <app-status-select [(statusId)]="selectedStatusId"></app-status-select>
+    <textarea
+      placeholder="备注信息（选填）"
+      rows="6"
+      nz-input
+      [(ngModel)]="remarks"
+    ></textarea>
+  </div>
 </nz-modal>
