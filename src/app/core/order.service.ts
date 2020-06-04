@@ -8,6 +8,7 @@ import {
   Malfunction,
   Action,
   Status,
+  Project,
 } from '../models/order.model';
 import { assembleRequestUrl } from './utils';
 import { NzCascaderOption } from 'ng-zorro-antd';
@@ -175,6 +176,33 @@ export class OrderService {
   deleteOrderMalfunction(malfunction: Malfunction): Observable<any> {
     return this.http.delete(
       environment.apiurl + 'orders/malfunctions/' + malfunction.id
+    );
+  }
+
+  /*projects*/
+  getOrderProjects(query: any = null): Observable<HttpResponse<Project[]>> {
+    return this.http.get<Project[]>(
+      assembleRequestUrl(query, environment.apiurl + 'orders/projects'),
+      {
+        observe: 'response',
+      }
+    );
+  }
+
+  putOrderProject(project: Project): Observable<any> {
+    return this.http.put(
+      environment.apiurl + 'orders/projects/' + project.id,
+      project
+    );
+  }
+
+  postOrderProject(project: Project): Observable<any> {
+    return this.http.post(environment.apiurl + 'orders/projects', project);
+  }
+
+  deleteOrderProject(project: Project): Observable<any> {
+    return this.http.delete(
+      environment.apiurl + 'orders/projects/' + project.id
     );
   }
 }

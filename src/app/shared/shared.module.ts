@@ -25,6 +25,12 @@ import { NgxEchartsModule } from 'ngx-echarts';
 import { SideLayoutComponent } from './layouts/side-layout/side-layout.component';
 import { DefaultLayoutComponent } from './layouts/default-layout/default-layout.component';
 import { RouterModule } from '@angular/router';
+import { ActionConfigComponent } from '../pages/order/config/action-config/action-config.component';
+import { AddrSelectComponent } from './components/addr-select/addr-select.component';
+import { TargetSelectComponent } from './components/target-select/target-select.component';
+import { MalfunctionSelectComponent } from './components/malfunction-select/malfunction-select.component';
+import { ActionSelectComponent } from './components/action-select/action-select.component';
+import { OperatorSelectComponent } from './components/operator-select/operator-select.component';
 
 const NzModules = [
   NzInputModule,
@@ -45,7 +51,17 @@ const NzModules = [
   NzCascaderModule,
 ];
 @NgModule({
-  declarations: [PieComponent, SideLayoutComponent, DefaultLayoutComponent],
+  declarations: [
+    PieComponent,
+    SideLayoutComponent,
+    DefaultLayoutComponent,
+    ActionConfigComponent,
+    AddrSelectComponent,
+    OperatorSelectComponent,
+    TargetSelectComponent,
+    MalfunctionSelectComponent,
+    ActionSelectComponent,
+  ],
   imports: [
     CommonModule,
     HttpClientModule,
@@ -65,6 +81,11 @@ const NzModules = [
     PieComponent,
     RouterModule,
     ReactiveFormsModule,
+    AddrSelectComponent,
+    OperatorSelectComponent,
+    TargetSelectComponent,
+    MalfunctionSelectComponent,
+    ActionSelectComponent,
   ],
 })
 export class SharedModule {}

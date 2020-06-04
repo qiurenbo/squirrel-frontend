@@ -9,17 +9,13 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { ConfigComponent } from './config/config.component';
 import { TargetConfigComponent } from './config/target-config/target-config.component';
 import { MalfunctionConfigComponent } from './config/malfunction-config/malfunction-config.component';
-import { ActionConfigComponent } from './config/action-config/action-config.component';
-import { AddrSelectComponent } from './list/addr-select/addr-select.component';
-import { OperatorSelectComponent } from './list/operator-select/operator-select.component';
-import { TargetSelectComponent } from './list/target-select/target-select.component';
-import { MalfunctionSelectComponent } from './list/malfunction-select/malfunction-select.component';
-import { ActionSelectComponent } from './list/action-select/action-select.component';
 
 import { EditDlgComponent } from './config/edit-dlg/edit-dlg.component';
-import { StatusSelectComponent } from './list/status-select/status-select.component';
+import { StatusSelectComponent } from '../../shared/components/status-select/status-select.component';
 import { TargetTypeCascaderComponent } from './config/target-config/target-type-cascader/target-type-cascader.component';
 import { TargetEditDlgComponent } from './config/target-config/target-edit-dlg/target-edit-dlg.component';
+import { ProjectComponent } from './project/project.component';
+import { ProjectDetailComponent } from './project/project-detail/project-detail.component';
 @NgModule({
   imports: [OrderRoutingModule, SharedModule],
   declarations: [
@@ -29,16 +25,13 @@ import { TargetEditDlgComponent } from './config/target-config/target-edit-dlg/t
     ConfigComponent,
     TargetConfigComponent,
     MalfunctionConfigComponent,
-    ActionConfigComponent,
-    AddrSelectComponent,
-    OperatorSelectComponent,
-    TargetSelectComponent,
-    MalfunctionSelectComponent,
-    ActionSelectComponent,
+
     EditDlgComponent,
     StatusSelectComponent,
     TargetTypeCascaderComponent,
     TargetEditDlgComponent,
+    ProjectComponent,
+    ProjectDetailComponent,
   ],
   exports: [],
 })

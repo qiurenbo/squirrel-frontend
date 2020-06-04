@@ -1,0 +1,24 @@
+<nz-modal
+  [nzWidth]="1250"
+  [nzVisible]="isVisible"
+  [nzTitle]="title"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk()"
+>
+  <div>
+    <nz-date-picker [(ngModel)]="date"></nz-date-picker>
+    <input nz-input placeholder="项目名称" [(ngModel)]="projectName" />
+    <app-addr-select [(addrId)]="selectedAddrId"></app-addr-select>
+    <app-operator-select
+      [(operatorId)]="selectedOperatorId"
+    ></app-operator-select>
+
+    <app-status-select [(statusId)]="selectedStatusId"></app-status-select>
+    <textarea
+      placeholder="备注信息（选填）"
+      rows="6"
+      nz-input
+      [(ngModel)]="remarks"
+    ></textarea>
+  </div>
+</nz-modal>

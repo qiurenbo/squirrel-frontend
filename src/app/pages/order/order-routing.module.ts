@@ -4,6 +4,7 @@ import { ListComponent } from './list/list.component';
 import { DetailComponent } from './list/detail/detail.component';
 import { StatsComponent } from './stats/stats.component';
 import { ConfigComponent } from './config/config.component';
+import { ProjectComponent } from './project/project.component';
 const routes: Routes = [
   { path: 'list', component: ListComponent },
   {
@@ -13,6 +14,11 @@ const routes: Routes = [
   {
     path: 'stats',
     component: StatsComponent,
+  },
+
+  {
+    path: 'projects',
+    component: ProjectComponent,
   },
 
   {

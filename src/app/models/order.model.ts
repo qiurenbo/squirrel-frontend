@@ -41,10 +41,15 @@ export interface OrderDetail {
   remarks: string;
 }
 
-// export interface Orders {
-//   total: number;
-//   list: Order[];
-// }
+export interface Project {
+  id?: string;
+  name: string;
+  date: string;
+  operatorId: string;
+  addrId: string;
+  statusId: string;
+  remarks: string;
+}
 
 export interface Addr {
   id?: string;
