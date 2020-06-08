@@ -16,6 +16,8 @@ import { TargetTypeCascaderComponent } from './config/target-config/target-type-
 import { TargetEditDlgComponent } from './config/target-config/target-edit-dlg/target-edit-dlg.component';
 import { ProjectComponent } from './project/project.component';
 import { ProjectDetailComponent } from './project/project-detail/project-detail.component';
+import { CameraComponent } from './camera/camera.component';
+import { CameraDetailComponent } from './camera/camera-detail/camera-detail.component';
 @NgModule({
   imports: [OrderRoutingModule, SharedModule],
   declarations: [
@@ -32,6 +34,8 @@ import { ProjectDetailComponent } from './project/project-detail/project-detail.
     TargetEditDlgComponent,
     ProjectComponent,
     ProjectDetailComponent,
+    CameraComponent,
+    CameraDetailComponent,
   ],
   exports: [],
 })

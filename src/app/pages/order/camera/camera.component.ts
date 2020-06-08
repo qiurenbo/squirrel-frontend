@@ -6,17 +6,17 @@ import {
   ComponentRef,
 } from '@angular/core';
 import { OrderService } from 'src/app/core/order.service';
-import { Operator, Addr, Project } from 'src/app/models/order.model';
+import { Operator, Addr, Camera } from 'src/app/models/order.model';
 import * as moment from 'moment';
-import { ProjectDetailComponent } from './project-detail/project-detail.component';
+import { CameraDetailComponent } from './camera-detail/camera-detail.component';
 
 @Component({
-  selector: 'app-project',
-  templateUrl: './project.component.html',
-  styleUrls: ['./project.component.scss'],
+  selector: 'app-camera',
+  templateUrl: './camera.component.html',
+  styleUrls: ['./camera.component.scss'],
 })
-export class ProjectComponent implements OnInit {
-  listOfData: Project[] = null;
+export class CameraComponent implements OnInit {
+  listOfData: Camera[] = null;
   isLoading = true;
   pageSize: number;
   pageIndex: number;
@@ -39,7 +39,7 @@ export class ProjectComponent implements OnInit {
 
   loadData() {
     this.isLoading = true;
-    this.mservice.getOrderProjects(this.filter).subscribe((p: any) => {
+    this.mservice.getOrderCameras(this.filter).subscribe((p: any) => {
       this.total = p.headers.get('X-Total-Count');
       this.isLoading = false;
       this.listOfData = p.body;
@@ -96,9 +96,9 @@ export class ProjectComponent implements OnInit {
       range.length > 0 ? moment(range[1]).format('YYYYMMDD') : null;
   }
 
-  makeDlg(): ComponentRef<ProjectDetailComponent> {
+  makeDlg(): ComponentRef<CameraDetailComponent> {
     const factory = this.resolver.resolveComponentFactory(
-      ProjectDetailComponent
+      CameraDetailComponent
     );
     const detailComponentRef = this.viewContainer.createComponent(factory);
     detailComponentRef.instance.dataUpdate.subscribe(() => this.loadData());
@@ -107,15 +107,15 @@ export class ProjectComponent implements OnInit {
   showAddDlg() {
     const detailComponentRef = this.makeDlg();
     detailComponentRef.instance.title = '新增日志';
-    detailComponentRef.instance.project = null;
+    detailComponentRef.instance.camera = null;
     detailComponentRef.instance.method = 'POST';
   }
 
-  showEditDlg(project: Project) {
+  showEditDlg(camera: Camera) {
     const detailComponentRef = this.makeDlg();
     detailComponentRef.instance.title = '修改当前';
     detailComponentRef.instance.method = 'PUT';
-    detailComponentRef.instance.project = project;
+    detailComponentRef.instance.camera = camera;
     detailComponentRef.instance.dataUpdate.subscribe(() => this.loadData());
   }
 
@@ -127,8 +127,8 @@ export class ProjectComponent implements OnInit {
     this.loadData();
   }
 
-  deleteRecord(project: Project) {
-    this.mservice.deleteOrderProject(project).subscribe(() => {
+  deleteRecord(camera: Camera) {
+    this.mservice.deleteOrderCamera(camera).subscribe(() => {
       this.loadData();
     });
   }

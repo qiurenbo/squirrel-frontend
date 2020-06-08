@@ -9,6 +9,7 @@ import {
   Action,
   Status,
   Project,
+  Camera,
 } from '../models/order.model';
 import { assembleRequestUrl } from './utils';
 import { NzCascaderOption } from 'ng-zorro-antd';
@@ -204,5 +205,30 @@ export class OrderService {
     return this.http.delete(
       environment.apiurl + 'orders/projects/' + project.id
     );
+  }
+
+  /*cameras*/
+  getOrderCameras(query: any = null): Observable<HttpResponse<Camera[]>> {
+    return this.http.get<Camera[]>(
+      assembleRequestUrl(query, environment.apiurl + 'orders/cameras'),
+      {
+        observe: 'response',
+      }
+    );
+  }
+
+  putOrderCamera(camera: Camera): Observable<any> {
+    return this.http.put(
+      environment.apiurl + 'orders/cameras/' + camera.id,
+      camera
+    );
+  }
+
+  postOrderCamera(camera: Camera): Observable<any> {
+    return this.http.post(environment.apiurl + 'orders/cameras', camera);
+  }
+
+  deleteOrderCamera(camera: Camera): Observable<any> {
+    return this.http.delete(environment.apiurl + 'orders/cameras/' + camera.id);
   }
 }

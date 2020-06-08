@@ -123,7 +123,7 @@ export class ListComponent implements OnInit {
   makeDlg() {
     const factory = this.resolver.resolveComponentFactory(DetailComponent);
     const detailComponentRef = this.viewContainer.createComponent(factory);
-    detailComponentRef.instance.dateUpdate.subscribe(() => this.loadData());
+    detailComponentRef.instance.dataUpdate.subscribe(() => this.loadData());
     return detailComponentRef;
   }
   showAddDlg() {
@@ -138,7 +138,7 @@ export class ListComponent implements OnInit {
     detailComponentRef.instance.title = '修改当前';
     detailComponentRef.instance.method = 'PUT';
     detailComponentRef.instance.detail = order;
-    detailComponentRef.instance.dateUpdate.subscribe(() => this.loadData());
+    detailComponentRef.instance.dataUpdate.subscribe(() => this.loadData());
   }
 
   onFilterClick() {

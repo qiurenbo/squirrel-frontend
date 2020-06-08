@@ -5,6 +5,7 @@ import { DetailComponent } from './list/detail/detail.component';
 import { StatsComponent } from './stats/stats.component';
 import { ConfigComponent } from './config/config.component';
 import { ProjectComponent } from './project/project.component';
+import { CameraComponent } from './camera/camera.component';
 const routes: Routes = [
   { path: 'list', component: ListComponent },
   {
@@ -19,6 +20,10 @@ const routes: Routes = [
   {
     path: 'projects',
     component: ProjectComponent,
+  },
+  {
+    path: 'cameras',
+    component: CameraComponent,
   },
 
   {

@@ -1,14 +1,15 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { v4 as uuidv4 } from 'uuid';
-import { OrderService } from 'src/app/core/order.service';
-import { OrderDetail } from 'src/app/models/order.model';
+
+import { Camera } from 'src/app/models/order.model';
 import * as moment from 'moment';
+import { OrderService } from 'src/app/core/order.service';
 @Component({
-  selector: 'app-detail',
-  templateUrl: './detail.component.html',
-  styleUrls: ['./detail.component.scss'],
+  selector: 'app-camera-detail',
+  templateUrl: './camera-detail.component.html',
+  styleUrls: ['./camera-detail.component.scss'],
 })
-export class DetailComponent implements OnInit {
+export class CameraDetailComponent implements OnInit {
   @Input()
   title: string = null;
 
@@ -16,32 +17,27 @@ export class DetailComponent implements OnInit {
   method: string = null;
 
   @Input()
-  detail: OrderDetail = null;
+  camera: Camera = null;
 
   @Output()
   dataUpdate = new EventEmitter();
 
   isVisible = true;
   date: Date;
+  cameraName: string = null;
   remarks: string = null;
   selectedOperatorId: string = null;
   selectedAddrId: string = null;
-  selectedActionId: string = '181d4a19-49a9-475e-bfdc-13f7e597eb4e';
-  selectedTargetId: string = null;
-  selectedMalfunctionId: string = null;
   selectedStatusId: string = null;
-  constructor(private mservice: OrderService) {}
+  constructor(private pservice: OrderService) {}
 
   ngOnInit() {
-    this.selectedDate = this.detail?.date;
-    this.selectedOperatorId = this.detail?.operatorId;
-    this.selectedAddrId = this.detail?.addrId;
-    // this.selectedActionId = this.detail?.actionId;
-    this.selectedActionId = '181d4a19-49a9-475e-bfdc-13f7e597eb4e';
-    this.selectedTargetId = this.detail?.targetId;
-    this.selectedMalfunctionId = this.detail?.malfunctionId;
-    this.selectedStatusId = this.detail?.statusId;
-    this.remarks = this.detail?.remarks;
+    this.selectedDate = this.camera?.date;
+    this.selectedOperatorId = this.camera?.operatorId;
+    this.selectedAddrId = this.camera?.addrId;
+    this.selectedStatusId = this.camera?.statusId;
+    this.remarks = this.camera?.remarks;
+    this.cameraName = this.camera?.name;
   }
 
   get selectedDate() {
@@ -58,16 +54,13 @@ export class DetailComponent implements OnInit {
       : null;
   }
 
-  get order() {
-    return <OrderDetail>{
-      id: this.detail?.id ? this.detail.id : uuidv4(),
+  get finalCamera() {
+    return <Camera>{
+      id: this.camera?.id ? this.camera.id : uuidv4(),
+      name: this.cameraName,
       date: this.selectedDate,
       operatorId: this.selectedOperatorId,
       addrId: this.selectedAddrId,
-      // actionId: this.selectedActionId,
-      actionId: '181d4a19-49a9-475e-bfdc-13f7e597eb4e', // compatible with api, deprecate this action id
-      targetId: this.selectedTargetId,
-      malfunctionId: this.selectedMalfunctionId,
       statusId: this.selectedStatusId,
       remarks: this.remarks,
     };
@@ -78,9 +71,6 @@ export class DetailComponent implements OnInit {
       this.selectedDate &&
       this.selectedOperatorId &&
       this.selectedAddrId &&
-      this.selectedActionId &&
-      this.selectedTargetId &&
-      this.selectedMalfunctionId &&
       this.selectedStatusId
     ) {
       return true;
@@ -101,13 +91,13 @@ export class DetailComponent implements OnInit {
 
     switch (this.method) {
       case 'POST':
-        this.mservice.postOrder(this.order).subscribe(() => {
+        this.pservice.postOrderCamera(this.finalCamera).subscribe(() => {
           this.dataUpdate.emit();
         });
         break;
 
       case 'PUT':
-        this.mservice.putOrder(this.order).subscribe(() => {
+        this.pservice.putOrderCamera(this.finalCamera).subscribe(() => {
           this.dataUpdate.emit();
         });
         break;

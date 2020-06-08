@@ -11,8 +11,8 @@
     [nzOptions]="divisions"
     (nzSelectionChange)="onChanges($event)"
   ></nz-cascader>
-  <input nz-input [(ngModel)]="addr.name" />
-  <input nz-input [(ngModel)]="addr.type" />
-  <input nz-input [(ngModel)]="addr.addr" />
-  <input nz-input [(ngModel)]="addr.tel" />
+  <input nz-input placeholder="姓名" [(ngModel)]="addr.name" />
+  <input nz-input placeholder="类型"  [(ngModel)]="addr.type" />
+  <input nz-input placeholder="地址"  [(ngModel)]="addr.addr" />
+  <input nz-input placeholder="电话"  [(ngModel)]="addr.tel" />
 </nz-modal>

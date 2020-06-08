@@ -5,10 +5,11 @@
   (nzOnCancel)="handleCancel()"
   (nzOnOk)="handleOk()"
 >
-  <input nz-input [(ngModel)]="account.email" />
+  <input nz-input placeholder="邮箱" [(ngModel)]="account.email" />
 
   <input
     nz-input
+    placeholder="密码"
     [ngModel]="'******'"
     (change)="onPasswordInputChange($event)"
   />

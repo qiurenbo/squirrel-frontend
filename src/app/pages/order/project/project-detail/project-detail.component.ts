@@ -20,7 +20,7 @@ export class ProjectDetailComponent implements OnInit {
   project: Project = null;
 
   @Output()
-  dateUpdate = new EventEmitter();
+  dataUpdate = new EventEmitter();
 
   isVisible = true;
   date: Date;
@@ -92,13 +92,13 @@ export class ProjectDetailComponent implements OnInit {
     switch (this.method) {
       case 'POST':
         this.pservice.postOrderProject(this.finalProject).subscribe(() => {
-          this.dateUpdate.emit();
+          this.dataUpdate.emit();
         });
         break;
 
       case 'PUT':
         this.pservice.putOrderProject(this.finalProject).subscribe(() => {
-          this.dateUpdate.emit();
+          this.dataUpdate.emit();
         });
         break;
     }

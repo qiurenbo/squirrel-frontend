@@ -51,6 +51,16 @@ export interface Project {
   remarks: string;
 }
 
+export interface Camera {
+  id?: string;
+  name: string;
+  date: string;
+  operatorId: string;
+  addrId: string;
+  statusId: string;
+  remarks: string;
+}
+
 export interface Addr {
   id?: string;
   name: string;

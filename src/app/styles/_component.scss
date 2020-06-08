@@ -1,0 +1,33 @@
+.content-container {
+  .filter-container {
+    width: 100%;
+    margin-bottom: 24px;
+
+    i {
+      font-size: 24px;
+      margin-right: 10px;
+    }
+    nz-range-picker {
+      width: 250px;
+      margin-right: 10px;
+    }
+    input {
+      width: 200px;
+      margin-right: 10px;
+    }
+    nz-cascader {
+      margin-right: 10px;
+    }
+  }
+  nz-table {
+    width: 100%;
+    ::ng-deep table {
+      table-layout: fixed;
+      td {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+  }
+}

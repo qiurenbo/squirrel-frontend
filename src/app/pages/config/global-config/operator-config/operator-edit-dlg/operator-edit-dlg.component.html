@@ -5,7 +5,7 @@
   (nzOnCancel)="handleCancel()"
   (nzOnOk)="handleOk()"
 >
-  <input nz-input [(ngModel)]="operator.name" />
-  <input nz-input [(ngModel)]="operator.department" />
-  <input nz-input [(ngModel)]="operator.tel" />
+  <input nz-input placeholder="姓名" [(ngModel)]="operator.name" />
+  <input nz-input placeholder="部门" [(ngModel)]="operator.department" />
+  <input nz-input placeholder="电话" [(ngModel)]="operator.tel" />
 </nz-modal>
