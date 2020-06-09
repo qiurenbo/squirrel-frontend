@@ -10,7 +10,7 @@ import { AddrEditDlgComponent } from './addr-edit-dlg/addr-edit-dlg.component';
 import { AddrService } from 'src/app/core/addr.service';
 
 import { DivisionService } from 'src/app/core/divisons.service';
-import { NzCascaderOption } from 'ng-zorro-antd';
+import { NzCascaderOption, NzMessageService } from 'ng-zorro-antd';
 @Component({
   selector: 'app-addr-config',
   templateUrl: './addr-config.component.html',
@@ -34,7 +34,8 @@ export class AddrConfigComponent implements OnInit {
     private addrService: AddrService,
     private divisionService: DivisionService,
     private resolver: ComponentFactoryResolver,
-    private viewContainer: ViewContainerRef
+    private viewContainer: ViewContainerRef,
+    private messageService: NzMessageService
   ) {}
 
   loadData() {
@@ -77,14 +78,21 @@ export class AddrConfigComponent implements OnInit {
         streetId: this.streetId,
       })
       .subscribe(() => {
+        this.messageService.info('新增成功');
         this.loadData();
       });
   }
 
   delete(addr: Addr) {
-    this.addrService.deleteAddr(addr).subscribe(() => {
-      this.loadData();
-    });
+    this.addrService.deleteAddr(addr).subscribe(
+      () => {
+        this.messageService.info('删除成功');
+        this.loadData();
+      },
+      (error) => {
+        this.messageService.info('删除失败！关联字段未删除');
+      }
+    );
   }
 
   openEditDlg(addr: Addr) {
@@ -96,6 +104,7 @@ export class AddrConfigComponent implements OnInit {
 
   OnOk = (addr: Addr) => {
     this.addrService.putAddr(addr).subscribe(() => {
+      this.messageService.info('修改成功');
       this.loadData();
     });
   };

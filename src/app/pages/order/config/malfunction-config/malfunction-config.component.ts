@@ -9,6 +9,7 @@ import { OrderService } from 'src/app/core/order.service';
 import { Malfunction } from 'src/app/models/order.model';
 import * as _ from 'lodash';
 import { EditDlgComponent } from 'src/app/pages/order/config/edit-dlg/edit-dlg.component';
+import { NzMessageService } from 'ng-zorro-antd';
 @Component({
   selector: 'app-malfunction-config',
   templateUrl: './malfunction-config.component.html',
@@ -26,7 +27,8 @@ export class MalfunctionConfigComponent implements OnInit {
   constructor(
     private mservice: OrderService,
     private resolver: ComponentFactoryResolver,
-    private viewContainer: ViewContainerRef
+    private viewContainer: ViewContainerRef,
+    private messageService: NzMessageService
   ) {}
 
   loadData() {
@@ -58,14 +60,21 @@ export class MalfunctionConfigComponent implements OnInit {
         name: this.malfunctionName,
       })
       .subscribe(() => {
+        this.messageService.info('新增成功');
         this.loadData();
       });
   }
 
   delete(malfunction: Malfunction) {
-    this.mservice.deleteOrderMalfunction(malfunction).subscribe(() => {
-      this.loadData();
-    });
+    this.mservice.deleteOrderMalfunction(malfunction).subscribe(
+      () => {
+        this.messageService.info('删除成功');
+        this.loadData();
+      },
+      (err) => {
+        this.messageService.info('删除失败！关联字段未删除');
+      }
+    );
   }
 
   saveData(malfunction: Malfunction) {
@@ -84,6 +93,7 @@ export class MalfunctionConfigComponent implements OnInit {
   }
   OnOk = (malfunction) => {
     this.mservice.putOrderMalfunction(malfunction).subscribe(() => {
+      this.messageService.info('修改成功');
       this.loadData();
     });
   };

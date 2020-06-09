@@ -15,6 +15,7 @@ import {
 } from 'src/app/models/order.model';
 import * as moment from 'moment';
 import { DetailComponent } from './detail/detail.component';
+import { NzMessageService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-list',
@@ -44,7 +45,8 @@ export class ListComponent implements OnInit {
   constructor(
     private mservice: OrderService,
     private resolver: ComponentFactoryResolver,
-    private viewContainer: ViewContainerRef
+    private viewContainer: ViewContainerRef,
+    private messageService: NzMessageService
   ) {}
 
   loadData() {
@@ -126,11 +128,16 @@ export class ListComponent implements OnInit {
     detailComponentRef.instance.dataUpdate.subscribe(() => this.loadData());
     return detailComponentRef;
   }
+
   showAddDlg() {
     const detailComponentRef = this.makeDlg();
     detailComponentRef.instance.title = '新增维护';
     detailComponentRef.instance.detail = null;
     detailComponentRef.instance.method = 'POST';
+    detailComponentRef.instance.dataUpdate.subscribe(() => {
+      this.messageService.info('新增成功');
+      this.loadData();
+    });
   }
 
   showEditDlg(order: OrderDetail) {
@@ -138,7 +145,10 @@ export class ListComponent implements OnInit {
     detailComponentRef.instance.title = '修改当前';
     detailComponentRef.instance.method = 'PUT';
     detailComponentRef.instance.detail = order;
-    detailComponentRef.instance.dataUpdate.subscribe(() => this.loadData());
+    detailComponentRef.instance.dataUpdate.subscribe(() => {
+      this.messageService.info('修改成功');
+      this.loadData();
+    });
   }
 
   onFilterClick() {
@@ -151,6 +161,7 @@ export class ListComponent implements OnInit {
 
   deleteRecord(order: OrderDetail) {
     this.mservice.deleteOrder(order).subscribe(() => {
+      this.messageService.info('删除成功');
       this.loadData();
     });
   }

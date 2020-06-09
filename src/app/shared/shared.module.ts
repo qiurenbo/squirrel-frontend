@@ -19,6 +19,7 @@ import {
   NzCardModule,
   NzDatePickerModule,
   NzCascaderModule,
+  NzMessageModule,
 } from 'ng-zorro-antd';
 import { PieComponent } from './components/graph/pie/pie.component';
 import { NgxEchartsModule } from 'ngx-echarts';
@@ -49,6 +50,7 @@ const NzModules = [
   NzDatePickerModule,
   NzCardModule,
   NzCascaderModule,
+  NzMessageModule,
 ];
 @NgModule({
   declarations: [

@@ -9,6 +9,7 @@ import { OrderService } from 'src/app/core/order.service';
 import { Operator, Addr, Camera } from 'src/app/models/order.model';
 import * as moment from 'moment';
 import { CameraDetailComponent } from './camera-detail/camera-detail.component';
+import { NzMessageService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-camera',
@@ -34,7 +35,8 @@ export class CameraComponent implements OnInit {
   constructor(
     private mservice: OrderService,
     private resolver: ComponentFactoryResolver,
-    private viewContainer: ViewContainerRef
+    private viewContainer: ViewContainerRef,
+    private messageService: NzMessageService
   ) {}
 
   loadData() {
@@ -104,11 +106,16 @@ export class CameraComponent implements OnInit {
     detailComponentRef.instance.dataUpdate.subscribe(() => this.loadData());
     return detailComponentRef;
   }
+
   showAddDlg() {
     const detailComponentRef = this.makeDlg();
     detailComponentRef.instance.title = '新增日志';
     detailComponentRef.instance.camera = null;
     detailComponentRef.instance.method = 'POST';
+    detailComponentRef.instance.dataUpdate.subscribe(() => {
+      this.messageService.info('新增成功');
+      this.loadData();
+    });
   }
 
   showEditDlg(camera: Camera) {
@@ -116,7 +123,10 @@ export class CameraComponent implements OnInit {
     detailComponentRef.instance.title = '修改当前';
     detailComponentRef.instance.method = 'PUT';
     detailComponentRef.instance.camera = camera;
-    detailComponentRef.instance.dataUpdate.subscribe(() => this.loadData());
+    detailComponentRef.instance.dataUpdate.subscribe(() => {
+      this.messageService.info('修改成功');
+      this.loadData();
+    });
   }
 
   onFilterClick() {
@@ -129,6 +139,7 @@ export class CameraComponent implements OnInit {
 
   deleteRecord(camera: Camera) {
     this.mservice.deleteOrderCamera(camera).subscribe(() => {
+      this.messageService.info('删除成功');
       this.loadData();
     });
   }

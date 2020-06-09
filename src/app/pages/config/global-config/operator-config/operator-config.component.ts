@@ -8,6 +8,7 @@ import { Operator } from 'src/app/models/order.model';
 import { v4 as uuidv4 } from 'uuid';
 import { OperatorService } from 'src/app/core/operator.service';
 import { OperatorEditDlgComponent } from './operator-edit-dlg/operator-edit-dlg.component';
+import { NzMessageService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-operator-config',
@@ -28,7 +29,8 @@ export class OperatorConfigComponent implements OnInit {
   constructor(
     private opService: OperatorService,
     private resolver: ComponentFactoryResolver,
-    private viewContainer: ViewContainerRef
+    private viewContainer: ViewContainerRef,
+    private messageService: NzMessageService
   ) {}
 
   loadData() {
@@ -68,14 +70,21 @@ export class OperatorConfigComponent implements OnInit {
         tel: this.tel,
       })
       .subscribe(() => {
+        this.messageService.info('新增成功');
         this.loadData();
       });
   }
 
   delete(operator: Operator) {
-    this.opService.deleteOperator(operator).subscribe(() => {
-      this.loadData();
-    });
+    this.opService.deleteOperator(operator).subscribe(
+      () => {
+        this.messageService.info('删除成功');
+        this.loadData();
+      },
+      (error) => {
+        this.messageService.info('删除失败！关联字段未删除');
+      }
+    );
   }
 
   openEditDlg(operator: Operator) {
@@ -89,6 +98,7 @@ export class OperatorConfigComponent implements OnInit {
 
   OnOk = (operator: Operator) => {
     this.opService.putOperator(operator).subscribe(() => {
+      this.messageService.info('修改成功');
       this.loadData();
     });
   };

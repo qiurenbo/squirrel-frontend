@@ -8,7 +8,7 @@ import * as _ from 'lodash';
 import { OrderService } from 'src/app/core/order.service';
 import { Target } from 'src/app/models/order.model';
 
-import { NzCascaderOption } from 'ng-zorro-antd';
+import { NzCascaderOption, NzMessageService } from 'ng-zorro-antd';
 import { TargetEditDlgComponent } from './target-edit-dlg/target-edit-dlg.component';
 @Component({
   selector: 'app-target-config',
@@ -28,7 +28,8 @@ export class TargetConfigComponent implements OnInit {
   constructor(
     private mservice: OrderService,
     private resolver: ComponentFactoryResolver,
-    private viewContainer: ViewContainerRef
+    private viewContainer: ViewContainerRef,
+    private messageService: NzMessageService
   ) {}
 
   loadData() {
@@ -61,14 +62,21 @@ export class TargetConfigComponent implements OnInit {
         minorTargetTypeId: this.minorTargetTypeId,
       })
       .subscribe(() => {
+        this.messageService.info('新增成功');
         this.loadData();
       });
   }
 
   delete(target: Target) {
-    this.mservice.deleteOrderTarget(target).subscribe(() => {
-      this.loadData();
-    });
+    this.mservice.deleteOrderTarget(target).subscribe(
+      () => {
+        this.messageService.info('删除成功');
+        this.loadData();
+      },
+      (err) => {
+        this.messageService.info('删除失败！关联字段未删除');
+      }
+    );
   }
 
   openEditDlg(target: Target) {
@@ -86,6 +94,7 @@ export class TargetConfigComponent implements OnInit {
 
   OnOk = (target) => {
     this.mservice.putOrderTarget(target).subscribe(() => {
+      this.messageService.info('修改成功');
       this.loadData();
     });
   };

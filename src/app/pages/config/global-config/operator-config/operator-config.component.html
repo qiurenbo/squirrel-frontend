@@ -41,10 +41,13 @@
           {{ data.tel }}
         </td>
         <td>
-          <a (click)="openEditDlg(data)">编辑</a>
-
+          <a (click)="openEditDlg(data)">
+            <i nz-icon nzType="edit" nzTheme="outline"></i>
+          </a>
           <nz-divider nzType="vertical"></nz-divider>
-          <a (click)="delete(data)">删除</a>
+          <a (click)="delete(data)">
+            <i nz-icon nzType="delete" nzTheme="outline"></i
+          ></a>
         </td>
       </tr>
     </tbody>

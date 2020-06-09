@@ -7,7 +7,7 @@ import {
 import { OrderService } from 'src/app/core/order.service';
 
 import { Action, Malfunction } from 'src/app/models/order.model';
-import { NzCascaderOption } from 'ng-zorro-antd';
+import { NzCascaderOption, NzMessageService } from 'ng-zorro-antd';
 import * as _ from 'lodash';
 import { EditDlgComponent } from '../edit-dlg/edit-dlg.component';
 
@@ -28,7 +28,8 @@ export class ActionConfigComponent implements OnInit {
   constructor(
     private mservice: OrderService,
     private resolver: ComponentFactoryResolver,
-    private viewContainer: ViewContainerRef
+    private viewContainer: ViewContainerRef,
+    private messageService: NzMessageService
   ) {}
 
   loadingData() {
@@ -74,6 +75,7 @@ export class ActionConfigComponent implements OnInit {
         name: this.actionName,
       })
       .subscribe(() => {
+        this.messageService.info('新增成功');
         this.loadingData();
       });
   }
@@ -81,6 +83,7 @@ export class ActionConfigComponent implements OnInit {
   delete(action: Action) {
     this.mservice.deleteOrderAction(action).subscribe(() => {
       this.loadingData();
+      this.messageService.info('删除成功');
     });
   }
 
@@ -96,6 +99,7 @@ export class ActionConfigComponent implements OnInit {
   }
   OnOk = (action: Action) => {
     this.mservice.putOrderAction(action).subscribe(() => {
+      this.messageService.info('修改成功');
       this.loadingData();
     });
   };

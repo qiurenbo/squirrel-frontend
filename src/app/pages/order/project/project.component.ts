@@ -9,6 +9,7 @@ import { OrderService } from 'src/app/core/order.service';
 import { Operator, Addr, Project } from 'src/app/models/order.model';
 import * as moment from 'moment';
 import { ProjectDetailComponent } from './project-detail/project-detail.component';
+import { NzMessageService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-project',
@@ -34,7 +35,8 @@ export class ProjectComponent implements OnInit {
   constructor(
     private mservice: OrderService,
     private resolver: ComponentFactoryResolver,
-    private viewContainer: ViewContainerRef
+    private viewContainer: ViewContainerRef,
+    private messageService: NzMessageService
   ) {}
 
   loadData() {
@@ -109,6 +111,10 @@ export class ProjectComponent implements OnInit {
     detailComponentRef.instance.title = '新增日志';
     detailComponentRef.instance.project = null;
     detailComponentRef.instance.method = 'POST';
+    detailComponentRef.instance.dataUpdate.subscribe(() => {
+      this.messageService.info('新增成功');
+      this.loadData();
+    });
   }
 
   showEditDlg(project: Project) {
@@ -117,6 +123,10 @@ export class ProjectComponent implements OnInit {
     detailComponentRef.instance.method = 'PUT';
     detailComponentRef.instance.project = project;
     detailComponentRef.instance.dataUpdate.subscribe(() => this.loadData());
+    detailComponentRef.instance.dataUpdate.subscribe(() => {
+      this.messageService.info('修改成功');
+      this.loadData();
+    });
   }
 
   onFilterClick() {
@@ -129,6 +139,7 @@ export class ProjectComponent implements OnInit {
 
   deleteRecord(project: Project) {
     this.mservice.deleteOrderProject(project).subscribe(() => {
+      this.messageService.info('删除成功');
       this.loadData();
     });
   }

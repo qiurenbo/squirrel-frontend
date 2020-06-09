@@ -6,7 +6,7 @@ import {
   HttpInterceptor,
   HttpErrorResponse,
 } from '@angular/common/http';
-import { Observable, EMPTY } from 'rxjs';
+import { Observable, EMPTY, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
@@ -42,7 +42,7 @@ export class AuthErrorInterceptor implements HttpInterceptor {
         //return throwError(error);
 
         // or just return nothing:
-        return EMPTY;
+        return throwError(error);
       })
     );
   }
