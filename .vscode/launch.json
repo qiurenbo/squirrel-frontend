@@ -5,6 +5,14 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Debug ng serve",
+      "program": "${workspaceFolder}/node_modules/@angular/cli/bin/ng",
+      "request": "launch",
+      "skipFiles": ["<node_internals>/**"],
+      "args": ["serve"],
+      "type": "pwa-node"
+    },
+    {
       "type": "chrome",
       "request": "launch",
       "name": "Launch Chrome against localhost",

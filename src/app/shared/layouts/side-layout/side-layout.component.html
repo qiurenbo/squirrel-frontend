@@ -47,14 +47,14 @@
       <li
         nz-submenu
         nzOpen
-        nzTitle="日常派发"
+        nzTitle="采购派发"
         nzIcon="shop"
         [(nzOpen)]="openMap.allocations"
         (nzOpenChange)="openHandler('allocations')"
       >
         <ul>
           <li nz-menu-item nzMatchRouter>
-            <a routerLink="/record">派发日志</a>
+            <a routerLink="/handout/purchase">采购日志</a>
           </li>
           <li nz-menu-item nzMatchRouter>
             <a>派发统计</a>

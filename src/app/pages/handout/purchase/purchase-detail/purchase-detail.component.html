@@ -1,0 +1,39 @@
+<nz-modal
+  [nzWidth]="1250"
+  [nzVisible]="isVisible"
+  [nzTitle]="title"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk()"
+>
+  <div class="container">
+    <nz-date-picker [(ngModel)]="date"></nz-date-picker>
+    <input nz-input placeholder="项目" [(ngModel)]="cloneDetail.projectName" />
+    <input nz-input placeholder="品名" [(ngModel)]="cloneDetail.productName" />
+    <input
+      nz-input
+      placeholder="单价"
+      [(ngModel)]="cloneDetail.unitPrice"
+      (ngModelChange)="calPrice()"
+    />
+    <input
+      nz-input
+      placeholder="数量"
+      [(ngModel)]="cloneDetail.number"
+      (ngModelChange)="calPrice()"
+    />
+    <input
+      nz-input
+      placeholder="总价"
+      [(ngModel)]="cloneDetail.totalPrice"
+      disabled
+    />
+    <input nz-input placeholder="来源" [(ngModel)]="cloneDetail.source" />
+
+    <textarea
+      placeholder="备注信息（选填）"
+      rows="6"
+      nz-input
+      [(ngModel)]="cloneDetail.remarks"
+    ></textarea>
+  </div>
+</nz-modal>

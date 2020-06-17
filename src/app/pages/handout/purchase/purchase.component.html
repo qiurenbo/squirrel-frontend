@@ -1,0 +1,63 @@
+<div
+  class="content-container"
+  fxLayout="column"
+  fxLayoutAlign="space-between center"
+>
+  <div class="filter-container" fxLayout="row" fxLayoutAlign="start center">
+    <a (click)="showAddDlg()">
+      <i nz-icon nzType="plus-square" nzTheme="outline"></i>
+    </a>
+    <nz-range-picker [(ngModel)]="dateRange"></nz-range-picker>
+    <button nz-button nzMalfunction="default" (click)="onFilterClick()">
+      过滤
+    </button>
+  </div>
+
+  <nz-table
+    #filterTable
+    [nzData]="listOfData"
+    [nzLoading]="isLoading"
+    [nzPageSize]="pageSize"
+    [(nzPageIndex)]="pageIndex"
+    [nzTotal]="total"
+    [nzFrontPagination]="false"
+    (nzPageIndexChange)="onPageIndexChange($event)"
+  >
+    <thead>
+      <tr>
+        <th style="width: 120px;">时间</th>
+        <th style="width: 120px;">项目</th>
+        <th style="width: 120px;">品名</th>
+        <th style="width: 120px;">单价</th>
+        <th style="width: 100px;">数量</th>
+        <th style="width: 100px;">总价</th>
+        <th style="width: 200px;">来源</th>
+        <th style="width: 200px;">备注</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of filterTable.data">
+        <td>{{ data.date }}</td>
+        <td>
+          {{ data.projectName }}
+        </td>
+        <td>{{ data.productName }}</td>
+        <td>{{ data.unitPrice }}</td>
+        <td>{{ data.number }}</td>
+        <td>{{ data.totalPrice }}</td>
+        <td>{{ data.source }}</td>
+        <td>{{ data.remarks }}</td>
+        <td>
+          <a (click)="showEditDlg(data)"
+            ><i nz-icon nzType="edit" nzTheme="outline"></i
+          ></a>
+          <nz-divider nzType="vertical"></nz-divider>
+          <a (click)="deleteRecord(data)">
+            <i nz-icon nzType="delete" nzTheme="outline"></i
+          ></a>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>

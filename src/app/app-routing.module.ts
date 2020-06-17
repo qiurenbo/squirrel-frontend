@@ -18,6 +18,12 @@ const routes: Routes = [
           import('./pages/order/order.module').then((m) => m.OrderModule),
       },
       {
+        path: 'handout',
+
+        loadChildren: () =>
+          import('./pages/handout/handout.module').then((m) => m.HandoutModule),
+      },
+      {
         path: 'config',
         loadChildren: () =>
           import('./pages/config/config.module').then((m) => m.ConfigModule),
