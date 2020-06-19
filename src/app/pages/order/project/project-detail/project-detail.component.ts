@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { Project } from 'src/app/models/order.model';
 import * as moment from 'moment';
-import { OrderService } from 'src/app/core/order.service';
+import { OrderService } from 'src/app/core/services/order.service';
 @Component({
   selector: 'app-project-detail',
   templateUrl: './project-detail.component.html',

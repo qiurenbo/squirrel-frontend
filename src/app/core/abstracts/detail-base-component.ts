@@ -1,10 +1,10 @@
 import { Input, Output, EventEmitter } from '@angular/core';
 import * as moment from 'moment';
 import { v4 as uuidv4 } from 'uuid';
-import { IBaseHttpService } from '../interface/http-interface.service';
-import { IDetail } from '../interface/detail-interface';
+import { IBaseHttpService } from '../interfaces/http-interface.service';
+import { IDetail } from '../interfaces/detail-interface';
 
-export abstract class AbstractDetailComponent<
+export abstract class DetailBaseComponent<
   T extends IDetail,
   S extends IBaseHttpService<T>
 > {

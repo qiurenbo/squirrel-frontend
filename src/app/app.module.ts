@@ -9,7 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
 import { SharedModule } from './shared/shared.module';
-import { CoreModule } from './core/core.module';
+import { CoreModule } from './core/services/core.module';
 
 registerLocaleData(zh);
 

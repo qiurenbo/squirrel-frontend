@@ -35,12 +35,12 @@
   >
     <thead>
       <tr>
-        <th style="width: 100px;">时间</th>
-        <th style="width: 220px;">地点</th>
+        <th>时间</th>
+        <th>地点</th>
         <th>人员</th>
-        <th style="width: 200px;">对象</th>
-        <th style="width: 100px;">故障</th>
-        <th style="width: 200px;">备注</th>
+        <th>对象</th>
+        <th>故障</th>
+        <th>备注</th>
         <th>状态</th>
         <th></th>
       </tr>
@@ -49,9 +49,7 @@
       <tr *ngFor="let data of filterTable.data">
         <td>{{ data.date }}</td>
         <td>
-          {{ data.Addr.Street.Area.name }}/{{ data.Addr.Street.name }}/{{
-            data.Addr.name
-          }}
+          {{ data.Addr.name }}
         </td>
         <td>{{ data.Operator.name }}</td>
         <td>{{ data.Target.name }}</td>

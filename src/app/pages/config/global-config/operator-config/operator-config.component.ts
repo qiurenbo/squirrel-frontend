@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 import { Operator } from 'src/app/models/order.model';
 import { v4 as uuidv4 } from 'uuid';
-import { OperatorService } from 'src/app/core/operator.service';
+import { OperatorService } from 'src/app/core/services/operator.service';
 import { OperatorEditDlgComponent } from './operator-edit-dlg/operator-edit-dlg.component';
 import { NzMessageService } from 'ng-zorro-antd';
 

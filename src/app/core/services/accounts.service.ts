@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Observable, forkJoin } from 'rxjs';
-import { Account } from '../models/account.model';
+import { Observable } from 'rxjs';
+import { Account } from '../../models/account.model';
 import { environment } from 'src/environments/environment';
-import { assembleRequestUrl } from './utils';
+import { assembleRequestUrl } from '../utils';
 
 @Injectable({
   providedIn: 'root',

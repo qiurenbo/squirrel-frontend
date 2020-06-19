@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
-import { OrderService } from 'src/app/core/order.service';
+import { OrderService } from 'src/app/core/services/order.service';
 import { Operator } from 'src/app/models/order.model';
-import { OperatorService } from 'src/app/core/operator.service';
+import { OperatorService } from 'src/app/core/services/operator.service';
 
 @Component({
   selector: 'app-operator-select',

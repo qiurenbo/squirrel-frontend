@@ -4,7 +4,7 @@ import {
   ComponentFactoryResolver,
   ViewContainerRef,
 } from '@angular/core';
-import { AccountService } from 'src/app/core/accounts.service';
+import { AccountService } from 'src/app/core/services/accounts.service';
 import { Account } from 'src/app/models/account.model';
 
 import { AccountEditDlgComponent } from './account-edit-dlg/account-edit-dlg.component';

@@ -7,9 +7,9 @@ import {
 import { Addr } from 'src/app/models/order.model';
 
 import { AddrEditDlgComponent } from './addr-edit-dlg/addr-edit-dlg.component';
-import { AddrService } from 'src/app/core/addr.service';
+import { AddrService } from 'src/app/core/services/addr.service';
 
-import { DivisionService } from 'src/app/core/divisons.service';
+import { DivisionService } from 'src/app/core/services/divisons.service';
 import { NzCascaderOption, NzMessageService } from 'ng-zorro-antd';
 @Component({
   selector: 'app-addr-config',

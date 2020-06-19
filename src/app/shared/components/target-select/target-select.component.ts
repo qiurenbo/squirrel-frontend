@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
-import { OrderService } from 'src/app/core/order.service';
+import { OrderService } from 'src/app/core/services/order.service';
 import { NzCascaderOption } from 'ng-zorro-antd';
 
 @Component({

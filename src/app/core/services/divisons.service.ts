@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Division } from '../models/division.model';
+import { Division } from '../../models/division.model';
 import { environment } from 'src/environments/environment';
 import { NzCascaderOption } from 'ng-zorro-antd/cascader';
 

@@ -4,7 +4,7 @@ import {
   ComponentFactoryResolver,
   ViewContainerRef,
 } from '@angular/core';
-import { OrderService } from 'src/app/core/order.service';
+import { OrderService } from 'src/app/core/services/order.service';
 
 import { Action, Malfunction } from 'src/app/models/order.model';
 import { NzCascaderOption, NzMessageService } from 'ng-zorro-antd';

@@ -1,8 +1,8 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { Addr } from 'src/app/models/order.model';
-import { AddrService } from 'src/app/core/addr.service';
+import { AddrService } from 'src/app/core/services/addr.service';
 import { NzCascaderOption, NzButtonModule } from 'ng-zorro-antd';
-import { DivisionService } from 'src/app/core/divisons.service';
+import { DivisionService } from 'src/app/core/services/divisons.service';
 @Component({
   selector: 'app-addr-select',
   templateUrl: './addr-select.component.html',

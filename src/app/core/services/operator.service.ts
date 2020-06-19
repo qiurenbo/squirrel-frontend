@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Operator } from '../models/order.model';
+import { Operator } from '../../models/order.model';
 import { Observable } from 'rxjs';
-import { assembleRequestUrl } from './utils';
+import { assembleRequestUrl } from '../utils';
 @Injectable({
   providedIn: 'root',
 })

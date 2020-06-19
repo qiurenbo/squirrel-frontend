@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Addr } from '../models/order.model';
+import { Addr } from '../../models/order.model';
 import { environment } from 'src/environments/environment';
-import { assembleRequestUrl } from './utils';
+import { assembleRequestUrl } from '../utils';
 import { NzCascaderOption } from 'ng-zorro-antd';
 
 @Injectable({

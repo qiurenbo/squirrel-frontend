@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { v4 as uuidv4 } from 'uuid';
-import { OrderService } from 'src/app/core/order.service';
+import { OrderService } from 'src/app/core/services/order.service';
 import { OrderDetail } from 'src/app/models/order.model';
 import * as moment from 'moment';
 import { NzMessageService } from 'ng-zorro-antd';

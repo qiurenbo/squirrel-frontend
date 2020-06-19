@@ -1,17 +1,3 @@
-<!-- <nz-select
-  [(ngModel)]="addrId"
-  nzPlaceHolder="所有地点"
-  nzAllowClear
-  [nzLoading]="isAddrsLoading"
-  nzNotFoundContent=""
->
-  <nz-option
-    *ngFor="let a of addrs"
-    [nzValue]="a.id"
-    [nzLabel]="a.name"
-  ></nz-option>
-</nz-select> -->
-
 <nz-cascader
   [nzPlaceHolder]="'选择地点'"
   [ngModel]="defaultAddrOption"

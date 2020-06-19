@@ -24,9 +24,9 @@ export interface Malfunction {
 
 export interface Operator {
   id?: string;
-  name: string;
-  department: string;
-  tel: string;
+  name?: string;
+  department?: string;
+  tel?: string;
 }
 
 export interface OrderDetail {
@@ -63,11 +63,11 @@ export interface Camera {
 
 export interface Addr {
   id?: string;
-  name: string;
-  addr: string;
-  tel: string;
-  type: string;
-  streetId: string;
+  name?: string;
+  addr?: string;
+  tel?: string;
+  type?: string;
+  streetId?: string;
   Street?: {
     id: string;
     name: string;

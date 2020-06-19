@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SideLayoutComponent } from './shared/layouts/side-layout/side-layout.component';
 import { DefaultLayoutComponent } from './shared/layouts/default-layout/default-layout.component';
-import { AuthGuardService } from './core/auth-guard.service';
+import { AuthGuardService } from './core/services/auth-guard.service';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/order/stats' },

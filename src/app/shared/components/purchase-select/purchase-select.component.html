@@ -1,0 +1,6 @@
+<nz-cascader
+  [nzPlaceHolder]="'选择库存'"
+  [ngModel]="defaultOption"
+  [nzOptions]="purchases"
+  (nzSelectionChange)="onChanges($event)"
+></nz-cascader>

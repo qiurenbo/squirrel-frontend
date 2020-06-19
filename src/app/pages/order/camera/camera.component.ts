@@ -5,7 +5,7 @@ import {
   ViewContainerRef,
   ComponentRef,
 } from '@angular/core';
-import { OrderService } from 'src/app/core/order.service';
+import { OrderService } from 'src/app/core/services/order.service';
 import { Operator, Addr, Camera } from 'src/app/models/order.model';
 import * as moment from 'moment';
 import { CameraDetailComponent } from './camera-detail/camera-detail.component';

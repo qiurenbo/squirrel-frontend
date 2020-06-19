@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, setTestabilityGetter } from '@angular/core';
 import * as _ from 'lodash';
-import { DivisionService } from 'src/app/core/divisons.service';
+import { DivisionService } from 'src/app/core/services/divisons.service';
 import { NzCascaderOption } from 'ng-zorro-antd';
 import { Addr } from 'src/app/models/order.model';
 @Component({

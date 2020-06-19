@@ -1,5 +1,5 @@
 <nz-modal
-  [nzWidth]="1250"
+  [nzWidth]="1350"
   [nzVisible]="isVisible"
   [nzTitle]="title"
   (nzOnCancel)="handleCancel()"
@@ -7,32 +7,29 @@
 >
   <div class="container">
     <nz-date-picker [(ngModel)]="date"></nz-date-picker>
-    <input nz-input placeholder="项目" [(ngModel)]="cloneDetail.projectName" />
-    <input nz-input placeholder="品名" [(ngModel)]="cloneDetail.productName" />
-    <input
-      nz-input
-      placeholder="单价"
-      [(ngModel)]="cloneDetail.unitPrice"
-      (ngModelChange)="calPrice()"
-    />
+    <app-operator-select
+      [(operatorId)]="cloneDetail.operatorId"
+    ></app-operator-select>
+    <app-addr-select [(addrId)]="cloneDetail.addrId"></app-addr-select>
+    <app-purchase-select
+      [(purchaseId)]="cloneDetail.purchaseId"
+      (onSelectChanges)="onChanges($event)"
+    ></app-purchase-select>
+
+    <input nz-input placeholder="接收人" [(ngModel)]="cloneDetail.receiver" />
     <input
       nz-input
       placeholder="数量"
       [(ngModel)]="cloneDetail.number"
-      (ngModelChange)="calPrice()"
-    />
-    <input
-      nz-input
-      placeholder="总价"
-      [(ngModel)]="cloneDetail.totalPrice"
-      disabled
+      (ngModelChange)="calStock()"
     />
     <input
       nz-input
       placeholder="库存"
-      [(ngModel)]="cloneDetail.stock"
       disabled
+      [(ngModel)]="this.cloneDetail.Purchase.stock"
     />
+
     <textarea
       placeholder="备注信息（选填）"
       rows="6"

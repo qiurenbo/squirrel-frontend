@@ -32,6 +32,7 @@ import { TargetSelectComponent } from './components/target-select/target-select.
 import { MalfunctionSelectComponent } from './components/malfunction-select/malfunction-select.component';
 import { ActionSelectComponent } from './components/action-select/action-select.component';
 import { OperatorSelectComponent } from './components/operator-select/operator-select.component';
+import { PurchaseSelectComponent } from './components/purchase-select/purchase-select.component';
 
 const NzModules = [
   NzInputModule,
@@ -63,6 +64,7 @@ const NzModules = [
     TargetSelectComponent,
     MalfunctionSelectComponent,
     ActionSelectComponent,
+    PurchaseSelectComponent,
   ],
   imports: [
     CommonModule,
@@ -88,6 +90,7 @@ const NzModules = [
     TargetSelectComponent,
     MalfunctionSelectComponent,
     ActionSelectComponent,
+    PurchaseSelectComponent,
   ],
 })
 export class SharedModule {}

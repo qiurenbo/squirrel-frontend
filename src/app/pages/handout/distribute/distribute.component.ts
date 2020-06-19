@@ -3,47 +3,39 @@ import {
   OnInit,
   ComponentFactoryResolver,
   ViewContainerRef,
+  ComponentRef,
 } from '@angular/core';
-import { OrderService } from 'src/app/core/services/order.service';
-import {
-  OrderDetail,
-  Addr,
-  Target,
-  Malfunction,
-  Operator,
-  Action,
-} from 'src/app/models/order.model';
+import { DistributeService } from 'src/app/core/services/distribute.service';
+import { Distribute } from 'src/app/models/distribute.model';
 import * as moment from 'moment';
-import { DetailComponent } from './detail/detail.component';
+import { DistributeDetailComponent } from './distribute-detail/distribute-detail.component';
 import { NzMessageService } from 'ng-zorro-antd';
 
 @Component({
-  selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss'],
+  selector: 'app-distribute',
+  templateUrl: './distribute.component.html',
+  styleUrls: ['./distribute.component.scss'],
 })
-export class ListComponent implements OnInit {
-  listOfData: OrderDetail[] = null;
+export class DistributeComponent implements OnInit {
+  listOfData: Distribute[] = null;
   isLoading = true;
   pageSize: number;
   pageIndex: number;
-  operators: Operator[] = null;
-  addrs: Addr[] = null;
-  actions: Action[] = null;
-  targets: Target[] = null;
-  malfunctions: Malfunction[] = null;
+
   total: number;
 
   selectedStartDate: string;
   selectedEndDate: string;
-  selectedOperatorId: string = null;
-  selectedAddrId: string = null;
-  selectedActionId: string = null;
-  selectedTargetId: string = null;
-  selectedMalfunctionId: string = null;
-  selectedStatusId: string = null;
+  inputProjectName: string = null;
+  inputProductName: string = null;
+  inputUnitPrice: number = null;
+  inputNumber: number = null;
+  inputTotalPrice: number = null;
+  inputSource: string = null;
+  inputRemarks: string = null;
+
   constructor(
-    private mservice: OrderService,
+    private pservice: DistributeService,
     private resolver: ComponentFactoryResolver,
     private viewContainer: ViewContainerRef,
     private messageService: NzMessageService
@@ -51,10 +43,10 @@ export class ListComponent implements OnInit {
 
   loadData() {
     this.isLoading = true;
-    this.mservice.getOrders(this.filter).subscribe((m: any) => {
-      this.total = m.headers.get('X-Total-Count');
+    this.pservice.get(this.filter).subscribe((p: any) => {
+      this.total = p.headers.get('X-Total-Count');
       this.isLoading = false;
-      this.listOfData = m.body;
+      this.listOfData = p.body;
     });
   }
 
@@ -75,28 +67,6 @@ export class ListComponent implements OnInit {
       fiter.endDate = this.selectedEndDate;
     }
 
-    if (this.selectedAddrId) {
-      fiter.addrId = this.selectedAddrId;
-    }
-
-    if (this.selectedTargetId) {
-      fiter.targetId = this.selectedTargetId;
-    }
-
-    if (this.selectedActionId) {
-      fiter.actionId = this.selectedActionId;
-    }
-
-    if (this.selectedOperatorId) {
-      fiter.operatorId = this.selectedOperatorId;
-    }
-    if (this.selectedMalfunctionId) {
-      fiter.malfunctionId = this.selectedMalfunctionId;
-    }
-    if (this.selectedStatusId) {
-      fiter.statusId = this.selectedStatusId;
-    }
-
     if (this.pageIndex) {
       fiter.offset = (this.pageIndex - 1) * this.pageSize;
     }
@@ -107,14 +77,6 @@ export class ListComponent implements OnInit {
     return fiter;
   }
 
-  // get selectedStartDate(): string {
-  //   return this.dateRange ? moment(this.dateRange[0]).format('YYYYMMDD') : null;
-  // }
-
-  // get selectedEndDate(): string {
-  //   return this.dateRange ? moment(this.dateRange[1]).format('YYYYMMDD') : null;
-  // }
-
   set dateRange(range) {
     this.selectedStartDate =
       range.length > 0 ? moment(range[0]).format('YYYYMMDD') : null;
@@ -122,8 +84,10 @@ export class ListComponent implements OnInit {
       range.length > 0 ? moment(range[1]).format('YYYYMMDD') : null;
   }
 
-  makeDlg() {
-    const factory = this.resolver.resolveComponentFactory(DetailComponent);
+  makeDlg(): ComponentRef<DistributeDetailComponent> {
+    const factory = this.resolver.resolveComponentFactory(
+      DistributeDetailComponent
+    );
     const detailComponentRef = this.viewContainer.createComponent(factory);
     detailComponentRef.instance.dataUpdate.subscribe(() => this.loadData());
     return detailComponentRef;
@@ -131,7 +95,7 @@ export class ListComponent implements OnInit {
 
   showAddDlg() {
     const detailComponentRef = this.makeDlg();
-    detailComponentRef.instance.title = '新增维护';
+    detailComponentRef.instance.title = '新增日志';
     detailComponentRef.instance.detail = null;
     detailComponentRef.instance.method = 'POST';
     detailComponentRef.instance.dataUpdate.subscribe(() => {
@@ -140,11 +104,12 @@ export class ListComponent implements OnInit {
     });
   }
 
-  showEditDlg(order: OrderDetail) {
+  showEditDlg(distribute: Distribute) {
+    console.log(distribute);
     const detailComponentRef = this.makeDlg();
     detailComponentRef.instance.title = '修改当前';
     detailComponentRef.instance.method = 'PUT';
-    detailComponentRef.instance.detail = order;
+    detailComponentRef.instance.detail = distribute;
     detailComponentRef.instance.dataUpdate.subscribe(() => {
       this.messageService.info('修改成功');
       this.loadData();
@@ -159,8 +124,8 @@ export class ListComponent implements OnInit {
     this.loadData();
   }
 
-  deleteRecord(order: OrderDetail) {
-    this.mservice.deleteOrder(order).subscribe(() => {
+  deleteRecord(distribute: Distribute) {
+    this.pservice.delete(distribute).subscribe(() => {
       this.messageService.info('删除成功');
       this.loadData();
     });

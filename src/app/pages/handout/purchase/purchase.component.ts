@@ -5,7 +5,7 @@ import {
   ViewContainerRef,
   ComponentRef,
 } from '@angular/core';
-import { PurchaseService } from 'src/app/core/purchase.service';
+import { PurchaseService } from 'src/app/core/services/purchase.service';
 import { Purchase } from 'src/app/models/purchase.model';
 import * as moment from 'moment';
 import { PurchaseDetailComponent } from './purchase-detail/purchase-detail.component';

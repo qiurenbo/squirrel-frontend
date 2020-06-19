@@ -1,11 +1,12 @@
 export interface Purchase {
-  id: string;
-  date: string;
-  projectName: string;
-  productName: string;
-  unitPrice: number;
-  number: number;
-  totalPrice: number;
-  source: string;
-  remarks: string;
+  id?: string;
+  date?: string;
+  projectName?: string;
+  productName?: string;
+  unitPrice?: number;
+  number?: number;
+  totalPrice?: number;
+  source?: string;
+  stock?: number;
+  remarks?: string;
 }

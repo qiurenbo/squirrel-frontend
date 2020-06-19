@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
-import { MinorTargetTypesService } from 'src/app/core/minor-target-type.service';
+import { MinorTargetTypesService } from 'src/app/core/services/minor-target-type.service';
 import { NzCascaderOption } from 'ng-zorro-antd';
 
 @Component({

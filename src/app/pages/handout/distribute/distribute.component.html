@@ -26,12 +26,11 @@
     <thead>
       <tr>
         <th>时间</th>
-        <th>项目</th>
         <th>品名</th>
-        <th>单价</th>
         <th>数量</th>
-        <th>总价</th>
-        <th>库存</th>
+        <th>经手人</th>
+        <th>接收人</th>
+        <th>派发地</th>
         <th>备注</th>
         <th></th>
       </tr>
@@ -40,13 +39,12 @@
       <tr *ngFor="let data of filterTable.data">
         <td>{{ data.date }}</td>
         <td>
-          {{ data.projectName }}
+          {{ data.Purchase.productName }}
         </td>
-        <td>{{ data.productName }}</td>
-        <td>{{ data.unitPrice }}</td>
         <td>{{ data.number }}</td>
-        <td>{{ data.totalPrice }}</td>
-        <td>{{ data.stock }}</td>
+        <td>{{ data.Operator.name }}</td>
+        <td>{{ data.receiver }}</td>
+        <td>{{ data.Addr.name }}</td>
         <td>{{ data.remarks }}</td>
         <td>
           <a (click)="showEditDlg(data)"
