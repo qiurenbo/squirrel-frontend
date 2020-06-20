@@ -15,20 +15,25 @@ export class PurchaseDetailComponent extends DetailBaseComponent<
   constructor(private purchaseService: PurchaseService) {
     super(purchaseService);
   }
+  distributed = 0;
 
   ngOnInit() {
     this.cloneDetail = this.detail
       ? _.clone(this.detail)
       : { unitPrice: 0, number: 0, totalPrice: 0 };
     this.selectedDate = this.cloneDetail.date;
+    this.distributed = this.detail
+      ? this.cloneDetail.number - this.cloneDetail.stock
+      : 0;
   }
 
-  calPrice() {
+  calPriceAndStock() {
     this.cloneDetail.unitPrice = +this.cloneDetail.unitPrice;
     this.cloneDetail.number = +this.cloneDetail.number;
     this.cloneDetail.totalPrice =
       Math.floor(this.cloneDetail.unitPrice * this.cloneDetail.number * 100) /
       100;
+    this.cloneDetail.stock = this.cloneDetail.number - this.distributed;
   }
   checkInput() {
     if (

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Purchase } from '../../models/purchase.model';
 import { environment } from 'src/environments/environment';
 import { assembleRequestUrl } from '../utils';
-import { IBaseHttpService } from '../interfaces/http-interface.service';
+import { IBaseHttpService } from '../interfaces/http.interface';
 import { NzCascaderOption } from 'ng-zorro-antd';
 
 @Injectable({

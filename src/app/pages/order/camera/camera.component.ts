@@ -55,40 +55,40 @@ export class CameraComponent implements OnInit {
   }
 
   get filter(): any {
-    let fiter: any = {};
+    let filter: any = {};
 
     if (this.selectedStartDate) {
-      fiter.startDate = this.selectedStartDate;
+      filter.startDate = this.selectedStartDate;
     }
 
     if (this.selectedEndDate) {
-      fiter.endDate = this.selectedEndDate;
+      filter.endDate = this.selectedEndDate;
     }
 
     if (this.selectedAddrId) {
-      fiter.addrId = this.selectedAddrId;
+      filter.addrId = this.selectedAddrId;
     }
 
     if (this.selectedActionId) {
-      fiter.actionId = this.selectedActionId;
+      filter.actionId = this.selectedActionId;
     }
 
     if (this.selectedOperatorId) {
-      fiter.operatorId = this.selectedOperatorId;
+      filter.operatorId = this.selectedOperatorId;
     }
 
     if (this.selectedStatusId) {
-      fiter.statusId = this.selectedStatusId;
+      filter.statusId = this.selectedStatusId;
     }
 
     if (this.pageIndex) {
-      fiter.offset = (this.pageIndex - 1) * this.pageSize;
+      filter.offset = (this.pageIndex - 1) * this.pageSize;
     }
     if (this.pageSize) {
-      fiter.limit = this.pageSize;
+      filter.limit = this.pageSize;
     }
 
-    return fiter;
+    return filter;
   }
 
   set dateRange(range) {

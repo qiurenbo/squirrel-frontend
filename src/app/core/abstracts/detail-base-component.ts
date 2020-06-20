@@ -1,28 +1,29 @@
 import { Input, Output, EventEmitter } from '@angular/core';
 import * as moment from 'moment';
 import { v4 as uuidv4 } from 'uuid';
-import { IBaseHttpService } from '../interfaces/http-interface.service';
-import { IDetail } from '../interfaces/detail-interface';
+import { IBaseHttpService } from '../interfaces/http.interface';
+import { IDetail } from '../interfaces/detail.interface';
+import { IDetailBaseComponent } from '../interfaces/detail-component.interface';
 
 export abstract class DetailBaseComponent<
-  T extends IDetail,
-  S extends IBaseHttpService<T>
-> {
+  DataType extends IDetail,
+  Http extends IBaseHttpService<DataType>
+> implements IDetailBaseComponent<DataType> {
   @Input()
   title: string = null;
   @Input()
   method: string = null;
 
   @Input()
-  detail: T = null;
+  detail: DataType = null;
 
   @Output()
   dataUpdate = new EventEmitter();
 
   isVisible = true;
   date: Date = null;
-  cloneDetail: T = null;
-  constructor(private service: S) {}
+  cloneDetail: DataType = null;
+  constructor(private service: Http) {}
 
   get final() {
     this.cloneDetail.date = this.selectedDate;

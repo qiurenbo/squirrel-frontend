@@ -8,6 +8,9 @@
       <i nz-icon nzType="plus-square" nzTheme="outline"></i>
     </a>
     <nz-range-picker [(ngModel)]="dateRange"></nz-range-picker>
+    <app-purchase-select
+      [(purchaseId)]="filter.purchaseId"
+    ></app-purchase-select>
     <button nz-button nzMalfunction="default" (click)="onFilterClick()">
       过滤
     </button>
