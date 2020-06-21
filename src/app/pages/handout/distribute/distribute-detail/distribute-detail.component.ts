@@ -20,40 +20,38 @@ export class DistributeDetailComponent extends DetailBaseComponent<
     super(distributeService);
   }
 
-  stock = 0;
-  preNumber = 0;
   isValidStock = true;
+
+  get max() {
+    if (this.method === 'POST') {
+      return this.cloneDetail.Purchase.stock;
+    }
+
+    if (this.method === 'PUT') {
+      return this.cloneDetail.Purchase.stock + this.cloneDetail.number;
+    }
+  }
   ngOnInit() {
     this.cloneDetail = this.detail
       ? _.clone(this.detail)
-      : { number: 0, Purchase: { stock: 0 }, Addr: {}, Operator: {} };
+      : { Purchase: { stock: 0 }, Addr: {}, Operator: {} };
     this.selectedDate = this.cloneDetail.date;
-    this.stock = this.cloneDetail.Purchase.stock;
-    this.preNumber = this.cloneDetail.number;
   }
 
   onChanges(purchase) {
+    // Change purchase then change distribute number
+    this.cloneDetail.number = 0;
     this.cloneDetail.Purchase.stock = purchase.stock;
-    this.stock = this.cloneDetail.Purchase.stock;
   }
   calStock() {
-    switch (this.method) {
-      case 'POST':
-        if (this.stock - this.cloneDetail.number >= 0) {
-          this.cloneDetail.Purchase.stock =
-            this.stock - this.cloneDetail.number;
-        } else {
-          this.isValidStock = false;
-        }
-        return;
-      case 'PUT':
-        const diff = this.preNumber - this.cloneDetail.number;
-        if (this.stock + diff >= 0) {
-          this.cloneDetail.Purchase.stock = this.stock + diff;
-          this.preNumber = this.cloneDetail.number;
-        } else {
-          this.isValidStock = false;
-        }
+    if (
+      this.cloneDetail.number > 0 &&
+      this.max - this.cloneDetail.number >= 0
+    ) {
+      this.cloneDetail.Purchase.stock = this.max - this.cloneDetail.number;
+      this.isValidStock = true;
+    } else {
+      this.isValidStock = false;
     }
   }
   checkInput() {
@@ -62,7 +60,7 @@ export class DistributeDetailComponent extends DetailBaseComponent<
       this.cloneDetail.addrId &&
       this.cloneDetail.operatorId &&
       this.cloneDetail.purchaseId &&
-      this.cloneDetail.number &&
+      this.cloneDetail.number > 0 &&
       this.isValidStock
     ) {
       return true;
