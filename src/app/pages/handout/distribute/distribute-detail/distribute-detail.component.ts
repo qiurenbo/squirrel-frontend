@@ -24,8 +24,9 @@ export class DistributeDetailComponent extends DetailBaseComponent<
   ngOnInit() {
     this.cloneDetail = this.detail
       ? _.clone(this.detail)
-      : { Purchase: {}, Addr: {}, Operator: {} };
+      : { Purchase: { stock: 0 }, Addr: {}, Operator: {} };
     this.selectedDate = this.cloneDetail.date;
+    this.stock = this.cloneDetail.Purchase.stock;
   }
 
   onChanges(purchase) {
