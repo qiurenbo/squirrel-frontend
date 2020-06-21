@@ -21,8 +21,8 @@ export class DistributeDetailComponent extends DetailBaseComponent<
   }
 
   isValidStock = true;
-
-  get max() {
+  max = 0;
+  get _max() {
     if (this.method === 'POST') {
       return this.cloneDetail.Purchase.stock;
     }
@@ -36,12 +36,14 @@ export class DistributeDetailComponent extends DetailBaseComponent<
       ? _.clone(this.detail)
       : { Purchase: { stock: 0 }, Addr: {}, Operator: {} };
     this.selectedDate = this.cloneDetail.date;
+    this.max = this._max;
   }
 
   onChanges(purchase) {
     // Change purchase then change distribute number
     this.cloneDetail.number = 0;
     this.cloneDetail.Purchase.stock = purchase.stock;
+    this.max = this._max;
   }
   calStock() {
     if (
