@@ -33,7 +33,7 @@ export abstract class ListBaseComponent<
 
   loadData() {
     this.isLoading = true;
-    this.httpService.get(this._filter).subscribe((p: any) => {
+    this.httpService.get(this.filter).subscribe((p: any) => {
       this.total = p.headers.get('X-Total-Count');
       this.isLoading = false;
       this.listOfData = p.body;
