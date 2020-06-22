@@ -25,12 +25,14 @@ export abstract class DetailBaseComponent<
   cloneDetail: DataType = null;
   constructor(private service: Http) {}
 
+  abstract getResult(): any;
   get final() {
-    this.cloneDetail.date = this.selectedDate;
-    if (!this.cloneDetail.id) {
-      this.cloneDetail.id = uuidv4();
+    let rs = this.getResult();
+    rs.date = this.selectedDate;
+    if (!rs.id) {
+      rs.id = uuidv4();
     }
-    return this.cloneDetail;
+    return rs;
   }
 
   abstract checkInput(): boolean;

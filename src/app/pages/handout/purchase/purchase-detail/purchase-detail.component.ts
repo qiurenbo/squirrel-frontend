@@ -16,7 +16,7 @@ export class PurchaseDetailComponent extends DetailBaseComponent<
     super(purchaseService);
   }
   distributed = 0;
-
+  deleteNoUseProps(): void {}
   ngOnInit() {
     this.cloneDetail = this.detail
       ? _.clone(this.detail)
@@ -47,5 +47,11 @@ export class PurchaseDetailComponent extends DetailBaseComponent<
     } else {
       return false;
     }
+  }
+
+  getResult(): any {
+    let result: Purchase = _.clone(this.cloneDetail);
+
+    return result;
   }
 }

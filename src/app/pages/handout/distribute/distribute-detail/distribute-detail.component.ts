@@ -22,6 +22,7 @@ export class DistributeDetailComponent extends DetailBaseComponent<
 
   isValidStock = true;
   max = 0;
+
   get _max() {
     if (this.method === 'POST') {
       return this.cloneDetail.Purchase.stock;
@@ -69,5 +70,14 @@ export class DistributeDetailComponent extends DetailBaseComponent<
     } else {
       return false;
     }
+  }
+
+  getResult(): any {
+    let result: Distribute = _.clone(this.cloneDetail);
+    delete result.Addr;
+    delete result.Operator;
+    delete result.Purchase;
+
+    return result;
   }
 }
