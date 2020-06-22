@@ -4,6 +4,7 @@ import { DistributeService } from 'src/app/core/services/distribute.service';
 import { DetailBaseComponent } from 'src/app/core/abstracts/detail-base-component';
 import _ from 'lodash';
 import { PurchaseService } from 'src/app/core/services/purchase.service';
+import { NzMessageService } from 'ng-zorro-antd';
 @Component({
   selector: 'app-distribute-detail',
   templateUrl: './distribute-detail.component.html',
@@ -15,7 +16,8 @@ export class DistributeDetailComponent extends DetailBaseComponent<
 > {
   constructor(
     private distributeService: DistributeService,
-    private purchaseSerive: PurchaseService
+    private purchaseSerive: PurchaseService,
+    private msgService: NzMessageService
   ) {
     super(distributeService);
   }
@@ -54,6 +56,7 @@ export class DistributeDetailComponent extends DetailBaseComponent<
       this.cloneDetail.Purchase.stock = this.max - this.cloneDetail.number;
       this.isValidStock = true;
     } else {
+      this.msgService.warning('当前已分配大于最大库存!');
       this.isValidStock = false;
     }
   }

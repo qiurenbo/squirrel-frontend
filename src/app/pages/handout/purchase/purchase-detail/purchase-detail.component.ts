@@ -3,6 +3,7 @@ import { Purchase } from 'src/app/models/purchase.model';
 import { PurchaseService } from 'src/app/core/services/purchase.service';
 import { DetailBaseComponent } from 'src/app/core/abstracts/detail-base-component';
 import _ from 'lodash';
+import { NzMessageService } from 'ng-zorro-antd';
 @Component({
   selector: 'app-purchase-detail',
   templateUrl: './purchase-detail.component.html',
@@ -12,7 +13,10 @@ export class PurchaseDetailComponent extends DetailBaseComponent<
   Purchase,
   PurchaseService
 > {
-  constructor(private purchaseService: PurchaseService) {
+  constructor(
+    private purchaseService: PurchaseService,
+    private msgService: NzMessageService
+  ) {
     super(purchaseService);
   }
   distributed = 0;
@@ -28,12 +32,15 @@ export class PurchaseDetailComponent extends DetailBaseComponent<
   }
 
   calPriceAndStock() {
+    if (this.cloneDetail.number - this.distributed < 0) {
+      this.msgService.warning('修改后数量小于当前已分配数量!');
+      return;
+    }
     this.cloneDetail.unitPrice = +this.cloneDetail.unitPrice;
     this.cloneDetail.number = +this.cloneDetail.number;
     this.cloneDetail.totalPrice =
       Math.floor(this.cloneDetail.unitPrice * this.cloneDetail.number * 100) /
       100;
-    this.cloneDetail.stock = this.cloneDetail.number - this.distributed;
   }
   checkInput() {
     if (
@@ -41,7 +48,7 @@ export class PurchaseDetailComponent extends DetailBaseComponent<
       this.cloneDetail.productName &&
       this.cloneDetail.projectName &&
       this.cloneDetail.unitPrice &&
-      this.cloneDetail.number
+      this.cloneDetail.number > 0
     ) {
       return true;
     } else {
@@ -51,7 +58,6 @@ export class PurchaseDetailComponent extends DetailBaseComponent<
 
   getResult(): any {
     let result: Purchase = _.clone(this.cloneDetail);
-
     return result;
   }
 }
