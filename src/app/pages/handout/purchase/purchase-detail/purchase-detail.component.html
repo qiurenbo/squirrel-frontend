@@ -13,13 +13,13 @@
       nz-input
       placeholder="单价"
       [(ngModel)]="cloneDetail.unitPrice"
-      (ngModelChange)="calPriceAndStock()"
+      (ngModelChange)="calPriceAndStock(cloneDetail.number)"
     />
     <input
       nz-input
       placeholder="数量"
       [(ngModel)]="cloneDetail.number"
-      (ngModelChange)="calPriceAndStock()"
+      (ngModelChange)="onNumberChange($event)"
     />
     <input
       nz-input

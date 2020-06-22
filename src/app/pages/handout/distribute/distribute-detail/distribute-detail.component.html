@@ -22,7 +22,7 @@
       nz-input
       placeholder="数量"
       [(ngModel)]="cloneDetail.number"
-      (ngModelChange)="calStock()"
+      (ngModelChange)="onNumberChanged($event)"
     />
     <input
       nz-input

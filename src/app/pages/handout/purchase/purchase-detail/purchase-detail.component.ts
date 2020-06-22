@@ -4,6 +4,8 @@ import { PurchaseService } from 'src/app/core/services/purchase.service';
 import { DetailBaseComponent } from 'src/app/core/abstracts/detail-base-component';
 import _ from 'lodash';
 import { NzMessageService } from 'ng-zorro-antd';
+import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 @Component({
   selector: 'app-purchase-detail',
   templateUrl: './purchase-detail.component.html',
@@ -13,14 +15,31 @@ export class PurchaseDetailComponent extends DetailBaseComponent<
   Purchase,
   PurchaseService
 > {
+  distributed = 0;
+  number = 0;
+  numberChanged: Subject<number> = new Subject<number>();
+
   constructor(
     private purchaseService: PurchaseService,
     private msgService: NzMessageService
   ) {
     super(purchaseService);
+    this.numberChanged
+      .pipe(debounceTime(300), distinctUntilChanged())
+      .subscribe((number) => {
+        this.number = number;
+        this.calPriceAndStock(number);
+      });
   }
-  distributed = 0;
-  deleteNoUseProps(): void {}
+
+  checkNumber(number) {
+    if (number - this.distributed < 0) {
+      this.msgService.warning('修改后数量小于当前已分配数量!');
+      return false;
+    }
+    return true;
+  }
+
   ngOnInit() {
     this.cloneDetail = this.detail
       ? _.clone(this.detail)
@@ -31,24 +50,30 @@ export class PurchaseDetailComponent extends DetailBaseComponent<
       : 0;
   }
 
-  calPriceAndStock() {
-    if (this.cloneDetail.number - this.distributed < 0) {
-      this.msgService.warning('修改后数量小于当前已分配数量!');
-      return;
+  onNumberChange(number) {
+    this.numberChanged.next(number);
+  }
+
+  calPriceAndStock(number) {
+    if (!this.checkNumber(number)) {
+      return false;
     }
     this.cloneDetail.unitPrice = +this.cloneDetail.unitPrice;
-    this.cloneDetail.number = +this.cloneDetail.number;
+    this.cloneDetail.number = +number;
+    this.cloneDetail.stock = +number;
     this.cloneDetail.totalPrice =
-      Math.floor(this.cloneDetail.unitPrice * this.cloneDetail.number * 100) /
-      100;
+      Math.floor(this.cloneDetail.unitPrice * number * 100) / 100;
   }
+
   checkInput() {
+    if (!this.checkNumber(this.number)) {
+      return false;
+    }
     if (
       this.date &&
       this.cloneDetail.productName &&
       this.cloneDetail.projectName &&
-      this.cloneDetail.unitPrice &&
-      this.cloneDetail.number > 0
+      this.cloneDetail.unitPrice
     ) {
       return true;
     } else {
