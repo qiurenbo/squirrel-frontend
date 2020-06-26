@@ -7,7 +7,11 @@
 >
   <div class="container">
     <nz-date-picker [(ngModel)]="date"></nz-date-picker>
-    <input nz-input placeholder="项目" [(ngModel)]="cloneDetail.projectName" />
+
+    <app-project-select
+      [(projectName)]="cloneDetail.projectName"
+    ></app-project-select>
+    <!-- <input nz-input placeholder="项目" [(ngModel)]="cloneDetail.projectName" /> -->
     <input nz-input placeholder="品名" [(ngModel)]="cloneDetail.productName" />
     <input
       nz-input

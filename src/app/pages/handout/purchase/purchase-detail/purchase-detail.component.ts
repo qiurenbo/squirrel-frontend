@@ -36,8 +36,9 @@ export class PurchaseDetailComponent extends DetailBaseComponent<
     if (number - this.distributed < 0) {
       this.msgService.warning('修改后数量小于当前已分配数量!');
       return false;
+    } else {
+      return true;
     }
-    return true;
   }
 
   ngOnInit() {
@@ -60,7 +61,8 @@ export class PurchaseDetailComponent extends DetailBaseComponent<
     }
     this.cloneDetail.unitPrice = +this.cloneDetail.unitPrice;
     this.cloneDetail.number = +number;
-    this.cloneDetail.stock = +number;
+    // new stock should be the new number minus distributed number
+    this.cloneDetail.stock = +number - this.distributed;
     this.cloneDetail.totalPrice =
       Math.floor(this.cloneDetail.unitPrice * number * 100) / 100;
   }

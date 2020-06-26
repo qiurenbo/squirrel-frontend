@@ -1,0 +1,14 @@
+<nz-select
+  [(ngModel)]="projectName"
+  nzPlaceHolder="项目"
+  nzAllowClear
+  nzNotFoundContent=""
+  (ngModelChange)="onChange()"
+>
+  <nz-option nzValue="线材配件" nzLabel="线材配件"></nz-option>
+  <nz-option nzValue="办公配件" nzLabel="办公配件"></nz-option>
+  <nz-option nzValue="计算机配件" nzLabel="计算机配件"></nz-option>
+  <nz-option nzValue="安防配件" nzLabel="安防配件"></nz-option>
+  <nz-option nzValue="自助借还配件" nzLabel="自助借还配件"></nz-option>
+  <nz-option nzValue="整机" nzLabel="整机"></nz-option>
+</nz-select>
