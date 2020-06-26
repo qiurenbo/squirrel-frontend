@@ -1,31 +1,5 @@
-nz-card {
-  margin: 2px;
-}
-.overview {
-  nz-card {
-    ::ng-deep .ant-statistic-title {
-      color: white;
-    }
-  }
-
-  .day-order {
-    background-color: #fa8c16;
-  }
-
-  .month-order {
-    background-color: #52c41a;
-  }
-  .year-order {
-    background-color: #1890ff;
-  }
-
-  .history-order {
-    background-color: #eb2f96;
-  }
-}
-
 .graphs {
-  margin-top: 10px;
+  margin-top: 5px;
   nz-card {
     ::ng-deep .ant-statistic-title {
       color: white;

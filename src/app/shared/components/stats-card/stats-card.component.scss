@@ -1,0 +1,8 @@
+:host {
+  padding: 10px;
+}
+nz-card {
+  ::ng-deep .ant-statistic-title {
+    color: white;
+  }
+}

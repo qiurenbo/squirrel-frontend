@@ -1,38 +1,23 @@
 <ng-container *ngIf="stats">
   <div class="overview" fxLayout="row" fxLayoutAlign="space-between center">
-    <nz-card class="day-order" fxFlex="25">
-      <nz-statistic
-        [nzValue]="stats.orderOfToday"
-        [nzTitle]="'本日工单数'"
-        [nzValueStyle]="{ color: '#ffffff' }"
-      >
-      </nz-statistic>
-    </nz-card>
-    <nz-card fxFlex="25" class="month-order">
-      <nz-statistic
-        [nzValue]="stats.orderOfCurMonth"
-        [nzTitle]="'本月工单数'"
-        [nzValueStyle]="{ color: '#ffffff' }"
-      >
-      </nz-statistic>
-    </nz-card>
-    <nz-card fxFlex="25" class="year-order">
-      <nz-statistic
-        [nzValue]="stats.orderOfHistory"
-        [nzTitle]="'本年工单数'"
-        [nzValueStyle]="{ color: '#ffffff' }"
-      >
-      </nz-statistic>
-    </nz-card>
-
-    <nz-card fxFlex="25" class="history-order">
-      <nz-statistic
-        [nzValue]="stats.orderOfHistory"
-        [nzTitle]="'历年工单数'"
-        [nzValueStyle]="{ color: '#ffffff' }"
-      >
-      </nz-statistic>
-    </nz-card>
+    <app-stats-card
+      fxFlex="33"
+      [title]="'工单数'"
+      [stat]="stats.orderStat"
+      [bgColor]="'#fa8c16'"
+    ></app-stats-card>
+    <app-stats-card
+      fxFlex="33"
+      [title]="'摄像数'"
+      [stat]="stats.cameraStat"
+      [bgColor]="'#52c41a'"
+    ></app-stats-card>
+    <app-stats-card
+      fxFlex="33"
+      [title]="'项目数'"
+      [stat]="stats.projectStat"
+      [bgColor]="'#1890ff'"
+    ></app-stats-card>
   </div>
   <div class="graphs" fxLayout="row" fxLayoutAlign="space-between center">
     <nz-card fxFlex="50" nzTitle="故障占比">

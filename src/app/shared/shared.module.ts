@@ -34,6 +34,7 @@ import { ActionSelectComponent } from './components/action-select/action-select.
 import { OperatorSelectComponent } from './components/operator-select/operator-select.component';
 import { PurchaseSelectComponent } from './components/purchase-select/purchase-select.component';
 import { ProjectSelectComponent } from './components/project-select/project-select.component';
+import { StatsCardComponent } from './components/stats-card/stats-card.component';
 
 const NzModules = [
   NzInputModule,
@@ -67,9 +68,11 @@ const NzModules = [
     ActionSelectComponent,
     PurchaseSelectComponent,
     ProjectSelectComponent,
+    StatsCardComponent,
   ],
   imports: [
     CommonModule,
+    FlexLayoutModule,
     HttpClientModule,
     FormsModule,
     ...NzModules,
@@ -94,6 +97,7 @@ const NzModules = [
     ActionSelectComponent,
     PurchaseSelectComponent,
     ProjectSelectComponent,
+    StatsCardComponent,
   ],
 })
 export class SharedModule {}

@@ -1,4 +1,5 @@
 import { MinorTargetType } from './minor-target-type.model';
+import { CardStat } from './card-stat.model';
 
 export interface Action {
   id?: string;
@@ -76,10 +77,11 @@ export interface Addr {
 }
 
 export interface Stats {
-  orderOfToday: string;
-  orderOfCurMonth: string;
-  orderOfCurYear: string;
-  orderOfHistory: string;
+  orderStat: CardStat;
+
+  cameraStat: CardStat;
+
+  projectStat: CardStat;
 
   pieOfMalfunctions: {
     lengend: [];
