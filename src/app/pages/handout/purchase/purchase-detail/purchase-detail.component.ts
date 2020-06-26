@@ -49,6 +49,8 @@ export class PurchaseDetailComponent extends DetailBaseComponent<
     this.distributed = this.detail
       ? this.cloneDetail.number - this.cloneDetail.stock
       : 0;
+
+    this.number = this.cloneDetail.number;
   }
 
   onNumberChange(number) {
