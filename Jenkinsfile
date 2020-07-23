@@ -4,7 +4,7 @@ pipeline {
     stages {
       stage('Build') {
             steps {
-                sh "docker build -t squirrel-frontend ."
+                sh "docker build --no-cache -t squirrel-frontend ."
 
             }
         }
